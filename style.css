@@ -1,17 +1,67 @@
-/* Top Header */
-.top-header {
-    background-color: #1e3d59;
-    color: white;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
+/* ==========================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Hero Scroll Section */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b131f; /* Deep ocean background */
+    color: #e2e8f0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Anti-Ripping: Block text highlighting and image dragging globally */
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* ==========================================
+   2. TOP STICKY HEADER & NAVIGATION
+   ========================================== */
+.top-header {
+    background-color: #111e30;
+    color: #63b3ed;
+    text-align: center;
+    padding: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    border-bottom: 2px solid #1a365d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ==========================================
+   3. HERO SCROLL SECTION
+   ========================================== */
 .hero-scroll {
-    height: 70vh;
-    background: linear-gradient(rgba(30, 61, 89, 0.6), rgba(30, 61, 89, 0.6)), url('images/bridge.png');
+    height: 75vh;
+    background: linear-gradient(rgba(11, 19, 31, 0.75), rgba(11, 19, 31, 0.85)), url('images/bridge.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -19,93 +69,149 @@
     justify-content: center;
     text-align: center;
     color: white;
+    padding: 0 20px;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 .action-buttons {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
 }
 
-.secondary-btn {
-    background-color: #2b2d42;
+/* ==========================================
+   4. UNIVERSE SECTION (HOUSE BRANNOR CHARACTERS)
+   ========================================== */
+.universe-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #101c2e;
 }
 
-/* Universe Section (4 Characters) */
-.universe-section {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #f4f7f6;
+.universe-section h2 {
+    font-size: 2.2rem;
+    color: #63b3ed;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #a0aec0;
+    font-size: 1.05rem;
+    margin-bottom: 40px;
 }
 
 .character-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
-    max-width: 1000px;
-    margin: 30px auto;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
 }
 
 .char-card {
-    background: white;
-    border-radius: 8px;
+    background: #18263d;
+    border: 1px solid #2a4365;
+    border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
+    color: #e2e8f0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 15px;
 }
 
 .char-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    border-color: #63b3ed;
 }
 
 .char-card img {
     width: 100%;
-    height: 220px;
+    height: 260px;
     object-fit: cover;
+    border-bottom: 2px solid #2a4365;
 }
 
 .char-card h3 {
-    padding: 15px;
-    font-size: 1.1rem;
+    padding: 15px 10px 5px 10px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.house-tag {
+    font-size: 0.8rem;
+    color: #f6ad55; /* Warm gold accent for Brannor values */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .center-action {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-/* Academy Showcase */
+/* ==========================================
+   5. ACADEMY DISPLAY SECTION
+   ========================================== */
 .academy-section {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
-    background-color: #e9ecef;
+    background-color: #0b131f;
+}
+
+.academy-section h2 {
+    font-size: 2.2rem;
+    color: #63b3ed;
+    margin-bottom: 20px;
 }
 
 .academy-display {
-    max-width: 800px;
-    margin: 20px auto 0 auto;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    max-width: 850px;
+    margin: 0 auto;
+    background: #142238;
+    border: 1px solid #2a4365;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
 .academy-display img {
     width: 100%;
-    height: 350px;
+    height: 400px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
-/* Spellcaster Mic Section */
+/* ==========================================
+   6. SPELLCASTER MIC SECTION
+   ========================================== */
 .spell-section {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
-    background-color: #1e3d59;
-    color: white;
+    background: linear-gradient(135deg, #111e30 0%, #0d1726 100%);
+    border-top: 2px solid #1a365d;
+    border-bottom: 2px solid #1a365d;
+}
+
+.spell-section h2 {
+    font-size: 2.2rem;
+    color: #63b3ed;
+    margin-bottom: 10px;
+}
+
+.spell-section p {
+    color: #a0aec0;
 }
 
 .spell-container {
@@ -114,93 +220,149 @@
     align-items: center;
     gap: 40px;
     max-width: 900px;
-    margin: 30px auto 0 auto;
+    margin: 40px auto 0 auto;
     flex-wrap: wrap;
 }
 
 .spell-list {
-    background: rgba(255, 255, 255, 0.05);
+    background: #18263d;
+    border: 1px solid #2a4365;
     padding: 20px;
-    border-radius: 8px;
-    width: 200px;
+    border-radius: 10px;
+    width: 220px;
     text-align: left;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .spell-list h4 {
-    margin-bottom: 10px;
-    color: #ff6e40;
+    margin-bottom: 12px;
+    color: #f6ad55;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #2a4365;
+    padding-bottom: 6px;
 }
 
 .spell-list ul {
     list-style: none;
     font-size: 0.95rem;
-    color: #b8c1ec;
+    color: #cbd5e0;
 }
 
 .spell-list li {
     margin-bottom: 8px;
+    padding-left: 10px;
+    border-left: 2px solid #63b3ed;
 }
 
 .mic-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .mic-button {
-    background-color: #ff6e40;
+    background: linear-gradient(135deg, #3182ce, #2b6cb0);
     color: white;
-    border: none;
-    width: 80px;
-    height: 80px;
+    border: 2px solid #63b3ed;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    font-size: 2rem;
+    font-size: 2.2rem;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
+    box-shadow: 0 0 20px rgba(49, 130, 206, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .mic-button:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(49, 130, 206, 0.7);
 }
 
 #mic-status {
-    font-size: 0.85rem;
-    color: #b8c1ec;
+    font-size: 0.9rem;
+    color: #a0aec0;
+    font-style: italic;
 }
 
-/* Form Prompts */
+/* ==========================================
+   7. FORM PROMPT SECTIONS
+   ========================================== */
 .form-prompt-section {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #f4f7f6;
-    border-top: 1px solid #ddd;
+    background-color: #101c2e;
+    border-top: 1px solid #1a365d;
 }
 
 .form-prompt-section h3 {
-    color: #1e3d59;
+    color: #63b3ed;
+    font-size: 1.8rem;
     margin-bottom: 10px;
 }
 
 .form-prompt-section p {
-    margin-bottom: 20px;
-    color: #555;
+    margin-bottom: 25px;
+    color: #a0aec0;
 }
 
 .feedback-prompt {
-    background-color: #e9ecef;
+    background-color: #0b131f;
 }
 
-/* Footer References */
+/* ==========================================
+   8. BUTTONS & GENERAL UTILITIES
+   ========================================== */
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #3182ce, #2b6cb0);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.secondary-btn:hover {
+    background: linear-gradient(135deg, #2d3748, #1a202c);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    flex: 1;
+    width: 100%;
+}
+
+/* ==========================================
+   9. FOOTER & REFERENCES
+   ========================================== */
 footer {
     text-align: center;
-    padding: 25px;
-    background-color: #162a3c;
-    color: #b8c1ec;
+    padding: 30px;
+    background-color: #080d14;
+    color: #a0aec0;
+    border-top: 2px solid #1a365d;
+    margin-top: auto;
 }
 
 .references {
     font-size: 0.85rem;
     font-style: italic;
+    color: #718096;
 }
