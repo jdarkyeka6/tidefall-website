@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4d7a8a"/>
+      <stop offset="1" stop-color="#122936"/>
+    </linearGradient>
+    <radialGradient id="r">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <circle cx="400" cy="390" r="250" fill="url(#r)"/>
+  <circle cx="400" cy="365" r="128" fill="#ffffff" opacity=".12"/>
+  <path d="M240 780c28-184 110-260 160-260s132 76 160 260" fill="#ffffff" opacity=".11"/>
+  <text x="400" y="870" fill="#fff" fill-opacity=".72" font-size="42" text-anchor="middle" font-family="Georgia">Student</text>
+  <text x="400" y="925" fill="#fff" fill-opacity=".28" font-size="28" text-anchor="middle" font-family="Georgia">TIDEFALL</text>
+</svg>
