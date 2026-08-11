@@ -1,126 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tidefall Academy</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07131f" />
+  <title>Tidefall</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Tidefall home">
+      <span class="brand-mark">◌</span>
+      <span>TIDEFALL</span>
+    </a>
 
-    <header class="top-header">
-        <h1>Tidefall Academy</h1>
-    </header>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#universe">Universe</a>
+      <a href="#academy">Academy</a>
+      <a href="#spells">Spells</a>
+      <a href="students.html">Students</a>
+    </nav>
+  </header>
 
-    <section class="hero-scroll">
-        <div class="hero-content">
-            <h2>Welcome to the Coast</h2>
-            <div class="action-buttons">
-                <a href="books.html" class="btn">Explore Books</a>
-                <a href="#universe" class="btn secondary-btn">More</a>
-            </div>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-water"></div>
+      <div class="hero-content">
+        <p class="eyebrow">THE TIDE IS LISTENING</p>
+        <h1>TIDEFALL</h1>
+        <p class="hero-copy">
+          A world shaped by water, magic, choice, and the things the sea refuses to explain.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#universe">Explore</a>
+          <a class="button ghost" href="#books">Books</a>
+          <a class="button ghost" href="#academy">More</a>
         </div>
+      </div>
+      <a class="scroll-cue" href="#universe" aria-label="Scroll to explore">
+        <span>SCROLL</span>
+        <span class="scroll-line"></span>
+      </a>
     </section>
 
-    <section id="universe" class="universe-section">
+    <section id="universe" class="section universe-section">
+      <div class="section-heading">
+        <p class="eyebrow">MEET THE STUDENTS</p>
         <h2>Explore the Universe</h2>
-        <p class="subtitle">Meet the core members of House Brannor—values of courage, loyalty, and action.</p>
-        
-        <div class="character-grid">
-            <a href="#" class="char-card">
-                <img src="images/char1.png" alt="Jasper Holloway">
-                <h3>Jasper Holloway</h3>
-                <span class="house-tag">House Brannor</span>
-            </a>
-            <a href="#" class="char-card">
-                <img src="images/char2.png" alt="Harper Vale">
-                <h3>Harper Vale</h3>
-                <span class="house-tag">House Brannor</span>
-            </a>
-            <a href="#" class="char-card">
-                <img src="images/char3.png" alt="Ava Rees">
-                <h3>Ava Rees</h3>
-                <span class="house-tag">House Brannor</span>
-            </a>
-            <a href="#" class="char-card">
-                <img src="images/char4.png" alt="Lily Hart">
-                <h3>Lily Hart</h3>
-                <span class="house-tag">House Brannor</span>
-            </a>
-        </div>
+        <p>
+          Four students. Four very different ways of surviving Tidefall.
+        </p>
+      </div>
 
-        <div class="center-action">
-            <a href="students.html" class="btn">See Other Students</a>
-        </div>
+      <div class="character-grid">
+        <a class="character-card jasper" href="#" data-coming-soon="Jasper Holloway">
+          <img src="assets/jasper-placeholder.svg" alt="Placeholder portrait for Jasper Holloway" />
+          <div class="character-overlay">
+            <p>BRANNOR</p>
+            <h3>Jasper Holloway</h3>
+            <span>View character →</span>
+          </div>
+        </a>
+
+        <a class="character-card harper" href="#" data-coming-soon="Harper Vale">
+          <img src="assets/harper-placeholder.svg" alt="Placeholder portrait for Harper Vale" />
+          <div class="character-overlay">
+            <p>STUDENT</p>
+            <h3>Harper Vale</h3>
+            <span>View character →</span>
+          </div>
+        </a>
+
+        <a class="character-card ava" href="#" data-coming-soon="Ava Rees">
+          <img src="assets/ava-placeholder.svg" alt="Placeholder portrait for Ava Rees" />
+          <div class="character-overlay">
+            <p>STUDENT</p>
+            <h3>Ava Rees</h3>
+            <span>View character →</span>
+          </div>
+        </a>
+
+        <a class="character-card lily" href="#" data-coming-soon="Lily Hart">
+          <img src="assets/lily-placeholder.svg" alt="Placeholder portrait for Lily Hart" />
+          <div class="character-overlay">
+            <p>BRANNOR</p>
+            <h3>Lily Hart</h3>
+            <span>View character →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="center-button">
+        <a class="button outline" href="students.html">See Other Students</a>
+      </div>
+
+      <div class="reference-strip">
+        <span>RESPONSE IS NOT OBEDIENCE.</span>
+        <span>✦</span>
+        <span>THE SEA REMEMBERS.</span>
+        <span>✦</span>
+        <span>SOME CURRENTS CAN BE FOUGHT.</span>
+      </div>
     </section>
 
-    <section class="academy-section">
+    <section id="academy" class="section academy-section">
+      <div class="academy-image-wrap">
+        <img src="assets/academy-placeholder.svg" alt="Placeholder image for Tidefall Academy" />
+        <div class="academy-fog"></div>
+      </div>
+
+      <div class="academy-copy">
+        <p class="eyebrow">BEYOND THE SHORE</p>
         <h2>See the Academy</h2>
-        <div class="academy-display">
-            <img src="images/bridge.png" alt="Tidefall Academy Castle">
-            <a href="#" class="btn">Explore the Castle</a>
+        <p>
+          Dorms, classrooms, hidden corridors, old stone, impossible water, and far too many places students probably should not be.
+        </p>
+
+        <div class="academy-actions">
+          <button class="button primary disabled-button" type="button" data-toast="The walkable Academy is coming later.">
+            Explore the Academy
+          </button>
+          <span class="coming-soon">Interactive castle coming later</span>
         </div>
+      </div>
     </section>
 
-    <section class="spell-section">
-        <h2>Cast a Spell</h2>
-        <p>Press the microphone and speak an incantation.</p>
-        
-        <div class="spell-container">
-            <div class="spell-list left-spells">
-                <h4>Known Spells</h4>
-                <ul>
-                    <li>Aque Verum</li>
-                    <li>Glaciem Shard</li>
-                    <li>Tidal Shield</li>
-                </ul>
-            </div>
+    <section id="spells" class="section spell-section">
+      <div class="spell-intro">
+        <p class="eyebrow">VOICE MAGIC</p>
+        <h2>Speak a Spell</h2>
+        <p>
+          Try one of the spells below. The page listens for your voice and reacts when it recognises one.
+        </p>
+      </div>
 
-            <div class="mic-box">
-                <button id="mic-btn" class="mic-button">🎤</button>
-                <span id="mic-status">Listening...</span>
-            </div>
+      <div class="spell-stage">
+        <aside class="spell-list left-list">
+          <button data-spell="lumen">Lumen <span>Light</span></button>
+          <button data-spell="unda">Unda <span>Water</span></button>
+          <button data-spell="vela">Vela <span>Wind</span></button>
+        </aside>
 
-            <div class="spell-list right-spells">
-                <h4>Incantations</h4>
-                <ul>
-                    <li>Ventus Call</li>
-                    <li>Terra Step</li>
-                    <li>Lumen Flare</li>
-                </ul>
-            </div>
+        <div class="mic-core">
+          <div class="magic-ring ring-one"></div>
+          <div class="magic-ring ring-two"></div>
+          <button id="micButton" class="mic-button" type="button" aria-label="Speak a spell">
+            <span class="mic-icon">🎙</span>
+          </button>
+          <p id="spellStatus">Press the mic and speak.</p>
+          <p id="heardText" class="heard-text"></p>
         </div>
+
+        <aside class="spell-list right-list">
+          <button data-spell="aegis">Aegis <span>Shield</span></button>
+          <button data-spell="ember">Ember <span>Fire</span></button>
+          <button data-spell="tide">Tide <span>???</span></button>
+        </aside>
+      </div>
+
+      <div id="spellEffect" class="spell-effect" aria-hidden="true"></div>
+
+      <p class="spell-note">
+        Not every spell answers the same way. Tidefall has opinions.
+      </p>
     </section>
 
-    <section class="form-prompt-section">
-        <h3>Something else you want to see?</h3>
-        <p>Let us know what secrets or content you're hunting for.</p>
-        <a href="contact.html?type=request" class="btn">Click Here</a>
+    <section id="books" class="section books-section">
+      <div class="books-copy">
+        <p class="eyebrow">THE STORY BEGINS HERE</p>
+        <h2>Enter Tidefall</h2>
+        <p>
+          The books are the main path through the world. This section is ready for covers, reading order, summaries, and links when you want them.
+        </p>
+      </div>
+      <div class="book-placeholder-row">
+        <div class="book-card">BOOK I</div>
+        <div class="book-card">BOOK II</div>
+        <div class="book-card">BOOK III</div>
+      </div>
     </section>
 
-    <section class="form-prompt-section feedback-prompt">
-        <h3>Got Feedback?</h3>
-        <p>Tell us how we can improve your academy experience.</p>
-        <a href="contact.html?type=feedback" class="btn">Click Here</a>
+    <section class="section ask-section">
+      <div class="ask-card">
+        <p class="eyebrow">SHAPE THE SITE</p>
+        <h2>Something else you want to see?</h2>
+        <p>Tell us what should exist here next.</p>
+        <a class="button primary" href="request.html">Click Here</a>
+      </div>
+
+      <div class="ask-card feedback-card">
+        <p class="eyebrow">FOUND SOMETHING?</p>
+        <h2>Got feedback?</h2>
+        <p>Tell us what works, what doesn’t, or what feels weird.</p>
+        <a class="button outline" href="feedback.html">Click Here</a>
+      </div>
     </section>
+  </main>
 
-    <footer>
-        <p class="references">References & Archives: Tidefall Chronicle Records, Vol. 1-4. All rights reserved &copy; 2026.</p>
-    </footer>
+  <footer class="site-footer">
+    <div>
+      <strong>TIDEFALL</strong>
+      <p>The tide chooses. You decide what to do next.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#universe">Universe</a>
+      <a href="students.html">Students</a>
+      <a href="#academy">Academy</a>
+      <a href="#spells">Spells</a>
+    </div>
+  </footer>
 
-    <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'F12') { event.preventDefault(); return false; }
-            if (ctrlOrCmd(event) && (event.key === 's' || event.key === 'u' || event.key === 'p')) {
-                event.preventDefault(); return false;
-            }
-            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) {
-                event.preventDefault(); return false;
-            }
-        });
-        function ctrlOrCmd(e) { return e.ctrlKey || e.metaKey; }
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('dragstart', event => { if (event.target.tagName === 'IMG') event.preventDefault(); });
-    </script>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
 </body>
 </html>
