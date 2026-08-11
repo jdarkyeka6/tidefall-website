@@ -1,23 +1,24 @@
-TIDEFALL WEBSITE - READY VERSION
+TIDEFALL WEBSITE - FINAL
 
-Open index.html.
+Deploy the contents of this folder as the website root.
 
-Already installed:
-- assets/hero.png      = chosen four-character group image at top of site
-- assets/jasper.png    = Jasper website portrait
-- assets/harper.png    = Harper website portrait
-- assets/ava.png       = Ava website portrait
-- assets/lily.png      = Lily website portrait
+Key files:
+index.html
+students.html
+request.html
+feedback.html
+styles.css
+script.js
+assets/
 
-The HTML and CSS already point to these files.
-No renaming is required.
+Main assets:
+assets/hero.png
+assets/jasper.png
+assets/harper.png
+assets/lily.png
+assets/ava.png
 
+Homepage character order:
+Harper | Jasper | Lily | Ava
 
-V2 CHANGES
-- Character order: Harper | Jasper | Lily | Ava
-- Jasper is directly beside Lily
-- All four website labels say BRANNOR
-- Explore the Universe section is pushed below the fixed navbar
-- Character cards are slightly shorter on desktop
-
-NOTE: the existing Harper portrait file remains the clean portrait asset. The website label is corrected to BRANNOR.
+All four website labels are BRANNOR.
