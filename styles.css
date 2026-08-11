@@ -766,3 +766,32 @@ img { display: block; width: 100%; }
 @media (max-width: 720px) {
   .hero { background-position: center center; }
 }
+
+
+/* v2 layout fixes */
+#universe, #academy, #spells, #books {
+  scroll-margin-top: 92px;
+}
+
+.universe-section {
+  padding-top: 150px;
+}
+
+.character-card {
+  min-height: 430px;
+}
+
+.character-card img {
+  min-height: 430px;
+  height: 430px;
+  object-fit: cover;
+}
+
+@media (max-width: 720px) {
+  .universe-section { padding-top: 110px; }
+  .character-card,
+  .character-card img {
+    min-height: 500px;
+    height: 500px;
+  }
+}
