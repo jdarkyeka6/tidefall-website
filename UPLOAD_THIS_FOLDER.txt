@@ -1,0 +1,13 @@
+UPLOAD/DEPLOY THE CONTENTS OF THIS FOLDER.
+
+IMPORTANT:
+Your web root should directly contain:
+index.html
+styles.css
+script.js
+assets/
+
+Do not upload this folder inside another existing tidefall-website folder,
+or the old index.html may remain live.
+
+After deploying, hard refresh with Ctrl+F5.

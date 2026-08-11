@@ -1,18 +1,13 @@
-TIDEFALL WEBSITE
+TIDEFALL WEBSITE - READY VERSION
 
-Open index.html to preview locally.
+Open index.html.
 
-Included:
-- index.html
-- students.html
-- request.html
-- feedback.html
-- styles.css
-- script.js
-- placeholder SVG artwork in /assets
+Already installed:
+- assets/hero.png      = chosen four-character group image at top of site
+- assets/jasper.png    = Jasper website portrait
+- assets/harper.png    = Harper website portrait
+- assets/ava.png       = Ava website portrait
+- assets/lily.png      = Lily website portrait
 
-Notes:
-- Character cards are intentionally "coming soon".
-- The Academy explore button is intentionally a placeholder.
-- Voice spell recognition uses the browser SpeechRecognition API where supported.
-- Forms are visual/demo only for now and do not save anywhere.
+The HTML and CSS already point to these files.
+No renaming is required.
