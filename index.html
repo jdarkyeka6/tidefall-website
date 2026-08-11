@@ -3,41 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tidefall - Coming Soon</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1f4068, #162447);
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: #e43f5a;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #b0c4de;
-        }
-    </style>
+    <title>Tidefall Academy</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Tidefall</h1>
-        <p>We are working hard behind the scenes to bring you something amazing. Stay tuned!</p>
-    </div>
+    <header class="top-header">
+        <h1>Tidefall Academy</h1>
+    </header>
 
+    <section class="hero-scroll">
+        <div class="hero-content">
+            <h2>Welcome to the Coast</h2>
+            <div class="action-buttons">
+                <a href="books.html" class="btn">Explore Books</a>
+                <a href="#universe" class="btn secondary-btn">More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="universe" class="universe-section">
+        <h2>Explore the Universe</h2>
+        <p class="subtitle">Meet the core members of House Brannor—values of courage, loyalty, and action.</p>
+        
+        <div class="character-grid">
+            <a href="#" class="char-card">
+                <img src="images/char1.png" alt="Jasper Holloway">
+                <h3>Jasper Holloway</h3>
+                <span class="house-tag">House Brannor</span>
+            </a>
+            <a href="#" class="char-card">
+                <img src="images/char2.png" alt="Harper Vale">
+                <h3>Harper Vale</h3>
+                <span class="house-tag">House Brannor</span>
+            </a>
+            <a href="#" class="char-card">
+                <img src="images/char3.png" alt="Ava Rees">
+                <h3>Ava Rees</h3>
+                <span class="house-tag">House Brannor</span>
+            </a>
+            <a href="#" class="char-card">
+                <img src="images/char4.png" alt="Lily Hart">
+                <h3>Lily Hart</h3>
+                <span class="house-tag">House Brannor</span>
+            </a>
+        </div>
+
+        <div class="center-action">
+            <a href="students.html" class="btn">See Other Students</a>
+        </div>
+    </section>
+
+    <section class="academy-section">
+        <h2>See the Academy</h2>
+        <div class="academy-display">
+            <img src="images/bridge.png" alt="Tidefall Academy Castle">
+            <a href="#" class="btn">Explore the Castle</a>
+        </div>
+    </section>
+
+    <section class="spell-section">
+        <h2>Cast a Spell</h2>
+        <p>Press the microphone and speak an incantation.</p>
+        
+        <div class="spell-container">
+            <div class="spell-list left-spells">
+                <h4>Known Spells</h4>
+                <ul>
+                    <li>Aque Verum</li>
+                    <li>Glaciem Shard</li>
+                    <li>Tidal Shield</li>
+                </ul>
+            </div>
+
+            <div class="mic-box">
+                <button id="mic-btn" class="mic-button">🎤</button>
+                <span id="mic-status">Listening...</span>
+            </div>
+
+            <div class="spell-list right-spells">
+                <h4>Incantations</h4>
+                <ul>
+                    <li>Ventus Call</li>
+                    <li>Terra Step</li>
+                    <li>Lumen Flare</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-prompt-section">
+        <h3>Something else you want to see?</h3>
+        <p>Let us know what secrets or content you're hunting for.</p>
+        <a href="contact.html?type=request" class="btn">Click Here</a>
+    </section>
+
+    <section class="form-prompt-section feedback-prompt">
+        <h3>Got Feedback?</h3>
+        <p>Tell us how we can improve your academy experience.</p>
+        <a href="contact.html?type=feedback" class="btn">Click Here</a>
+    </section>
+
+    <footer>
+        <p class="references">References & Archives: Tidefall Chronicle Records, Vol. 1-4. All rights reserved &copy; 2026.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'F12') { event.preventDefault(); return false; }
+            if (ctrlOrCmd(event) && (event.key === 's' || event.key === 'u' || event.key === 'p')) {
+                event.preventDefault(); return false;
+            }
+            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) {
+                event.preventDefault(); return false;
+            }
+        });
+        function ctrlOrCmd(e) { return e.ctrlKey || e.metaKey; }
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('dragstart', event => { if (event.target.tagName === 'IMG') event.preventDefault(); });
+    </script>
 </body>
 </html>
