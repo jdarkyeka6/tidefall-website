@@ -1,7 +1,19 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "tidefall.com.au"
+        }
+      ],
+      "destination": "https://www.tidefall.com.au/:path*",
+      "permanent": true
+    },
     {
       "source": "/index.html",
       "destination": "/",
