@@ -1,128 +1,106 @@
-const DB_NAME = "tidefall-wardrobe";
-const DB_VERSION = 1;
-const STORE = "photos";
 const MODERATION_DAYS = 30;
 const RECENTLY_DELETED_DAYS = 30;
+const BUCKET = 'wardrobe-private';
+const sb = window.tidefallSupabase;
 
-const camera = document.getElementById("camera");
-const startCameraBtn = document.getElementById("startCamera");
-const captureBtn = document.getElementById("capturePhoto");
-const cameraStatus = document.getElementById("cameraStatus");
-const cameraPlaceholder = document.getElementById("cameraPlaceholder");
-const captureCanvas = document.getElementById("captureCanvas");
-const gallery = document.getElementById("gallery");
-const emptyGallery = document.getElementById("emptyGallery");
-const toast = document.getElementById("wardrobeToast");
-const outfitOverlay = document.getElementById("outfitOverlay");
-const outfitLabel = document.getElementById("outfitLabel");
+const camera = document.getElementById('camera');
+const startCameraBtn = document.getElementById('startCamera');
+const captureBtn = document.getElementById('capturePhoto');
+const cameraStatus = document.getElementById('cameraStatus');
+const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+const captureCanvas = document.getElementById('captureCanvas');
+const gallery = document.getElementById('gallery');
+const emptyGallery = document.getElementById('emptyGallery');
+const toast = document.getElementById('wardrobeToast');
+const outfitOverlay = document.getElementById('outfitOverlay');
+const outfitLabel = document.getElementById('outfitLabel');
+const authGateTitle = document.getElementById('authGateTitle');
+const authGateText = document.getElementById('authGateText');
+const accountLink = document.getElementById('accountLink');
 
 let stream = null;
-let currentGallery = "active";
-let currentOutfit = "brannor";
+let currentGallery = 'active';
+let currentOutfit = 'brannor';
+let currentUser = null;
 
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-    request.onupgradeneeded = () => {
-      const db = request.result;
-      if (!db.objectStoreNames.contains(STORE)) {
-        const store = db.createObjectStore(STORE, { keyPath: "id" });
-        store.createIndex("state", "state", { unique: false });
-        store.createIndex("createdAt", "createdAt", { unique: false });
-      }
-    };
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
-}
-
-async function withStore(mode, callback) {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE, mode);
-    const store = tx.objectStore(STORE);
-    const result = callback(store);
-    tx.oncomplete = () => { db.close(); resolve(result); };
-    tx.onerror = () => { db.close(); reject(tx.error); };
-  });
-}
-
-async function getAllPhotos() {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE, "readonly");
-    const request = tx.objectStore(STORE).getAll();
-    request.onsuccess = () => resolve(request.result || []);
-    request.onerror = () => reject(request.error);
-    tx.oncomplete = () => db.close();
-  });
-}
-
-async function putPhoto(photo) {
-  return withStore("readwrite", store => store.put(photo));
-}
-
-async function deletePhotoPermanently(id) {
-  return withStore("readwrite", store => store.delete(id));
-}
-
-function addDays(timestamp, days) {
-  return timestamp + days * 24 * 60 * 60 * 1000;
-}
-
-function resetModeration(photo) {
-  const now = Date.now();
-  photo.updatedAt = now;
-  photo.moderationUntil = addDays(now, MODERATION_DAYS);
-  return photo;
+function addDays(dateLike, days) {
+  return new Date(dateLike).getTime() + days * 86400000;
 }
 
 function showToast(message) {
   if (!toast) return;
   toast.textContent = message;
-  toast.classList.add("show");
+  toast.classList.add('show');
   clearTimeout(window.__wardrobeToast);
-  window.__wardrobeToast = setTimeout(() => toast.classList.remove("show"), 2600);
+  window.__wardrobeToast = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-function formatDate(timestamp) {
-  return new Intl.DateTimeFormat("en-AU", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit"
-  }).format(new Date(timestamp));
+function formatDate(value) {
+  return new Intl.DateTimeFormat('en-AU', {
+    day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit'
+  }).format(new Date(value));
 }
 
-function daysRemaining(timestamp) {
-  return Math.max(0, Math.ceil((timestamp - Date.now()) / (24 * 60 * 60 * 1000)));
+function daysRemaining(value) {
+  return Math.max(0, Math.ceil((new Date(value).getTime() - Date.now()) / 86400000));
 }
 
-async function housekeeping() {
-  const photos = await getAllPhotos();
-  const now = Date.now();
-  for (const photo of photos) {
-    if (photo.state === "recently_deleted" && photo.deletedAt && now > addDays(photo.deletedAt, RECENTLY_DELETED_DAYS)) {
-      await deletePhotoPermanently(photo.id);
-    }
+function syncTabs() {
+  document.querySelectorAll('.gallery-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.gallery === currentGallery);
+  });
+}
+
+async function refreshAuth() {
+  const { data: { user } } = await sb.auth.getUser();
+  currentUser = user || null;
+  const signedIn = !!currentUser;
+  startCameraBtn.disabled = !signedIn;
+  if (!signedIn) captureBtn.disabled = true;
+
+  if (signedIn) {
+    authGateTitle.textContent = 'Signed in';
+    authGateText.textContent = currentUser.email ? `Camera Roll syncing to ${currentUser.email}` : 'Camera Roll syncing to your Tidefall account.';
+    accountLink.textContent = 'My Account';
+    emptyGallery.textContent = 'No photos here yet.';
+  } else {
+    authGateTitle.textContent = 'Sign in required';
+    authGateText.innerHTML = 'Your Camera Roll is private and tied to your Tidefall account. <a href="account.html" style="color:#fff;text-decoration:underline">Sign in or create an account</a>.';
+    accountLink.textContent = 'Sign In';
+    emptyGallery.textContent = 'Sign in to load your Camera Roll.';
+    stopCamera();
   }
+
+  await renderGallery();
+}
+
+function stopCamera() {
+  if (stream) stream.getTracks().forEach(track => track.stop());
+  stream = null;
+  camera.srcObject = null;
+  cameraPlaceholder.classList.remove('hidden');
+  captureBtn.disabled = true;
+  startCameraBtn.textContent = 'Start Camera';
 }
 
 async function startCamera() {
+  if (!currentUser) {
+    location.href = 'account.html';
+    return;
+  }
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 1600 } },
+      video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 1600 } },
       audio: false
     });
     camera.srcObject = stream;
-    cameraPlaceholder.classList.add("hidden");
+    cameraPlaceholder.classList.add('hidden');
     captureBtn.disabled = false;
-    startCameraBtn.textContent = "Camera On";
-    cameraStatus.textContent = "Live camera stays in the browser. Press Take Photo to save a photo to your private Camera Roll.";
+    startCameraBtn.textContent = 'Camera On';
+    cameraStatus.textContent = 'Live camera stays on this device. Captured photos are uploaded privately to your Tidefall Camera Roll.';
   } catch (error) {
-    cameraStatus.textContent = "Camera access was blocked or unavailable.";
-    showToast("Camera could not start.");
+    cameraStatus.textContent = 'Camera access was blocked or unavailable.';
+    showToast('Camera could not start.');
   }
 }
 
@@ -131,17 +109,15 @@ function drawOutfit(ctx, width, height) {
   const top = height * .49;
   const bodyW = width * .39;
   const bodyH = height * .39;
-
   const palettes = {
-    brannor: ["#173b52", "#081923"],
-    riptide: ["#167d98", "#052c3b"],
-    proving: ["#474e60", "#151922"]
+    brannor: ['#173b52', '#081923'],
+    riptide: ['#167d98', '#052c3b'],
+    proving: ['#474e60', '#151922']
   };
   const [topColour, bottomColour] = palettes[currentOutfit] || palettes.brannor;
   const gradient = ctx.createLinearGradient(cx, top, cx, top + bodyH);
   gradient.addColorStop(0, topColour);
   gradient.addColorStop(1, bottomColour);
-
   ctx.save();
   ctx.globalAlpha = .78;
   ctx.fillStyle = gradient;
@@ -151,186 +127,229 @@ function drawOutfit(ctx, width, height) {
   ctx.beginPath();
   ctx.roundRect(cx - bodyW / 2, top + bodyH * .08, bodyW, bodyH, 42);
   ctx.fill();
-  ctx.strokeStyle = "rgba(255,255,255,.35)";
+  ctx.strokeStyle = 'rgba(255,255,255,.35)';
   ctx.lineWidth = Math.max(2, width * .003);
   ctx.stroke();
-  ctx.fillStyle = "rgba(255,255,255,.9)";
+  ctx.fillStyle = 'rgba(255,255,255,.9)';
   ctx.font = `700 ${Math.max(18, width * .025)}px Georgia`;
-  ctx.textAlign = "center";
-  ctx.letterSpacing = "4px";
+  ctx.textAlign = 'center';
   ctx.fillText(outfitLabel.textContent, cx, top + bodyH * .58);
   ctx.restore();
 }
 
-async function capturePhoto() {
-  if (!stream || !camera.videoWidth) return;
+async function uploadPhotoBlob(blob) {
+  const photoId = crypto.randomUUID();
+  const path = `${currentUser.id}/${photoId}.jpg`;
+  const { error: uploadError } = await sb.storage.from(BUCKET).upload(path, blob, {
+    contentType: 'image/jpeg', upsert: false, cacheControl: '3600'
+  });
+  if (uploadError) throw uploadError;
 
-  const width = camera.videoWidth;
-  const height = camera.videoHeight;
-  captureCanvas.width = width;
-  captureCanvas.height = height;
-  const ctx = captureCanvas.getContext("2d");
-
-  ctx.save();
-  ctx.translate(width, 0);
-  ctx.scale(-1, 1);
-  ctx.drawImage(camera, 0, 0, width, height);
-  ctx.restore();
-  drawOutfit(ctx, width, height);
-
-  const blob = await new Promise(resolve => captureCanvas.toBlob(resolve, "image/jpeg", .9));
-  if (!blob) return;
-
-  const now = Date.now();
-  const photo = resetModeration({
-    id: crypto.randomUUID(),
-    blob,
-    state: "active",
-    createdAt: now,
-    updatedAt: now,
-    deletedAt: null,
+  const { error: rowError } = await sb.from('wardrobe_photos').insert({
+    id: photoId,
+    user_id: currentUser.id,
+    storage_path: path,
     outfit: currentOutfit,
+    state: 'active',
     posted: false
   });
-
-  await putPhoto(photo);
-  currentGallery = "active";
-  syncTabs();
-  await renderGallery();
-  showToast("Saved to your private Tidefall Camera Roll.");
+  if (rowError) {
+    await sb.storage.from(BUCKET).remove([path]);
+    throw rowError;
+  }
+  return photoId;
 }
 
-async function moveToRecentlyDeleted(id) {
-  const photos = await getAllPhotos();
-  const photo = photos.find(item => item.id === id);
-  if (!photo) return;
-  photo.state = "recently_deleted";
-  photo.deletedAt = Date.now();
-  resetModeration(photo);
-  await putPhoto(photo);
-  await renderGallery();
-  showToast("Moved to Recently Deleted.");
-}
-
-async function restorePhoto(id) {
-  const photos = await getAllPhotos();
-  const photo = photos.find(item => item.id === id);
-  if (!photo) return;
-  photo.state = "active";
-  photo.deletedAt = null;
-  resetModeration(photo);
-  await putPhoto(photo);
-  await renderGallery();
-  showToast("Photo restored. 30-day moderation clock reset.");
-}
-
-async function markForShare(id) {
-  const photos = await getAllPhotos();
-  const photo = photos.find(item => item.id === id);
-  if (!photo) return;
-  photo.posted = true;
-  resetModeration(photo);
-  await putPhoto(photo);
-  await renderGallery();
-  showToast("Marked for posting. Public publishing will activate when the Tidefall server is connected.");
-}
-
-async function renderGallery() {
-  await housekeeping();
-  const photos = (await getAllPhotos())
-    .filter(photo => currentGallery === "active" ? photo.state === "active" : photo.state === "recently_deleted")
-    .sort((a, b) => b.updatedAt - a.updatedAt);
-
-  gallery.innerHTML = "";
-  emptyGallery.classList.toggle("show", photos.length === 0);
-
-  for (const photo of photos) {
-    const url = URL.createObjectURL(photo.blob);
-    const card = document.createElement("article");
-    card.className = "photo-card";
-
-    let stateText;
-    if (photo.state === "recently_deleted") {
-      const purgeAt = addDays(photo.deletedAt, RECENTLY_DELETED_DAYS);
-      stateText = `Recently Deleted · ${daysRemaining(purgeAt)} days until permanent deletion`;
-    } else if (Date.now() <= photo.moderationUntil) {
-      stateText = `Moderation storage · ${daysRemaining(photo.moderationUntil)} days remaining`;
-    } else {
-      stateText = "Private gallery storage";
-    }
-
-    card.innerHTML = `
-      <img alt="Tidefall Wardrobe photo" />
-      <div class="photo-meta">
-        <strong>${photo.outfit === "riptide" ? "Riptide" : photo.outfit === "proving" ? "Proving Ground" : "Brannor"}</strong>
-        <small>${formatDate(photo.createdAt)}<br>${stateText}</small>
-        <div class="photo-actions"></div>
-      </div>`;
-
-    card.querySelector("img").src = url;
-    card.querySelector("img").addEventListener("load", () => URL.revokeObjectURL(url), { once: true });
-    const actions = card.querySelector(".photo-actions");
-
-    if (photo.state === "active") {
-      const post = document.createElement("button");
-      post.textContent = photo.posted ? "Post queued" : "Post";
-      post.disabled = photo.posted;
-      post.addEventListener("click", () => markForShare(photo.id));
-
-      const remove = document.createElement("button");
-      remove.className = "danger";
-      remove.textContent = "Delete";
-      remove.addEventListener("click", () => moveToRecentlyDeleted(photo.id));
-      actions.append(post, remove);
-    } else {
-      const restore = document.createElement("button");
-      restore.textContent = "Restore";
-      restore.addEventListener("click", () => restorePhoto(photo.id));
-
-      const remove = document.createElement("button");
-      remove.className = "danger";
-      remove.textContent = "Delete Permanently";
-      remove.addEventListener("click", async () => {
-        await deletePhotoPermanently(photo.id);
-        await renderGallery();
-        showToast("Photo permanently deleted from this browser.");
-      });
-      actions.append(restore, remove);
-    }
-
-    gallery.appendChild(card);
+async function capturePhoto() {
+  if (!currentUser || !stream || !camera.videoWidth) return;
+  captureBtn.disabled = true;
+  cameraStatus.textContent = 'Saving securely…';
+  try {
+    const width = camera.videoWidth;
+    const height = camera.videoHeight;
+    captureCanvas.width = width;
+    captureCanvas.height = height;
+    const ctx = captureCanvas.getContext('2d');
+    ctx.save();
+    ctx.translate(width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(camera, 0, 0, width, height);
+    ctx.restore();
+    drawOutfit(ctx, width, height);
+    const blob = await new Promise(resolve => captureCanvas.toBlob(resolve, 'image/jpeg', .9));
+    if (!blob) throw new Error('Could not create photo.');
+    await uploadPhotoBlob(blob);
+    currentGallery = 'active';
+    syncTabs();
+    await renderGallery();
+    showToast('Saved privately to your Tidefall Camera Roll.');
+  } catch (error) {
+    console.error(error);
+    showToast(`Save failed: ${error.message || 'unknown error'}`);
+  } finally {
+    captureBtn.disabled = !stream;
+    cameraStatus.textContent = 'Live camera stays on this device. Captured photos are stored privately in your Tidefall account.';
   }
 }
 
-function syncTabs() {
-  document.querySelectorAll(".gallery-tab").forEach(tab => {
-    tab.classList.toggle("active", tab.dataset.gallery === currentGallery);
-  });
+async function getPhotos() {
+  if (!currentUser) return [];
+  const wantedState = currentGallery === 'active' ? 'active' : 'recently_deleted';
+  const { data, error } = await sb.from('wardrobe_photos')
+    .select('*')
+    .eq('state', wantedState)
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  return data || [];
 }
 
-startCameraBtn.addEventListener("click", startCamera);
-captureBtn.addEventListener("click", capturePhoto);
+async function signedPhotoUrl(path) {
+  const { data, error } = await sb.storage.from(BUCKET).createSignedUrl(path, 3600);
+  if (error) throw error;
+  return data.signedUrl;
+}
 
-document.querySelectorAll(".outfit-choice").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".outfit-choice").forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
+async function moveToRecentlyDeleted(photo) {
+  const { error } = await sb.from('wardrobe_photos').update({
+    state: 'recently_deleted',
+    deleted_at: new Date().toISOString(),
+    posted: false
+  }).eq('id', photo.id);
+  if (error) return showToast(error.message);
+  await renderGallery();
+  showToast('Moved to Recently Deleted.');
+}
+
+async function restorePhoto(photo) {
+  const { error } = await sb.from('wardrobe_photos').update({
+    state: 'active',
+    deleted_at: null,
+    posted: false
+  }).eq('id', photo.id);
+  if (error) return showToast(error.message);
+  await renderGallery();
+  showToast('Photo restored. Moderation clock reset to 30 days.');
+}
+
+async function markForShare(photo) {
+  const { error } = await sb.from('wardrobe_photos').update({ posted: true }).eq('id', photo.id);
+  if (error) return showToast(error.message);
+  await renderGallery();
+  showToast('Marked for sharing. Public Tidefall posts are the next moderation layer.');
+}
+
+async function permanentlyDelete(photo) {
+  const { error: storageError } = await sb.storage.from(BUCKET).remove([photo.storage_path]);
+  if (storageError) return showToast(storageError.message);
+  const { error: rowError } = await sb.from('wardrobe_photos').delete().eq('id', photo.id);
+  if (rowError) return showToast(rowError.message);
+  await renderGallery();
+  showToast('Photo permanently deleted.');
+}
+
+async function purgeExpired() {
+  if (!currentUser) return;
+  const cutoff = new Date(Date.now() - RECENTLY_DELETED_DAYS * 86400000).toISOString();
+  const { data, error } = await sb.from('wardrobe_photos')
+    .select('id,storage_path,deleted_at')
+    .eq('state', 'recently_deleted')
+    .lt('deleted_at', cutoff);
+  if (error || !data?.length) return;
+  for (const photo of data) {
+    const { error: storageError } = await sb.storage.from(BUCKET).remove([photo.storage_path]);
+    if (!storageError) await sb.from('wardrobe_photos').delete().eq('id', photo.id);
+  }
+}
+
+async function renderGallery() {
+  gallery.innerHTML = '';
+  if (!currentUser) {
+    emptyGallery.classList.add('show');
+    return;
+  }
+  emptyGallery.classList.remove('show');
+  try {
+    await purgeExpired();
+    const photos = await getPhotos();
+    emptyGallery.classList.toggle('show', photos.length === 0);
+    if (!photos.length) return;
+
+    for (const photo of photos) {
+      const card = document.createElement('article');
+      card.className = 'photo-card';
+      const img = document.createElement('img');
+      img.alt = 'Tidefall Wardrobe photo';
+      img.src = await signedPhotoUrl(photo.storage_path);
+
+      let stateText;
+      if (photo.state === 'recently_deleted') {
+        const purgeAt = addDays(photo.deleted_at, RECENTLY_DELETED_DAYS);
+        stateText = `Recently Deleted · ${daysRemaining(purgeAt)} days until permanent deletion`;
+      } else if (Date.now() <= new Date(photo.moderation_until).getTime()) {
+        stateText = `Moderation storage · ${daysRemaining(photo.moderation_until)} days remaining`;
+      } else {
+        stateText = 'Private gallery storage';
+      }
+
+      const meta = document.createElement('div');
+      meta.className = 'photo-meta';
+      const title = photo.outfit === 'riptide' ? 'Riptide' : photo.outfit === 'proving' ? 'Proving Ground' : 'Brannor';
+      meta.innerHTML = `<strong>${title}</strong><small>${formatDate(photo.created_at)}<br>${stateText}</small><div class="photo-actions"></div>`;
+      const actions = meta.querySelector('.photo-actions');
+
+      if (photo.state === 'active') {
+        const post = document.createElement('button');
+        post.textContent = photo.posted ? 'Post queued' : 'Post';
+        post.disabled = photo.posted;
+        post.onclick = () => markForShare(photo);
+        const remove = document.createElement('button');
+        remove.className = 'danger';
+        remove.textContent = 'Delete';
+        remove.onclick = () => moveToRecentlyDeleted(photo);
+        actions.append(post, remove);
+      } else {
+        const restore = document.createElement('button');
+        restore.textContent = 'Restore';
+        restore.onclick = () => restorePhoto(photo);
+        const remove = document.createElement('button');
+        remove.className = 'danger';
+        remove.textContent = 'Delete Permanently';
+        remove.onclick = () => permanentlyDelete(photo);
+        actions.append(restore, remove);
+      }
+
+      card.append(img, meta);
+      gallery.appendChild(card);
+    }
+  } catch (error) {
+    console.error(error);
+    emptyGallery.textContent = 'Could not load your Camera Roll.';
+    emptyGallery.classList.add('show');
+    showToast(error.message || 'Camera Roll failed to load.');
+  }
+}
+
+startCameraBtn.addEventListener('click', startCamera);
+captureBtn.addEventListener('click', capturePhoto);
+
+document.querySelectorAll('.outfit-choice').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.outfit-choice').forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
     currentOutfit = button.dataset.outfit;
     outfitOverlay.className = `outfit-overlay outfit-${currentOutfit}`;
     outfitLabel.textContent = button.dataset.label;
   });
 });
 
-document.querySelectorAll(".gallery-tab").forEach(tab => {
-  tab.addEventListener("click", async () => {
+document.querySelectorAll('.gallery-tab').forEach(tab => {
+  tab.addEventListener('click', async () => {
     currentGallery = tab.dataset.gallery;
     syncTabs();
     await renderGallery();
   });
 });
 
-window.addEventListener("beforeunload", () => {
-  if (stream) stream.getTracks().forEach(track => track.stop());
-});
-
-renderGallery();
+sb.auth.onAuthStateChange(() => refreshAuth());
+window.addEventListener('beforeunload', stopCamera);
+refreshAuth();
