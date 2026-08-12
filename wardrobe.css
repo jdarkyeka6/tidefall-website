@@ -59,17 +59,56 @@
     #020a10;
 }
 
-#camera {
+#camera,
+.ar-canvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 560px;
+  height: 100%;
+}
+
+#camera {
   object-fit: cover;
   transform: scaleX(-1);
   display: block;
 }
 
+.ar-canvas {
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tracking-badge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 3;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(3, 12, 18, .7);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.72);
+  font-size: .72rem;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: .2s ease;
+}
+
+.tracking-badge.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tracking-badge.locked {
+  color: #d8fbff;
+  border-color: rgba(126,222,238,.32);
+}
+
 .camera-placeholder {
   position: absolute;
   inset: 0;
+  z-index: 4;
   display: grid;
   place-items: center;
   align-content: center;
@@ -85,59 +124,6 @@
 .camera-placeholder strong { font-family: "Cinzel", serif; font-size: 1.35rem; color: #fff; }
 .camera-placeholder small { opacity: .58; }
 .camera-placeholder.hidden { display: none; }
-
-.outfit-overlay {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  width: min(42%, 290px);
-  aspect-ratio: .82;
-  transform: translate(-50%, -18%);
-  pointer-events: none;
-  opacity: .76;
-  filter: drop-shadow(0 18px 28px rgba(0,0,0,.38));
-}
-
-.outfit-shoulders {
-  position: absolute;
-  left: -18%;
-  right: -18%;
-  top: 0;
-  height: 30%;
-  border-radius: 50% 50% 28% 28%;
-  background: linear-gradient(180deg, rgba(21,49,68,.95), rgba(13,31,44,.92));
-}
-
-.outfit-body {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 12%;
-  bottom: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 28% 28% 14% 14%;
-  border: 2px solid rgba(255,255,255,.22);
-  background: linear-gradient(155deg, rgba(30,73,99,.95), rgba(8,24,35,.94));
-}
-
-.outfit-body span {
-  font-family: "Cinzel", serif;
-  font-size: clamp(.72rem, 1.8vw, 1.1rem);
-  letter-spacing: .18em;
-  font-weight: 700;
-  text-shadow: 0 2px 10px rgba(0,0,0,.5);
-}
-
-.outfit-riptide .outfit-shoulders,
-.outfit-riptide .outfit-body {
-  background: linear-gradient(155deg, rgba(26,127,153,.96), rgba(5,38,53,.96));
-}
-
-.outfit-proving .outfit-shoulders,
-.outfit-proving .outfit-body {
-  background: linear-gradient(155deg, rgba(67,74,93,.96), rgba(17,20,28,.96));
-}
 
 .camera-actions {
   display: flex;
@@ -280,8 +266,7 @@
 
 @media (max-width: 620px) {
   .wardrobe-main { padding-left: 14px; padding-right: 14px; }
-  .camera-stage, #camera { min-height: 480px; height: 480px; }
+  .camera-stage { min-height: 480px; height: 480px; }
   .storage-explainer { grid-template-columns: 1fr; }
   .photo-grid { grid-template-columns: 1fr; }
-  .outfit-overlay { width: 54%; }
 }
