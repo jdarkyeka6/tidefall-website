@@ -50,18 +50,94 @@ const heardText = document.getElementById("heardText");
 const spellEffect = document.getElementById("spellEffect");
 
 const spells = {
-  lumen: "Light answers.",
-  unda: "Water rises.",
-  vela: "The air moves.",
-  aegis: "A shield forms.",
-  ember: "Heat gathers.",
-  tide: "The Tide heard you."
+  veyra: "A soft light appears and follows you.",
+  sela: "The target pulls toward you.",
+  kera: "A force pushes the target away.",
+  neri: "The area falls silent.",
+  tavra: "A protective barrier forms.",
+  mira: "Your voice echoes from another place.",
+  aveni: "The target's movement slows dramatically.",
+  rova: "The lock releases.",
+  fera: "The broken object temporarily repairs itself.",
+  sori: "Recent magical traces become visible.",
+  deya: "Moisture is drawn away.",
+  liora: "The object becomes extremely light.",
+  vessa: "A directed gust of wind bursts forward.",
+  cera: "The target's temperature shifts.",
+  teli: "The target anchors in place.",
+  orena: "Murky water becomes clear to your sight.",
+  pera: "A pocket of breathable air forms underwater.",
+  reni: "Dirt and grime vanish from the target.",
+  navi: "A pull points toward the place you know.",
+  evari: "The object turns transparent while remaining solid.",
+  tora: "A focused beam of light fires forward.",
+  sava: "Two objects bind together temporarily.",
+  veli: "A floating platform of water forms.",
+  ressa: "The force of a fall softens.",
+  dori: "The object lowers gently to the ground.",
+  vara: "A controlled vibration runs through the object.",
+  luma: "Mist gathers around the chosen spot.",
+  raska: "A concentrated duelling blast fires at the target.",
+  velka: "Whatever the target is holding is knocked from their hand.",
+  kavra: "The target's arms and legs lock in place.",
+  terva: "A concentrated magical impact erupts. Direct hits on people explode into magical confetti.",
+  sevra: "An incoming spell is intercepted and disrupted.",
+  drava: "A fast surge of water rushes toward the target.",
+  astra: "The target's movement briefly locks up.",
+  riven: "An active spell is knocked off-course.",
+  valka: "You burst a short distance in your chosen direction.",
+  sivra: "A pulling vortex forms at the target point.",
+  orva: "A defensive shockwave bursts outward around you.",
+  kelis: "A magical tether links you to the target.",
+  veyka: "The target's currently maintained spell breaks.",
+  avera: "An incoming attack reflects back toward its caster.",
+  ravik: "A blade of concentrated magic cuts through magical constructs.",
+  neyra: "Two moving magical decoys of you appear.",
+  tavrae: "A mobile protective shield forms around your movement.",
+  korsa: "The target's balance and sense of direction scramble.",
+  veyris: "The target's next spell fizzles.",
+  seyra: "Two nearby visible objects instantly swap positions.",
+  davra: "An opponent's spell is interrupted mid-cast.",
+  rovek: "A wave of magical force races along the ground.",
+  zeyra: "A burst of magical pressure blasts loose items outward and breaks concentration."
 };
+
+const spellClasses = {
+  veyra: "lumen", sela: "tide", kera: "vela", neri: "aegis", tavra: "aegis",
+  mira: "lumen", aveni: "aegis", rova: "lumen", fera: "lumen", sori: "lumen",
+  deya: "vela", liora: "vela", vessa: "vela", cera: "ember", teli: "aegis",
+  orena: "tide", pera: "tide", reni: "lumen", navi: "lumen", evari: "lumen",
+  tora: "lumen", sava: "aegis", veli: "tide", ressa: "vela", dori: "vela",
+  vara: "vela", luma: "tide", raska: "ember", velka: "vela", kavra: "aegis",
+  terva: "ember", sevra: "aegis", drava: "tide", astra: "ember", riven: "vela",
+  valka: "vela", sivra: "tide", orva: "aegis", kelis: "tide", veyka: "ember",
+  avera: "aegis", ravik: "ember", neyra: "lumen", tavrae: "aegis", korsa: "tide",
+  veyris: "ember", seyra: "lumen", davra: "ember", rovek: "tide", zeyra: "vela"
+};
+
+function normaliseSpellText(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function findSpellInSpeech(text) {
+  const clean = normaliseSpellText(text);
+  const words = clean.split(" ");
+  return Object.keys(spells).find(spell => words.includes(spell)) ||
+    Object.keys(spells).find(spell => clean.includes(spell));
+}
 
 function castSpell(spell) {
   if (!spells[spell] || !spellEffect) return;
   spellStatus.textContent = spells[spell];
-  spellEffect.className = `spell-effect active ${spell}`;
+  const effectClass = spellClasses[spell] || "lumen";
+  spellEffect.className = `spell-effect active ${effectClass}`;
+  if (spell === "terva") {
+    showToast("🎉 TERVA HIT: CONFETTI.");
+  }
   setTimeout(() => spellEffect.className = "spell-effect", 1350);
 }
 
@@ -73,7 +149,7 @@ if (micButton) {
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!Recognition) {
-    spellStatus.textContent = "Voice recognition is not supported in this browser. Click a spell instead.";
+    spellStatus.textContent = "Voice recognition is not supported in this browser. Click a shown spell instead.";
   } else {
     const recognition = new Recognition();
     recognition.lang = "en-AU";
@@ -91,7 +167,7 @@ if (micButton) {
       const text = event.results[0][0].transcript.toLowerCase().trim();
       heardText.textContent = `Heard: “${text}”`;
 
-      const spell = Object.keys(spells).find(key => text.includes(key));
+      const spell = findSpellInSpeech(text);
       if (spell) {
         castSpell(spell);
       } else {
@@ -105,7 +181,7 @@ if (micButton) {
 
     recognition.addEventListener("error", () => {
       micButton.classList.remove("listening");
-      spellStatus.textContent = "Mic access failed. You can still click a spell.";
+      spellStatus.textContent = "Mic access failed. You can still click a shown spell.";
     });
   }
 }
