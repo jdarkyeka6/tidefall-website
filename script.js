@@ -185,3 +185,127 @@ if (micButton) {
     });
   }
 }
+
+// Hidden Tide Mode Easter egg: click the round Tidefall mark five times quickly.
+(() => {
+  const mark = document.querySelector(".brand-mark");
+  if (!mark) return;
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .tide-secret-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .8s ease;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 110%, rgba(63,181,213,.27), transparent 42%),
+        linear-gradient(180deg, rgba(0,28,47,.08), rgba(0,55,78,.22));
+      mix-blend-mode: screen;
+    }
+    body.tide-awake .tide-secret-layer { opacity: 1; }
+    body.tide-awake { filter: saturate(1.08); }
+    body.tide-awake .brand-mark {
+      box-shadow: 0 0 18px rgba(126,226,255,.75), 0 0 55px rgba(50,163,198,.45);
+      border-color: rgba(197,244,255,.9);
+    }
+    .tide-bubble {
+      position: absolute;
+      bottom: -80px;
+      border: 1px solid rgba(207,246,255,.35);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.18), rgba(113,213,238,.03));
+      animation: tideBubble linear infinite;
+    }
+    @keyframes tideBubble {
+      from { transform: translateY(0) translateX(0) scale(.8); opacity: 0; }
+      12% { opacity: .7; }
+      80% { opacity: .35; }
+      to { transform: translateY(-115vh) translateX(35px) scale(1.15); opacity: 0; }
+    }
+    .tide-secret-message {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%) scale(.96);
+      padding: 28px 38px;
+      border: 1px solid rgba(186,233,244,.25);
+      border-radius: 22px;
+      background: rgba(3,21,32,.82);
+      backdrop-filter: blur(18px);
+      color: #e9fbff;
+      text-align: center;
+      font-family: "Cinzel", serif;
+      letter-spacing: .08em;
+      box-shadow: 0 20px 80px rgba(0,0,0,.45), 0 0 70px rgba(69,174,202,.18);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .tide-secret-message.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .tide-secret-message small {
+      display: block;
+      margin-top: 10px;
+      font-family: "Inter", system-ui, sans-serif;
+      letter-spacing: .2em;
+      font-size: .62rem;
+      color: rgba(207,244,252,.58);
+    }
+  `;
+  document.head.appendChild(style);
+
+  const layer = document.createElement("div");
+  layer.className = "tide-secret-layer";
+  document.body.appendChild(layer);
+
+  for (let i = 0; i < 26; i++) {
+    const bubble = document.createElement("span");
+    bubble.className = "tide-bubble";
+    const size = 8 + Math.random() * 34;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${7 + Math.random() * 10}s`;
+    bubble.style.animationDelay = `${-Math.random() * 14}s`;
+    layer.appendChild(bubble);
+  }
+
+  const message = document.createElement("div");
+  message.className = "tide-secret-message";
+  message.innerHTML = `THE TIDE NOTICED YOU.<small>RESPONSE IS NOT OBEDIENCE.</small>`;
+  document.body.appendChild(message);
+
+  let clicks = [];
+  let awake = false;
+
+  mark.style.cursor = "pointer";
+  mark.title = "";
+
+  mark.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const now = Date.now();
+    clicks = clicks.filter(time => now - time < 2400);
+    clicks.push(now);
+
+    if (clicks.length >= 5) {
+      clicks = [];
+      awake = !awake;
+      document.body.classList.toggle("tide-awake", awake);
+
+      message.innerHTML = awake
+        ? `THE TIDE NOTICED YOU.<small>RESPONSE IS NOT OBEDIENCE.</small>`
+        : `THE TIDE WITHDRAWS.<small>FOR NOW.</small>`;
+      message.classList.add("show");
+      setTimeout(() => message.classList.remove("show"), 2600);
+    }
+  });
+})();
