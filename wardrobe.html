@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07131f" />
+  <title>Tidefall Wardrobe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="wardrobe.css" />
+</head>
+<body class="wardrobe-page">
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">◌</span><span>TIDEFALL</span></a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html#universe">Universe</a>
+      <a href="index.html#academy">Academy</a>
+      <a href="index.html#spells">Spells</a>
+      <a href="students.html">Students</a>
+      <a href="wardrobe.html">Wardrobe</a>
+    </nav>
+  </header>
+
+  <main class="wardrobe-main">
+    <section class="wardrobe-hero">
+      <p class="eyebrow">ENTER THE STORY</p>
+      <h1>Tidefall Wardrobe</h1>
+      <p>Try on Tidefall looks, take a photo, and it is automatically saved to your private Tidefall Camera Roll.</p>
+    </section>
+
+    <section class="wardrobe-studio">
+      <div class="camera-panel">
+        <div class="camera-stage" id="cameraStage">
+          <video id="camera" autoplay muted playsinline></video>
+          <div id="outfitOverlay" class="outfit-overlay outfit-brannor" aria-hidden="true">
+            <div class="outfit-shoulders"></div>
+            <div class="outfit-body"><span id="outfitLabel">BRANNOR</span></div>
+          </div>
+          <div id="cameraPlaceholder" class="camera-placeholder">
+            <span>📷</span>
+            <strong>Camera is off</strong>
+            <small>Start the camera to enter the Wardrobe.</small>
+          </div>
+        </div>
+
+        <div class="camera-actions">
+          <button id="startCamera" class="button outline" type="button">Start Camera</button>
+          <button id="capturePhoto" class="button primary" type="button" disabled>Take Photo</button>
+        </div>
+        <p id="cameraStatus" class="wardrobe-status">Live camera is not saved. Photos begin storage only when captured.</p>
+      </div>
+
+      <aside class="outfit-panel">
+        <p class="eyebrow">STORY WARDROBE</p>
+        <h2>Choose a look</h2>
+        <div class="outfit-options">
+          <button class="outfit-choice active" type="button" data-outfit="brannor" data-label="BRANNOR"><strong>Brannor</strong><span>Academy colours</span></button>
+          <button class="outfit-choice" type="button" data-outfit="riptide" data-label="RIPTIDE"><strong>Riptide</strong><span>Match kit prototype</span></button>
+          <button class="outfit-choice" type="button" data-outfit="proving" data-label="PROVING GROUND"><strong>Proving Ground</strong><span>Duelling gear prototype</span></button>
+        </div>
+        <p class="wardrobe-note">These are prototype overlays. The next AR pass can replace them with body-tracked canon outfit assets.</p>
+      </aside>
+    </section>
+
+    <section class="camera-roll-section">
+      <div class="camera-roll-heading">
+        <div>
+          <p class="eyebrow">PRIVATE BY DEFAULT</p>
+          <h2>Your Camera Roll</h2>
+        </div>
+        <div class="gallery-tabs" role="tablist">
+          <button class="gallery-tab active" type="button" data-gallery="active">Camera Roll</button>
+          <button class="gallery-tab" type="button" data-gallery="deleted">Recently Deleted</button>
+        </div>
+      </div>
+
+      <div class="storage-explainer">
+        <div><strong>0–30 days</strong><span>Active moderation storage</span></div>
+        <div><strong>After 30 days</strong><span>Private gallery storage</span></div>
+        <div><strong>State changes</strong><span>Reset the 30-day moderation clock</span></div>
+      </div>
+
+      <div id="gallery" class="photo-grid"></div>
+      <div id="emptyGallery" class="empty-gallery">No photos here yet.</div>
+    </section>
+  </main>
+
+  <canvas id="captureCanvas" hidden></canvas>
+  <div id="wardrobeToast" class="toast" role="status" aria-live="polite"></div>
+  <script src="wardrobe.js"></script>
+</body>
+</html>
