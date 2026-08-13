@@ -1,55 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tidefall Books | Stories from the Tidefall Universe</title>
-    <meta name="description" content="Explore the Tidefall books, reading order and stories from the fantasy world of Tidefall Academy." />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <link rel="canonical" href="https://www.tidefall.com.au/books" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Tidefall" />
-    <meta property="og:title" content="Tidefall Books | Stories from the Tidefall Universe" />
-    <meta property="og:description" content="Explore the Tidefall books, reading order and stories from Tidefall Academy." />
-    <meta property="og:url" content="https://www.tidefall.com.au/books" />
-    <meta property="og:image" content="https://www.tidefall.com.au/assets/hero.png" />
-    <meta property="og:image:alt" content="Tidefall fantasy world artwork" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tidefall Books" />
-    <meta name="twitter:description" content="Explore the books and stories of the Tidefall universe." />
-    <meta name="twitter:image" content="https://www.tidefall.com.au/assets/hero.png" />
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07131f" />
+  <title>Tidefall Books | Preview Book One</title>
+  <meta name="description" content="Preview Tidefall Book One. Read the official blurb and Chapter One before purchasing the full book." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://www.tidefall.com.au/books" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tidefall" />
+  <meta property="og:title" content="Tidefall Books | Preview Book One" />
+  <meta property="og:description" content="Read the blurb and Chapter One preview of Tidefall Book One." />
+  <meta property="og:url" content="https://www.tidefall.com.au/books" />
+  <meta property="og:image" content="https://www.tidefall.com.au/assets/hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .book-preview-page{min-height:100svh;padding:130px clamp(18px,5vw,72px) 80px;background:radial-gradient(circle at 50% 0%,rgba(39,105,127,.24),transparent 30%),#07131f}
+    .book-preview-shell{width:min(1040px,100%);margin:0 auto}
+    .book-preview-top{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:clamp(30px,6vw,72px);align-items:center;margin-bottom:70px}
+    .book-cover-shell{aspect-ratio:2/3;border-radius:22px;border:1px solid rgba(255,255,255,.16);background:radial-gradient(circle at 40% 20%,rgba(95,181,207,.22),transparent 32%),linear-gradient(155deg,#173748,#07131f);display:grid;place-items:center;padding:28px;box-shadow:0 25px 80px rgba(0,0,0,.35);font-family:"Cinzel",serif;text-align:center;letter-spacing:.12em}
+    .book-cover-shell span{display:block;font-size:.72rem;opacity:.6;margin-top:14px}
+    .book-preview-copy h1{font-family:"Cinzel",serif;font-size:clamp(2.8rem,6vw,5.6rem);line-height:.95;margin:10px 0 20px}
+    .book-preview-copy>p{color:rgba(255,255,255,.68);line-height:1.75}
+    .preview-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.16);border-radius:999px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#a9d5df;background:rgba(255,255,255,.035)}
+    .reader-section{border-top:1px solid rgba(255,255,255,.12);padding:54px 0}
+    .reader-section h2{font-family:"Cinzel",serif;font-size:clamp(2rem,4vw,3.4rem);margin:0 0 22px}
+    .reader-copy{max-width:760px;font-size:1.05rem;line-height:1.9;color:rgba(255,255,255,.78);user-select:none;-webkit-user-select:none}
+    .reader-lock{margin-top:32px;padding:22px 24px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.035);color:rgba(255,255,255,.62);line-height:1.65}
+    .purchase-panel{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:30px;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025))}
+    .purchase-panel h3{font-family:"Cinzel",serif;margin:0 0 8px;font-size:1.5rem}.purchase-panel p{margin:0;color:rgba(255,255,255,.58)}
+    .copy-warning{position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);opacity:0;pointer-events:none;padding:12px 17px;border-radius:999px;background:rgba(5,18,28,.94);border:1px solid rgba(255,255,255,.14);transition:.2s ease;z-index:100}.copy-warning.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:720px){.book-preview-page{padding-top:100px}.book-preview-top{grid-template-columns:1fr}.book-cover-shell{width:min(280px,80vw);margin:0 auto}.purchase-panel{align-items:flex-start;flex-direction:column}}
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Tidefall home"><span class="brand-mark">◌</span><span>TIDEFALL</span></a>
+    <nav class="nav-links" aria-label="Primary navigation"><a href="/">Home</a><a href="/books" aria-current="page">Books</a><a href="/students">Students</a><a href="/wardrobe">Wardrobe</a><a href="/account">Account</a></nav>
+  </header>
 
-    <nav class="navbar">
-        <a href="/" class="logo">Tidefall Academy</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/books" class="active">Books</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/contact">Contact</a>
+  <main class="book-preview-page">
+    <div class="book-preview-shell">
+      <section class="book-preview-top">
+        <div class="book-cover-shell" aria-label="Tidefall Book One cover placeholder">TIDEFALL<span>BOOK ONE</span></div>
+        <div class="book-preview-copy">
+          <div class="preview-badge">Free preview</div>
+          <h1>Tidefall<br />Book One</h1>
+          <p>Read the official blurb and the first chapter free. The rest of the book will require purchase and a Tidefall account.</p>
         </div>
-    </nav>
+      </section>
 
-    <main class="container">
-        <h1>Published Books</h1>
-        <div class="book-grid">
-            <div class="book-card">
-                <img src="images/cover1.jpg" alt="Tidefall Academy Year One book cover">
-                <div class="book-info">
-                    <h2>Tidefall Academy: Year One</h2>
-                    <p class="genre">Fantasy / Magic Academy</p>
-                    <p>Follow our core group of students as they arrive at the coastal fortress, test their powers over water and earth, and uncover strange mysteries hidden in the archives.</p>
-                    <a href="#" class="btn">Get the Book</a>
-                </div>
-            </div>
-            </div>
-    </main>
+      <section class="reader-section" aria-labelledby="blurb-heading">
+        <p class="eyebrow">ABOUT THE BOOK</p>
+        <h2 id="blurb-heading">Blurb</h2>
+        <div class="reader-copy protected-reader">
+          <p>Tidefall Academy stands where stone meets an ocean that does not always behave like an ocean should. For its students, learning magic is only the beginning. The deeper they go into Tidefall, the clearer it becomes that the sea is watching, the Academy is hiding things, and some currents were never meant to be followed quietly.</p>
+        </div>
+      </section>
 
-    <footer>
-        <p>&copy; 2026 Tidefall Academy. All rights reserved.</p>
-    </footer>
+      <section class="reader-section" aria-labelledby="chapter-heading">
+        <p class="eyebrow">FREE PREVIEW</p>
+        <h2 id="chapter-heading">Chapter One</h2>
+        <div class="reader-copy protected-reader">
+          <p><strong>The current canon Chapter One is being locked before publication.</strong></p>
+          <p>The older Book One file is intentionally not being published here because it contains outdated character and age canon. Once the locked Chapter One is added, this will remain the only full chapter available without purchase.</p>
+        </div>
+        <div class="reader-lock">🔒 <strong>Preview limit:</strong> public access stops after Chapter One. Chapters Two onward will only be served after the signed-in account has a valid purchase entitlement.</div>
+      </section>
 
+      <section class="reader-section">
+        <div class="purchase-panel">
+          <div><h3>Continue the story</h3><p>Full-book access will unlock here after purchase.</p></div>
+          <button class="button primary" type="button" disabled aria-disabled="true">Purchase coming soon</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The tide chooses. You decide what to do next.</p></div><div class="footer-links"><a href="/">Home</a><a href="/students">Students</a><a href="/account">Account</a></div></footer>
+  <div id="copyWarning" class="copy-warning" role="status" aria-live="polite">Preview copying is disabled.</div>
+
+  <script>
+    (() => {
+      const warning = document.getElementById('copyWarning');
+      let timer;
+      const showWarning = () => {
+        if (!warning) return;
+        warning.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(() => warning.classList.remove('show'), 1800);
+      };
+      const insideProtectedReader = target => target && target.closest && target.closest('.protected-reader');
+
+      document.addEventListener('copy', event => {
+        if (insideProtectedReader(event.target)) {
+          event.preventDefault();
+          showWarning();
+        }
+      });
+
+      document.addEventListener('cut', event => {
+        if (insideProtectedReader(event.target)) {
+          event.preventDefault();
+          showWarning();
+        }
+      });
+
+      document.addEventListener('contextmenu', event => {
+        if (insideProtectedReader(event.target)) {
+          event.preventDefault();
+          showWarning();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        const copyShortcut = (event.ctrlKey || event.metaKey) && ['c','x','a'].includes(event.key.toLowerCase());
+        if (copyShortcut && insideProtectedReader(document.activeElement || event.target)) {
+          event.preventDefault();
+          showWarning();
+        }
+      });
+
+      document.querySelectorAll('.protected-reader').forEach(reader => {
+        reader.addEventListener('dragstart', event => event.preventDefault());
+        reader.setAttribute('tabindex', '0');
+      });
+    })();
+  </script>
 </body>
 </html>
