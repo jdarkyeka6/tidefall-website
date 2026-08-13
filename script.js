@@ -8,6 +8,23 @@ function showToast(message) {
   window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
 }
 
+// The main four now have real profile pages. Upgrade the existing homepage cards
+// at runtime so older cached HTML does not keep trapping clicks in "coming soon".
+const characterRoutes = {
+  "Harper Vale": "/characters/harper",
+  "Jasper Holloway": "/characters/jasper",
+  "Lily Hart": "/characters/lily",
+  "Ava Rees": "/characters/ava"
+};
+
+document.querySelectorAll("[data-coming-soon]").forEach(card => {
+  const route = characterRoutes[card.dataset.comingSoon];
+  if (route) {
+    card.setAttribute("href", route);
+    card.removeAttribute("data-coming-soon");
+  }
+});
+
 document.querySelectorAll("[data-coming-soon]").forEach(card => {
   card.addEventListener("click", event => {
     event.preventDefault();
