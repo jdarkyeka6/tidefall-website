@@ -54,7 +54,10 @@
   .hero {
     width: 100%;
     min-height: 86svh;
-    background-position: 52% center;
+    background:
+      linear-gradient(to bottom, rgba(1,7,12,.10), rgba(1,10,16,.48)),
+      url('/assets/tidefall-mobile-hero.webp') center top / 150% auto no-repeat !important;
+    background-color: #07131f !important;
     overflow: hidden;
   }
   .hero-content {
