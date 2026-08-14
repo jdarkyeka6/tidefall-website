@@ -5,29 +5,35 @@
   .site-header {
     position: sticky;
     top: 0;
-    padding: 10px 12px;
-    gap: 10px;
+    padding: 9px 10px 8px;
+    gap: 8px;
     background: rgba(4,14,23,.94);
     backdrop-filter: blur(16px);
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  .brand { flex: 0 0 auto; font-size: .8rem; letter-spacing: .11em; }
-  .brand-mark { width: 24px; height: 24px; }
+  .brand { flex: 1 1 auto; font-size: .78rem; letter-spacing: .1em; min-width: 0; }
+  .brand-mark { width: 23px; height: 23px; flex: 0 0 23px; }
   .nav-links {
+    order: 3;
     display: flex !important;
-    flex: 1 1 auto;
-    gap: 7px;
+    flex: 0 0 100%;
+    width: 100%;
+    gap: 6px;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 4px 2px 6px;
+    padding: 2px 0 1px;
     scrollbar-width: none;
-    font-size: .72rem;
+    font-size: .68rem;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
   }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-links a {
     flex: 0 0 auto;
-    padding: 8px 11px;
+    scroll-snap-align: start;
+    padding: 7px 10px;
     border: 1px solid rgba(255,255,255,.12);
     border-radius: 999px;
     background: rgba(255,255,255,.045);
