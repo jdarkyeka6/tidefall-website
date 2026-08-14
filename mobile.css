@@ -1,16 +1,26 @@
 @media (max-width: 720px) {
-  html, body { width: 100%; overflow-x: hidden; }
+  html, body { width: 100%; max-width: 100%; overflow-x: clip; }
   body { -webkit-text-size-adjust: 100%; }
+
+  main, section, header, footer, .hero, .hero-content, .section,
+  .academy-section, .spell-section, .books-section, .ask-section,
+  .inner-main, .book-preview-page, .entity-page, .academy-guide, .spell-guide {
+    min-width: 0;
+    max-width: 100%;
+  }
 
   .site-header {
     position: sticky;
     top: 0;
+    width: 100%;
+    max-width: 100%;
     padding: 9px 10px 8px;
     gap: 8px;
     background: rgba(4,14,23,.94);
     backdrop-filter: blur(16px);
     flex-wrap: wrap;
     align-items: center;
+    overflow: hidden;
   }
 
   .brand { flex: 1 1 auto; font-size: .78rem; letter-spacing: .1em; min-width: 0; }
@@ -20,8 +30,10 @@
     display: flex !important;
     flex: 0 0 100%;
     width: 100%;
+    max-width: 100%;
     gap: 6px;
     overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
     padding: 2px 0 1px;
     scrollbar-width: none;
@@ -39,17 +51,62 @@
     background: rgba(255,255,255,.045);
   }
 
-  .hero { min-height: 86svh; background-position: 52% center; }
-  .hero-content { padding: 86px 16px 72px; width: 100%; }
-  .hero h1 { font-size: clamp(3rem, 18vw, 5rem); letter-spacing: .07em; margin-bottom: 18px; }
-  .hero-copy { font-size: .98rem; line-height: 1.55; max-width: 34rem; }
-  .hero-actions { gap: 9px; margin-top: 24px; }
-  .hero-actions .button { min-width: 0; flex: 1 1 140px; padding: 0 15px; }
+  .hero {
+    width: 100%;
+    min-height: 86svh;
+    background-position: 52% center;
+    overflow: hidden;
+  }
+  .hero-content {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 78px 18px 68px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .hero h1 {
+    width: 100%;
+    max-width: 100%;
+    margin: 14px auto 18px;
+    font-size: clamp(2.65rem, 14vw, 4.15rem);
+    line-height: .94;
+    letter-spacing: .025em;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .hero-copy {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 34rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    font-size: .96rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  .hero-actions {
+    width: 100%;
+    max-width: 100%;
+    margin: 24px auto 0;
+    gap: 9px;
+  }
+  .hero-actions .button {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+    padding: 0 15px;
+  }
   .scroll-cue { display: none; }
 
-  .section { width: calc(100% - 28px); padding: 68px 0; }
+  .section { width: calc(100% - 28px); max-width: calc(100% - 28px); padding: 68px 0; }
   .section-heading { margin-bottom: 26px; }
-  .section h2 { font-size: clamp(2rem, 10vw, 3rem); line-height: 1.05; }
+  .section h2 { font-size: clamp(2rem, 10vw, 3rem); line-height: 1.05; overflow-wrap: anywhere; }
   .eyebrow { font-size: .64rem; letter-spacing: .2em; }
 
   .character-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
@@ -75,22 +132,22 @@
 
   .spell-section { padding-left: 14px; padding-right: 14px; }
   .spell-intro { margin-bottom: 30px; }
-  .spell-stage { gap: 16px; }
+  .spell-stage { gap: 16px; min-width: 0; max-width: 100%; }
   .mic-core { min-height: 250px; }
   .mic-button { width: 92px; height: 92px; }
   .ring-one { width: 165px; height: 165px; }
   .ring-two { width: 225px; height: 225px; }
-  .spell-list { gap: 8px; }
-  .spell-list button { padding: 14px 15px; border-radius: 14px; }
+  .spell-list { gap: 8px; min-width: 0; }
+  .spell-list button { padding: 14px 15px; border-radius: 14px; max-width: 100%; }
 
   .books-section { gap: 30px; }
-  .book-placeholder-row { gap: 8px; }
-  .book-card { padding: 12px 6px; font-size: .68rem; border-radius: 12px; }
+  .book-placeholder-row { gap: 8px; min-width: 0; }
+  .book-card { padding: 12px 6px; font-size: .68rem; border-radius: 12px; min-width: 0; }
   .book-card:nth-child(2), .book-card:nth-child(3) { transform: none; }
 
   .ask-section { gap: 12px; padding-bottom: 76px; }
-  .ask-card { padding: 26px 20px; border-radius: 20px; }
-  .ask-card .button { width: 100%; }
+  .ask-card { padding: 26px 20px; border-radius: 20px; min-width: 0; }
+  .ask-card .button { width: 100%; max-width: 100%; }
 
   .site-footer { padding: 28px 16px; gap: 18px; }
   .footer-links { gap: 8px; }
@@ -98,32 +155,34 @@
 
   .inner-main, .form-page { padding: 88px 14px 56px; }
   .inner-hero { margin-bottom: 34px; }
-  .inner-hero h1, .form-shell h1 { font-size: clamp(2.5rem, 14vw, 4rem); }
-  .student-roster, .main-roster { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .student-mini-card { border-radius: 16px; }
+  .inner-hero h1, .form-shell h1 { font-size: clamp(2.5rem, 14vw, 4rem); overflow-wrap: anywhere; }
+  .student-roster, .main-roster { grid-template-columns: 1fr 1fr !important; gap: 10px !important; min-width: 0; }
+  .student-mini-card { border-radius: 16px; min-width: 0; }
   .student-mini-card h2 { margin: 12px 12px 6px; font-size: 1rem; }
   .student-mini-card p { margin: 0 12px 14px; font-size: .76rem; }
   .student-mini-card .view-profile { margin: 0 12px 14px !important; font-size: .7rem !important; }
-  .form-shell { padding: 24px 16px; border-radius: 22px; }
+  .form-shell { padding: 24px 16px; border-radius: 22px; max-width: 100%; }
 
   .book-preview-page { padding: 86px 14px 56px !important; }
-  .book-preview-top { gap: 24px !important; margin-bottom: 44px !important; }
-  .book-cover-shell { width: min(220px, 68vw) !important; }
-  .book-preview-copy h1 { font-size: clamp(2.5rem, 14vw, 4rem) !important; }
+  .book-preview-top { gap: 24px !important; margin-bottom: 44px !important; min-width: 0; }
+  .book-cover-shell { width: min(220px, 68vw) !important; max-width: 100%; }
+  .book-preview-copy { min-width: 0; }
+  .book-preview-copy h1 { font-size: clamp(2.5rem, 14vw, 4rem) !important; overflow-wrap: anywhere; }
   .reader-section { padding: 38px 0 !important; }
-  .reader-copy { font-size: 1rem !important; line-height: 1.72 !important; }
-  .purchase-panel { padding: 20px !important; }
+  .reader-copy { font-size: 1rem !important; line-height: 1.72 !important; max-width: 100%; }
+  .purchase-panel { padding: 20px !important; max-width: 100%; }
 
   .entity-page, .academy-guide, .spell-guide { padding: 88px 14px 56px !important; }
-  .entity-hero h1, .academy-guide h1, .spell-guide h1 { font-size: clamp(2.7rem, 14vw, 4.2rem) !important; line-height: 1 !important; }
-  .entity-section h2, .academy-guide h2, .spell-guide h2 { font-size: clamp(1.8rem, 9vw, 2.7rem) !important; }
+  .entity-hero h1, .academy-guide h1, .spell-guide h1 { font-size: clamp(2.7rem, 14vw, 4.2rem) !important; line-height: 1 !important; overflow-wrap: anywhere; }
+  .entity-section h2, .academy-guide h2, .spell-guide h2 { font-size: clamp(1.8rem, 9vw, 2.7rem) !important; overflow-wrap: anywhere; }
   .entity-links, .seo-links { gap: 8px !important; }
-  .entity-links .button, .seo-links .button { flex: 1 1 100%; width: 100%; }
-  .academy-hero-img { border-radius: 16px !important; margin: 22px 0 !important; }
+  .entity-links .button, .seo-links .button { flex: 1 1 100%; width: 100%; max-width: 100%; }
+  .academy-hero-img { border-radius: 16px !important; margin: 22px 0 !important; max-width: 100%; }
 }
 
 @media (max-width: 420px) {
   .character-grid, .student-roster, .main-roster { grid-template-columns: 1fr !important; }
   .character-card, .character-card img { min-height: 400px !important; height: 400px !important; }
-  .hero-actions .button { flex-basis: 100%; }
+  .hero h1 { font-size: clamp(2.45rem, 13.5vw, 3.65rem); letter-spacing: .015em; }
+  .hero-content { padding-left: 16px; padding-right: 16px; }
 }
