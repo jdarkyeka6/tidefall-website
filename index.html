@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#07131f" />
-  <title>Tidefall | Official Fantasy World, Books & Academy</title>
-  <meta name="description" content="Enter Tidefall, a fantasy world shaped by water, magic and choice. Meet Jasper, Lily, Harper and Ava, explore Tidefall Academy, books, spells and more." />
+  <title>Tidefall | Official Fantasy Universe, Books & Academy</title>
+  <meta name="description" content="Tidefall is an original fantasy universe shaped by water, magic and choice. Explore the official Tidefall books, Tidefall Academy, characters, spells and Wardrobe." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://www.tidefall.com.au/" />
   <link rel="sitemap" type="application/xml" href="https://www.tidefall.com.au/sitemap.xml" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Tidefall" />
-  <meta property="og:title" content="Tidefall | Official Fantasy World, Books & Academy" />
-  <meta property="og:description" content="Enter Tidefall, a fantasy world shaped by water, magic and choice. Explore the Academy, characters, books and spells." />
+  <meta property="og:title" content="Tidefall | Official Fantasy Universe, Books & Academy" />
+  <meta property="og:description" content="The official home of Tidefall, an original fantasy universe featuring Tidefall Academy, the Tidefall books, Jasper Holloway, Lily Hart, Harper Vale and Ava Rees." />
   <meta property="og:url" content="https://www.tidefall.com.au/" />
   <meta property="og:image" content="https://www.tidefall.com.au/assets/hero.png" />
-  <meta property="og:image:alt" content="Tidefall fantasy world artwork" />
+  <meta property="og:image:alt" content="Tidefall fantasy universe artwork" />
   <meta property="og:locale" content="en_AU" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tidefall | Official Fantasy World, Books & Academy" />
-  <meta name="twitter:description" content="Enter Tidefall, a fantasy world shaped by water, magic and choice." />
+  <meta name="twitter:title" content="Tidefall | Official Fantasy Universe, Books & Academy" />
+  <meta name="twitter:description" content="The official home of the Tidefall fantasy universe, books, Academy, characters and spells." />
   <meta name="twitter:image" content="https://www.tidefall.com.au/assets/hero.png" />
 
   <script type="application/ld+json">
@@ -33,20 +33,37 @@
         "@id": "https://www.tidefall.com.au/#website",
         "url": "https://www.tidefall.com.au/",
         "name": "Tidefall",
-        "alternateName": "Tidefall Official Website",
-        "description": "The official website for Tidefall, a fantasy world shaped by water, magic and choice.",
-        "inLanguage": "en-AU"
+        "alternateName": ["Tidefall Official Website", "Tidefall Fantasy Universe"],
+        "description": "The official website for Tidefall, an original fantasy universe shaped by water, magic and choice.",
+        "inLanguage": "en-AU",
+        "about": {"@id": "https://www.tidefall.com.au/#universe"}
       },
       {
-        "@type": "CreativeWork",
-        "@id": "https://www.tidefall.com.au/#tidefall",
+        "@type": ["CreativeWork", "CreativeWorkSeries"],
+        "@id": "https://www.tidefall.com.au/#universe",
         "name": "Tidefall",
+        "alternateName": "Tidefall Fantasy Universe",
         "url": "https://www.tidefall.com.au/",
         "image": "https://www.tidefall.com.au/assets/hero.png",
-        "description": "A fantasy world centred on Tidefall Academy, water, magic, choice and its students.",
-        "genre": ["Fantasy", "Magic Academy"],
+        "description": "Tidefall is an original fantasy universe centred on Tidefall Academy and the stories of Jasper Holloway, Lily Hart, Harper Vale and Ava Rees.",
+        "genre": ["Fantasy", "Magic Academy", "Young Adult Fantasy"],
         "inLanguage": "en-AU",
-        "mainEntityOfPage": {"@id": "https://www.tidefall.com.au/#website"}
+        "mainEntityOfPage": {"@id": "https://www.tidefall.com.au/#website"},
+        "hasPart": [
+          {"@id": "https://www.tidefall.com.au/books#series"},
+          {"@id": "https://www.tidefall.com.au/what-is-tidefall#academy"},
+          {"@id": "https://www.tidefall.com.au/characters/jasper#character"},
+          {"@id": "https://www.tidefall.com.au/characters/lily#character"},
+          {"@id": "https://www.tidefall.com.au/characters/harper#character"},
+          {"@id": "https://www.tidefall.com.au/characters/ava#character"}
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.tidefall.com.au/#breadcrumbs",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Tidefall","item":"https://www.tidefall.com.au/"}
+        ]
       }
     ]
   }
@@ -54,11 +71,11 @@
 
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body><header class="site-header"><a class="brand" href="#top" aria-label="Tidefall home"><span class="brand-mark">◌</span><span>TIDEFALL</span></a><nav class="nav-links" aria-label="Primary navigation"><a href="#universe">Universe</a><a href="#academy">Academy</a><a href="#spells">Spells</a><a href="/students">Students</a><a href="/wardrobe">Wardrobe</a><a href="/account">Account</a></nav></header>
-<main id="top"><section class="hero"><div class="hero-water"></div><div class="hero-content"><p class="eyebrow">THE TIDE IS LISTENING</p><h1>TIDEFALL</h1><p class="hero-copy">A world shaped by water, magic, choice, and the things the sea refuses to explain.</p><div class="hero-actions"><a class="button primary" href="#universe">Explore</a><a class="button ghost" href="#books">Books</a><a class="button ghost" href="#academy">More</a></div></div><a class="scroll-cue" href="#universe" aria-label="Scroll to explore"><span>SCROLL</span><span class="scroll-line"></span></a></section>
-<section id="universe" class="section universe-section"><div class="section-heading"><p class="eyebrow">MEET THE STUDENTS</p><h2>Explore the Universe</h2><p>Four students. Four very different ways of surviving Tidefall.</p></div><div class="character-grid"><a class="character-card harper" href="#" data-coming-soon="Harper Vale"><img src="assets/harper.png" alt="Harper Vale of Brannor" /><div class="character-overlay"><p>BRANNOR</p><h3>Harper Vale</h3><span>View character →</span></div></a><a class="character-card jasper" href="#" data-coming-soon="Jasper Holloway"><img src="assets/jasper.png" alt="Jasper Holloway of Brannor" /><div class="character-overlay"><p>BRANNOR</p><h3>Jasper Holloway</h3><span>View character →</span></div></a><a class="character-card lily" href="#" data-coming-soon="Lily Hart"><img src="assets/lily.png" alt="Lily Hart of Brannor" /><div class="character-overlay"><p>BRANNOR</p><h3>Lily Hart</h3><span>View character →</span></div></a><a class="character-card ava" href="#" data-coming-soon="Ava Rees"><img src="assets/ava.png" alt="Ava Rees of Brannor" /><div class="character-overlay"><p>BRANNOR</p><h3>Ava Rees</h3><span>View character →</span></div></a></div><div class="center-button"><a class="button outline" href="/students">See Other Students</a></div><div class="reference-strip"><span>RESPONSE IS NOT OBEDIENCE.</span><span>✦</span><span>THE SEA REMEMBERS.</span><span>✦</span><span>SOME CURRENTS CAN BE FOUGHT.</span></div></section>
-<section id="academy" class="section academy-section"><div class="academy-image-wrap"><img src="assets/academy-placeholder.svg" alt="Tidefall Academy" /><div class="academy-fog"></div></div><div class="academy-copy"><p class="eyebrow">BEYOND THE SHORE</p><h2>See the Academy</h2><p>Dorms, classrooms, hidden corridors, old stone, impossible water, and far too many places students probably should not be.</p><div class="academy-actions"><button class="button primary disabled-button" type="button" data-toast="The walkable Academy is coming later.">Explore the Academy</button><span class="coming-soon">Interactive castle coming later</span></div></div></section>
-<section id="spells" class="section spell-section"><div class="spell-intro"><p class="eyebrow">VOICE MAGIC</p><h2>Speak a Spell</h2><p>A few spells are shown below. The rest are hidden across Tidefall. If you discover one, come back and try saying it.</p></div><div class="spell-stage"><aside class="spell-list left-list"><button data-spell="veyra">Veyra <span>Light</span></button><button data-spell="sela">Sela <span>Pull</span></button><button data-spell="tavra">Tavra <span>Shield</span></button></aside><div class="mic-core"><div class="magic-ring ring-one"></div><div class="magic-ring ring-two"></div><button id="micButton" class="mic-button" type="button" aria-label="Speak a spell"><span class="mic-icon">🎙</span></button><p id="spellStatus">Press the mic and speak.</p><p id="heardText" class="heard-text"></p></div><aside class="spell-list right-list"><button data-spell="raska">Raska <span>Duel</span></button><button data-spell="valka">Valka <span>Move</span></button><button data-spell="terva">Terva <span>???</span></button></aside></div><div id="spellEffect" class="spell-effect" aria-hidden="true"></div><p class="spell-note">The site knows more spells than it shows.</p></section>
+<body><header class="site-header"><a class="brand" href="#top" aria-label="Tidefall home"><span class="brand-mark">◌</span><span>TIDEFALL</span></a><nav class="nav-links" aria-label="Primary navigation"><a href="#universe">Universe</a><a href="/what-is-tidefall">What is Tidefall?</a><a href="/books">Books</a><a href="#academy">Academy</a><a href="#spells">Spells</a><a href="/students">Students</a><a href="/wardrobe">Wardrobe</a><a href="/account">Account</a></nav></header>
+<main id="top"><section class="hero"><div class="hero-water"></div><div class="hero-content"><p class="eyebrow">THE TIDE IS LISTENING</p><h1>TIDEFALL</h1><p class="hero-copy">Tidefall is an original fantasy universe shaped by water, magic, choice, and the things the sea refuses to explain.</p><div class="hero-actions"><a class="button primary" href="#universe">Explore</a><a class="button ghost" href="/books">Books</a><a class="button ghost" href="/what-is-tidefall">What is Tidefall?</a></div></div><a class="scroll-cue" href="#universe" aria-label="Scroll to explore"><span>SCROLL</span><span class="scroll-line"></span></a></section>
+<section id="universe" class="section universe-section"><div class="section-heading"><p class="eyebrow">MEET THE STUDENTS</p><h2>Explore the Tidefall Universe</h2><p>The Tidefall fantasy universe follows four central students through Tidefall Academy: Jasper Holloway, Lily Hart, Harper Vale and Ava Rees.</p></div><div class="character-grid"><a class="character-card harper" href="/characters/harper"><img src="assets/harper.png" alt="Harper Vale, a main character in the Tidefall fantasy universe" /><div class="character-overlay"><p>BRANNOR</p><h3>Harper Vale</h3><span>View character →</span></div></a><a class="character-card jasper" href="/characters/jasper"><img src="assets/jasper.png" alt="Jasper Holloway, a main character in the Tidefall fantasy universe" /><div class="character-overlay"><p>BRANNOR</p><h3>Jasper Holloway</h3><span>View character →</span></div></a><a class="character-card lily" href="/characters/lily"><img src="assets/lily.png" alt="Lily Hart, a main character in the Tidefall fantasy universe" /><div class="character-overlay"><p>BRANNOR</p><h3>Lily Hart</h3><span>View character →</span></div></a><a class="character-card ava" href="/characters/ava"><img src="assets/ava.png" alt="Ava Rees, a main character in the Tidefall fantasy universe" /><div class="character-overlay"><p>BRANNOR</p><h3>Ava Rees</h3><span>View character →</span></div></a></div><div class="center-button"><a class="button outline" href="/students">See Other Students</a></div><div class="reference-strip"><span>RESPONSE IS NOT OBEDIENCE.</span><span>✦</span><span>THE SEA REMEMBERS.</span><span>✦</span><span>SOME CURRENTS CAN BE FOUGHT.</span></div></section>
+<section id="academy" class="section academy-section"><div class="academy-image-wrap"><img src="assets/academy-placeholder.svg" alt="Tidefall Academy, the central school in the Tidefall fantasy universe" /><div class="academy-fog"></div></div><div class="academy-copy"><p class="eyebrow">BEYOND THE SHORE</p><h2>Tidefall Academy</h2><p>Tidefall Academy is the central school and setting of the Tidefall fantasy universe. Its dorms, classrooms, hidden corridors and impossible waters sit at the heart of the books.</p><div class="academy-actions"><button class="button primary disabled-button" type="button" data-toast="The walkable Academy is coming later.">Explore the Academy</button><span class="coming-soon">Interactive castle coming later</span></div></div></section>
+<section id="spells" class="section spell-section"><div class="spell-intro"><p class="eyebrow">VOICE MAGIC</p><h2>Tidefall Spells</h2><p>Magic in Tidefall is cast without wands. A few spells are shown below. The rest are hidden across the official Tidefall site.</p></div><div class="spell-stage"><aside class="spell-list left-list"><button data-spell="veyra">Veyra <span>Light</span></button><button data-spell="sela">Sela <span>Pull</span></button><button data-spell="tavra">Tavra <span>Shield</span></button></aside><div class="mic-core"><div class="magic-ring ring-one"></div><div class="magic-ring ring-two"></div><button id="micButton" class="mic-button" type="button" aria-label="Speak a spell"><span class="mic-icon">🎙</span></button><p id="spellStatus">Press the mic and speak.</p><p id="heardText" class="heard-text"></p></div><aside class="spell-list right-list"><button data-spell="raska">Raska <span>Duel</span></button><button data-spell="valka">Valka <span>Move</span></button><button data-spell="terva">Terva <span>???</span></button></aside></div><div id="spellEffect" class="spell-effect" aria-hidden="true"></div><p class="spell-note">The site knows more spells than it shows.</p></section>
 <section class="section ask-section"><div class="ask-card"><p class="eyebrow">TIDEFALL WARDROBE</p><h2>Step into the story</h2><p>Use your camera to try Tidefall looks, take photos, and keep them in your private Tidefall Camera Roll.</p><a class="button primary" href="/wardrobe">Open Wardrobe</a></div><div class="ask-card feedback-card"><p class="eyebrow">YOUR TIDEFALL</p><h2>Create an account</h2><p>Your account will hold your profile, wardrobe, discoveries and future duel progress.</p><a class="button outline" href="/account">Account</a></div></section>
-<section id="books" class="section books-section"><div class="books-copy"><p class="eyebrow">THE STORY BEGINS HERE</p><h2>Enter Tidefall</h2><p>The books are the main path through the world. This section is ready for covers, reading order, summaries, and links when you want them.</p></div><div class="book-placeholder-row"><div class="book-card">BOOK I</div><div class="book-card">BOOK II</div><div class="book-card">BOOK III</div></div></section><section class="section ask-section"><div class="ask-card"><p class="eyebrow">SHAPE THE SITE</p><h2>Something else you want to see?</h2><p>Tell us what should exist here next.</p><a class="button primary" href="/request">Click Here</a></div><div class="ask-card feedback-card"><p class="eyebrow">FOUND SOMETHING?</p><h2>Got feedback?</h2><p>Tell us what works, what doesn’t, or what feels weird.</p><a class="button outline" href="/feedback">Click Here</a></div></section></main>
-<footer class="site-footer"><div><strong>TIDEFALL</strong><p>The tide chooses. You decide what to do next.</p></div><div class="footer-links"><a href="#universe">Universe</a><a href="/students">Students</a><a href="#academy">Academy</a><a href="#spells">Spells</a><a href="/wardrobe">Wardrobe</a><a href="/account">Account</a></div></footer><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="script.js"></script></body></html>
+<section id="books" class="section books-section"><div class="books-copy"><p class="eyebrow">THE STORY BEGINS HERE</p><h2>The Tidefall Books</h2><p>The Tidefall books are the main story of the Tidefall fantasy universe, following Jasper Holloway, Lily Hart, Harper Vale and Ava Rees through Tidefall Academy.</p><a class="button outline" href="/books">Explore the Tidefall books</a></div><div class="book-placeholder-row"><div class="book-card">BOOK I</div><div class="book-card">BOOK II</div><div class="book-card">BOOK III</div></div></section><section class="section ask-section"><div class="ask-card"><p class="eyebrow">SHAPE THE SITE</p><h2>Something else you want to see?</h2><p>Tell us what should exist here next.</p><a class="button primary" href="/request">Click Here</a></div><div class="ask-card feedback-card"><p class="eyebrow">FOUND SOMETHING?</p><h2>Got feedback?</h2><p>Tell us what works, what doesn’t, or what feels weird.</p><a class="button outline" href="/feedback">Click Here</a></div></section></main>
+<footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe. The tide chooses. You decide what to do next.</p></div><div class="footer-links"><a href="/what-is-tidefall">What is Tidefall?</a><a href="/books">Books</a><a href="/students">Students</a><a href="#academy">Academy</a><a href="#spells">Spells</a><a href="/wardrobe">Wardrobe</a><a href="/account">Account</a></div></footer><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="script.js"></script></body></html>
