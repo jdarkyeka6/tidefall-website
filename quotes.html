@@ -11,7 +11,7 @@
   <link rel="icon" href="/favicon.ico" sizes="16x16" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .quote-page{min-height:100svh;display:grid;place-items:center;padding:130px 20px 80px;background:radial-gradient(circle at 50% 15%,rgba(54,132,160,.2),transparent 35%),#07131f;color:white}.quote-wrap{width:min(900px,100%);text-align:center}.quote-kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;opacity:.65;margin-bottom:18px}.quote-card{padding:clamp(28px,5vw,60px);border:1px solid rgba(255,255,255,.12);border-radius:28px;background:rgba(255,255,255,.04);backdrop-filter:blur(14px);box-shadow:0 20px 80px rgba(0,0,0,.24)}.quote-mark{font-size:4rem;line-height:.7;opacity:.22}.quote-text{font-family:Cinzel,serif;font-size:clamp(1.8rem,4.5vw,3.6rem);line-height:1.3;margin:18px auto 26px;max-width:760px}.quote-author{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;opacity:.72}.quote-date{margin-top:14px;font-size:.9rem;opacity:.45}.quote-note{margin:28px auto 0;max-width:620px;line-height:1.7;opacity:.62}.quote-actions{margin-top:28px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .quote-page{min-height:100svh;display:grid;place-items:center;padding:130px 20px 80px;background:radial-gradient(circle at 50% 15%,rgba(54,132,160,.2),transparent 35%),#07131f;color:white}.quote-wrap{width:min(900px,100%);text-align:center}.quote-kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;opacity:.65;margin-bottom:18px}.quote-card{padding:clamp(28px,5vw,60px);border:1px solid rgba(255,255,255,.12);border-radius:28px;background:rgba(255,255,255,.04);backdrop-filter:blur(14px);box-shadow:0 20px 80px rgba(0,0,0,.24)}.quote-mark{font-size:4rem;line-height:.7;opacity:.22}.quote-text{font-family:Cinzel,serif;font-size:clamp(1.8rem,4.5vw,3.6rem);line-height:1.3;margin:18px auto 26px;max-width:760px}.quote-author{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;opacity:.72}.quote-date{margin-top:14px;font-size:.9rem;opacity:.45}.quote-note{margin:28px auto 0;max-width:620px;line-height:1.7;opacity:.62}.quote-actions{margin-top:28px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.random-label{margin-top:18px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;opacity:.45}
   </style>
 </head>
 <body>
@@ -24,9 +24,10 @@
       <p id="quoteText" class="quote-text">The Tide is choosing today's words...</p>
       <p id="quoteAuthor" class="quote-author"></p>
       <p id="quoteDate" class="quote-date"></p>
+      <p id="randomLabel" class="random-label" hidden>Another message from the Tide</p>
     </section>
-    <p class="quote-note">A new Tidefall quote appears every day. Everyone gets the same quote for that calendar day.</p>
-    <div class="quote-actions"><a class="button outline" href="/">Return to Tidefall</a></div>
+    <p class="quote-note">A new Tidefall quote appears every day. Everyone gets the same official quote for that calendar day.</p>
+    <div class="quote-actions"><button id="anotherQuote" class="button primary" type="button">Give me another</button><button id="todaysQuote" class="button outline" type="button" hidden>Back to today's quote</button><a class="button outline" href="/">Return to Tidefall</a></div>
   </div>
 </main>
 <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div><div class="footer-links"><a href="/what-is-tidefall">What is Tidefall?</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/quotes">Daily Quote</a></div></footer>
@@ -74,6 +75,8 @@ const quotes = [
   {author:'Harper Vale', text:'The plan does not need to be pretty. It needs to move.'}
 ];
 
+let currentIndex = -1;
+
 function dayNumberUTC(date){
   return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000);
 }
@@ -87,13 +90,32 @@ function dailyIndex(date){
   return Math.abs(x) % quotes.length;
 }
 
-function renderDailyQuote(){
-  const now = new Date();
-  const quote = quotes[dailyIndex(now)];
+function showQuote(index, isRandom=false){
+  currentIndex = index;
+  const quote = quotes[index];
   document.getElementById('quoteText').textContent = quote.text;
   document.getElementById('quoteAuthor').textContent = '— ' + quote.author;
+  document.getElementById('randomLabel').hidden = !isRandom;
+  document.getElementById('todaysQuote').hidden = !isRandom;
+}
+
+function renderDailyQuote(){
+  const now = new Date();
+  showQuote(dailyIndex(now), false);
   document.getElementById('quoteDate').textContent = now.toLocaleDateString('en-AU', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 }
+
+function renderRandomQuote(){
+  const today = dailyIndex(new Date());
+  let next;
+  do {
+    next = Math.floor(Math.random() * quotes.length);
+  } while (quotes.length > 1 && (next === currentIndex || next === today));
+  showQuote(next, true);
+}
+
+document.getElementById('anotherQuote').addEventListener('click', renderRandomQuote);
+document.getElementById('todaysQuote').addEventListener('click', renderDailyQuote);
 
 renderDailyQuote();
 setInterval(() => {
