@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#07131f" />
   <title>What Tidefall House Are You? | Tidefall</title>
-  <meta name="description" content="Take the official Tidefall house quiz and discover which house fits you best." />
+  <meta name="description" content="Take the official Tidefall house quiz and discover whether the Choosing Tide would place you in Brannor, Astrae, Calyx or Nocten." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
   <link rel="canonical" href="https://www.tidefall.com.au/house-quiz" />
   <link rel="icon" href="/favicon.ico" sizes="16x16" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .quiz-page{min-height:100svh;padding:130px 20px 90px;background:radial-gradient(circle at 50% 0%,rgba(46,120,145,.22),transparent 34%),#07131f;color:white}.quiz-shell{width:min(900px,100%);margin:auto}.quiz-hero{text-align:center;margin-bottom:36px}.quiz-hero h1{font-family:Cinzel,serif;font-size:clamp(2.8rem,7vw,5.6rem);line-height:1;margin:10px 0 18px}.quiz-hero p{max-width:680px;margin:auto;color:rgba(255,255,255,.72);line-height:1.7}.progress{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin:28px 0}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#6fd3ff,#fff);transition:width .3s ease}.question-card,.result-card{padding:clamp(24px,5vw,48px);border:1px solid rgba(255,255,255,.12);border-radius:26px;background:rgba(255,255,255,.04);backdrop-filter:blur(14px)}.question-number{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}.question-card h2{font-family:Cinzel,serif;font-size:clamp(1.7rem,4vw,2.8rem);margin:12px 0 24px}.answers{display:grid;gap:12px}.answer{width:100%;text-align:left;padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:#fff;cursor:pointer;font:inherit;transition:.2s ease}.answer:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}.result-card{text-align:center}.result-card h2{font-family:Cinzel,serif;font-size:clamp(2.3rem,6vw,4.5rem);margin:12px 0}.result-name{font-size:clamp(2rem,7vw,5rem);font-family:Cinzel,serif;letter-spacing:.08em}.result-copy{max-width:650px;margin:18px auto 0;line-height:1.8;color:rgba(255,255,255,.72)}.quiz-actions{margin-top:26px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.hidden{display:none}
+    .quiz-page{min-height:100svh;padding:130px 20px 90px;background:radial-gradient(circle at 50% 0%,rgba(46,120,145,.22),transparent 34%),#07131f;color:white}.quiz-shell{width:min(900px,100%);margin:auto}.quiz-hero{text-align:center;margin-bottom:36px}.quiz-hero h1{font-family:Cinzel,serif;font-size:clamp(2.8rem,7vw,5.6rem);line-height:1;margin:10px 0 18px}.quiz-hero p{max-width:700px;margin:auto;color:rgba(255,255,255,.72);line-height:1.7}.progress{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin:28px 0}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#6fd3ff,#fff);transition:width .3s ease}.question-card,.result-card{padding:clamp(24px,5vw,48px);border:1px solid rgba(255,255,255,.12);border-radius:26px;background:rgba(255,255,255,.04);backdrop-filter:blur(14px)}.question-number{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}.question-card h2{font-family:Cinzel,serif;font-size:clamp(1.7rem,4vw,2.8rem);margin:12px 0 24px}.answers{display:grid;gap:12px}.answer{width:100%;text-align:left;padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:#fff;cursor:pointer;font:inherit;transition:.2s ease}.answer:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}.result-card{text-align:center}.result-name{font-size:clamp(2rem,7vw,5rem);font-family:Cinzel,serif;letter-spacing:.08em;margin:12px 0}.result-values{font-size:.9rem;letter-spacing:.13em;text-transform:uppercase;opacity:.55}.result-copy{max-width:650px;margin:18px auto 0;line-height:1.8;color:rgba(255,255,255,.72)}.quiz-actions{margin-top:26px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.hidden{display:none}
   </style>
 </head>
 <body>
@@ -19,9 +19,9 @@
 <main class="quiz-page">
   <div class="quiz-shell">
     <section class="quiz-hero">
-      <p class="eyebrow">THE TIDE CHOOSES</p>
+      <p class="eyebrow">THE CHOOSING TIDE</p>
       <h1>What Tidefall House Are You?</h1>
-      <p>Answer seven questions. Your result is based on your choices, so the same answers will always lead to the same house.</p>
+      <p>Answer seven questions to see which of Tidefall Academy's four Orders best fits you. In canon, students do not choose their own Order. The Choosing Tide places them where Tidefall believes they will grow, contribute and be challenged.</p>
     </section>
     <div class="progress"><div id="progressBar"></div></div>
     <section id="questionCard" class="question-card">
@@ -30,8 +30,9 @@
       <div id="answers" class="answers"></div>
     </section>
     <section id="resultCard" class="result-card hidden">
-      <p class="eyebrow">YOUR HOUSE IS</p>
+      <p class="eyebrow">THE TIDE CHOOSES</p>
       <div id="resultName" class="result-name"></div>
+      <p id="resultValues" class="result-values"></p>
       <p id="resultCopy" class="result-copy"></p>
       <div class="quiz-actions"><button id="restart" class="button primary" type="button">Take it again</button><a class="button outline" href="/academy">Explore the Academy</a></div>
     </section>
@@ -40,24 +41,24 @@
 <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div><div class="footer-links"><a href="/">Home</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/quotes">Daily Quote</a><a href="/house-quiz">House Quiz</a></div></footer>
 <script>
 const houses = {
-  Brannor:{copy:'You lean toward courage, loyalty and action. You would rather step into the current than watch it pass.'},
-  Vaelora:{copy:'You lean toward curiosity, imagination and instinct. You notice patterns other people miss.'},
-  Caerwyn:{copy:'You lean toward patience, strategy and discipline. You prefer a strong plan over a loud entrance.'},
-  Solmere:{copy:'You lean toward empathy, adaptability and connection. You are often the person who keeps a group together.'}
+  Brannor:{values:'Courage · Loyalty · Action',copy:'Brannor suits people who move when something matters. You value courage, loyalty and action, and you are more likely to step into the current than wait safely on shore.'},
+  Astrae:{values:'Imagination · Curiosity · Creative Magic',copy:'Astrae suits people who are drawn toward possibility. You value imagination, curiosity and creative magic, and you tend to notice strange paths, unusual answers and ideas other people overlook.'},
+  Calyx:{values:'Patience · Growth · Careful Understanding',copy:'Calyx suits people who give things time. You value patience, growth and careful understanding, preferring to learn what something truly is before deciding what to do with it.'},
+  Nocten:{values:'Independence · Strategy · Resolve',copy:'Nocten suits people who can hold their own course. You value independence, strategy and resolve, and you are comfortable thinking ahead, making difficult calls and trusting your judgement.'}
 };
 
 const questions = [
-  {q:'You find a locked door in a corridor nobody uses. What do you do?',a:[['Try to open it','Brannor'],['Study the lock and the room around it','Caerwyn'],['Listen for anything strange behind it','Vaelora'],['Get someone you trust before doing anything','Solmere']]},
-  {q:'A friend has completely messed up. Your first instinct?',a:[['Stand beside them while they fix it','Solmere'],['Tell them exactly what went wrong','Caerwyn'],['Help them act before things get worse','Brannor'],['Ask what they noticed that everyone else missed','Vaelora']]},
-  {q:'Which sounds most useful in a difficult situation?',a:[['Courage','Brannor'],['Knowledge','Caerwyn'],['Instinct','Vaelora'],['Trust','Solmere']]},
-  {q:'The Tide suddenly changes direction. What do you do?',a:[['Move with it and adapt','Solmere'],['Push through and keep your course','Brannor'],['Stop and work out why it changed','Caerwyn'],['Follow it to see where it leads','Vaelora']]},
-  {q:'Pick the place you would explore first.',a:[['A sealed tower','Brannor'],['An archive nobody has catalogued','Caerwyn'],['A glowing cave under the water','Vaelora'],['A hidden courtyard where students gather','Solmere']]},
-  {q:'What matters most when a team is under pressure?',a:[['Someone willing to act','Brannor'],['A plan everyone understands','Caerwyn'],['A new idea nobody has tried','Vaelora'],['Making sure nobody gets left behind','Solmere']]},
-  {q:'Which sentence sounds most like you?',a:[['I would rather try than wonder forever.','Brannor'],['There is usually a reason. Find it.','Caerwyn'],['The strange option is sometimes the right one.','Vaelora'],['People matter more than being right.','Solmere']]}
+  {q:'You find a locked door in a corridor nobody uses. What do you do?',a:[['Try the handle, then find another way in.','Brannor'],['Wonder why it was sealed and look for something unusual nearby.','Astrae'],['Study the lock, hinges and marks around the frame first.','Calyx'],['Work out the safest way to investigate without depending on anyone else.','Nocten']]},
+  {q:'A friend has completely messed something up. What is your first instinct?',a:[['Stand beside them and help fix it now.','Brannor'],['Think of a solution nobody has tried yet.','Astrae'],['Slow things down and understand exactly what happened.','Calyx'],['Work out the smartest next move and keep emotions from wrecking the plan.','Nocten']]},
+  {q:'Which quality matters most when everything suddenly goes wrong?',a:[['Courage','Brannor'],['Imagination','Astrae'],['Patience','Calyx'],['Resolve','Nocten']]},
+  {q:'The Tide suddenly changes direction while you are crossing it. What do you do?',a:[['Fight through and keep moving toward the people beside you.','Brannor'],['Follow the strange current for a moment to see what it reveals.','Astrae'],['Pause, watch the water and understand the change before moving.','Calyx'],['Recalculate the route and commit to the strongest option.','Nocten']]},
+  {q:'Pick the place you would explore first.',a:[['A sealed tower everyone says is dangerous.','Brannor'],['A chamber where the walls react to magic.','Astrae'],['An ancient greenhouse full of unfamiliar Tide plants.','Calyx'],['A hidden strategy room overlooking the Academy grounds.','Nocten']]},
+  {q:'Your group is under serious pressure. What do you naturally contribute?',a:[['I act when everyone else freezes.','Brannor'],['I find an option nobody else has considered.','Astrae'],['I keep everyone from rushing into the wrong answer.','Calyx'],['I make a plan and stay focused when things get messy.','Nocten']]},
+  {q:'Which sentence sounds most like you?',a:[['If it matters, do something.','Brannor'],['There is always another possibility.','Astrae'],['Understanding comes before judgement.','Calyx'],['Know your goal, then hold your course.','Nocten']]}
 ];
 
 let current = 0;
-const scores = {Brannor:0,Vaelora:0,Caerwyn:0,Solmere:0};
+const scores = {Brannor:0,Astrae:0,Calyx:0,Nocten:0};
 const answerHistory = [];
 
 function deterministicTieBreak(tied){
@@ -93,6 +94,7 @@ function showResult(){
   document.getElementById('questionCard').classList.add('hidden');
   document.getElementById('resultCard').classList.remove('hidden');
   document.getElementById('resultName').textContent = winner.toUpperCase();
+  document.getElementById('resultValues').textContent = houses[winner].values;
   document.getElementById('resultCopy').textContent = houses[winner].copy;
 }
 
