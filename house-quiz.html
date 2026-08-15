@@ -34,7 +34,7 @@
       <div id="resultName" class="result-name"></div>
       <p id="resultValues" class="result-values"></p>
       <p id="resultCopy" class="result-copy"></p>
-      <div class="quiz-actions"><button id="restart" class="button primary" type="button">Take it again</button><a class="button outline" href="/academy">Explore the Academy</a></div>
+      <div class="quiz-actions"><button id="restart" class="button primary" type="button">Take it again</button><a class="button outline" href="/orders">Explore the Orders</a><a class="button outline" href="/secrets">Secrets</a></div>
     </section>
   </div>
 </main>
@@ -91,6 +91,7 @@ function showResult(){
   const max = Math.max(...Object.values(scores));
   const tied = Object.keys(scores).filter(h=>scores[h]===max);
   const winner = tied.length===1 ? tied[0] : deterministicTieBreak(tied);
+  localStorage.setItem('tidefall-house-result', winner);
   document.getElementById('questionCard').classList.add('hidden');
   document.getElementById('resultCard').classList.remove('hidden');
   document.getElementById('resultName').textContent = winner.toUpperCase();
