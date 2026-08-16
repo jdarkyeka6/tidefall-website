@@ -1,0 +1,50 @@
+name: Tidefall TestFlight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testflight:
+    name: Build and submit Tidefall to TestFlight
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile-app
+    steps:
+      - name: Check EXPO_TOKEN
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "Missing EXPO_TOKEN repository secret."
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify Expo project is linked
+        run: |
+          if ! grep -q '"projectId"' app.json; then
+            echo "This app is not linked to an EAS project yet. Link it once in Expo, then commit the projectId to app.json."
+            exit 1
+          fi
+
+      - name: Build and submit to TestFlight
+        run: eas build --platform ios --profile production --non-interactive --auto-submit --no-wait
