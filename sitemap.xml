@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.tidefall.com.au/</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/hero.png</image:loc><image:title>Tidefall fantasy universe</image:title></image:image>
   </url>
   <url>
@@ -18,6 +18,7 @@
   </url>
   <url><loc>https://www.tidefall.com.au/books</loc><lastmod>2026-08-15</lastmod></url>
   <url><loc>https://www.tidefall.com.au/spells</loc><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://www.tidefall.com.au/merch</loc><lastmod>2026-08-16</lastmod></url>
   <url>
     <loc>https://www.tidefall.com.au/students</loc>
     <lastmod>2026-08-15</lastmod>
