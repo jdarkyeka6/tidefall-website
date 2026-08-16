@@ -1,0 +1,43 @@
+name: Add quiz back button
+on:
+  push:
+    paths:
+      - '.github/workflows/add-quiz-back-button.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add undo script to interactive quizzes and games
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files = [
+            'academy-role-quiz.html','best-friend-quiz.html','character-quiz.html','class-quiz.html',
+            'corridor-quiz.html','decision-test.html','house-quiz.html','magic-style-quiz.html',
+            'riptide-player-quiz.html','risk-style-quiz.html','tide-instinct-quiz.html','trust-quiz.html',
+            'survive.html','mini-adventure.html','tide-or-truth.html','who-said-it.html','riddle.html',
+            'emoji-riddle.html','codebreaker.html','sequence.html','spell-trial.html'
+          ]
+          tag='<script src="/quiz-back.js"></script>'
+          changed=[]
+          for name in files:
+            p=Path(name)
+            if not p.exists(): continue
+            s=p.read_text(encoding='utf-8')
+            if tag in s: continue
+            if '</body>' in s:
+              p.write_text(s.replace('</body>',tag+'</body>'),encoding='utf-8')
+              changed.append(name)
+          print('Patched:', ', '.join(changed))
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git diff --cached --quiet || git commit -m 'Add undo back button across quizzes and games'
+          git push
