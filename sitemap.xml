@@ -12,6 +12,11 @@
     <image:image><image:loc>https://www.tidefall.com.au/assets/hero.png</image:loc><image:title>What is Tidefall? Official fantasy universe</image:title></image:image>
   </url>
   <url>
+    <loc>https://www.tidefall.com.au/lore</loc>
+    <lastmod>2026-08-16</lastmod>
+    <image:image><image:loc>https://www.tidefall.com.au/assets/hero.png</image:loc><image:title>Tidefall lore and canon archive</image:title></image:image>
+  </url>
+  <url>
     <loc>https://www.tidefall.com.au/academy</loc>
     <lastmod>2026-08-15</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/academy-placeholder.svg</image:loc><image:title>Tidefall Academy</image:title></image:image>
@@ -21,23 +26,23 @@
   <url><loc>https://www.tidefall.com.au/merch</loc><lastmod>2026-08-16</lastmod></url>
   <url>
     <loc>https://www.tidefall.com.au/students</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/hero.png</image:loc><image:title>Tidefall characters</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.tidefall.com.au/characters/jasper</loc><lastmod>2026-08-15</lastmod>
+    <loc>https://www.tidefall.com.au/characters/jasper</loc><lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/jasper.png</image:loc><image:title>Jasper Holloway from Tidefall</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.tidefall.com.au/characters/lily</loc><lastmod>2026-08-15</lastmod>
+    <loc>https://www.tidefall.com.au/characters/lily</loc><lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/lily.png</image:loc><image:title>Lily Hart from Tidefall</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.tidefall.com.au/characters/harper</loc><lastmod>2026-08-15</lastmod>
+    <loc>https://www.tidefall.com.au/characters/harper</loc><lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/harper.png</image:loc><image:title>Harper Vale from Tidefall</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.tidefall.com.au/characters/ava</loc><lastmod>2026-08-15</lastmod>
+    <loc>https://www.tidefall.com.au/characters/ava</loc><lastmod>2026-08-16</lastmod>
     <image:image><image:loc>https://www.tidefall.com.au/assets/ava.png</image:loc><image:title>Ava Rees from Tidefall</image:title></image:image>
   </url>
   <url><loc>https://www.tidefall.com.au/characters/eli</loc><lastmod>2026-08-15</lastmod></url>
@@ -55,4 +60,7 @@
   <url><loc>https://www.tidefall.com.au/gallery</loc><lastmod>2026-08-15</lastmod></url>
   <url><loc>https://www.tidefall.com.au/wardrobe</loc><lastmod>2026-08-15</lastmod></url>
   <url><loc>https://www.tidefall.com.au/contact</loc><lastmod>2026-08-15</lastmod></url>
+  <url><loc>https://www.tidefall.com.au/canon.txt</loc><lastmod>2026-08-16</lastmod></url>
+  <url><loc>https://www.tidefall.com.au/llms.txt</loc><lastmod>2026-08-16</lastmod></url>
+  <url><loc>https://www.tidefall.com.au/data/characters.json</loc><lastmod>2026-08-16</lastmod></url>
 </urlset>
