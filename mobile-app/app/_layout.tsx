@@ -1,9 +1,9 @@
 import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
 
-const tabIcon = (name: keyof typeof Ionicons.glyphMap) =>
+const tabIcon = (icon: string) =>
   ({ color, size }: { color: string; size: number }) => (
-    <Ionicons name={name} color={color} size={size} />
+    <Text style={{ color, fontSize: size }}>{icon}</Text>
   );
 
 export default function RootLayout() {
@@ -21,11 +21,11 @@ export default function RootLayout() {
         },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: tabIcon('water-outline') }} />
-      <Tabs.Screen name="academy" options={{ title: 'Academy', tabBarIcon: tabIcon('business-outline') }} />
-      <Tabs.Screen name="magic" options={{ title: 'Magic', tabBarIcon: tabIcon('sparkles-outline') }} />
-      <Tabs.Screen name="explore" options={{ title: 'Explore', tabBarIcon: tabIcon('compass-outline') }} />
-      <Tabs.Screen name="profile" options={{ title: 'You', tabBarIcon: tabIcon('person-outline') }} />
+      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: tabIcon('🌊') }} />
+      <Tabs.Screen name="academy" options={{ title: 'Academy', tabBarIcon: tabIcon('🏰') }} />
+      <Tabs.Screen name="magic" options={{ title: 'Magic', tabBarIcon: tabIcon('✨') }} />
+      <Tabs.Screen name="explore" options={{ title: 'Explore', tabBarIcon: tabIcon('🧭') }} />
+      <Tabs.Screen name="profile" options={{ title: 'You', tabBarIcon: tabIcon('👤') }} />
     </Tabs>
   );
 }
