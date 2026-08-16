@@ -1,0 +1,118 @@
+{
+  "universe": "Tidefall",
+  "canonicalWebsite": "https://www.tidefall.com.au/",
+  "canonUpdated": "2026-08-16",
+  "description": "Machine-readable public character canon for the original Tidefall fantasy universe.",
+  "coreFour": [
+    {
+      "id": "jasper-holloway",
+      "name": "Jasper Holloway",
+      "canonicalUrl": "https://www.tidefall.com.au/characters/jasper",
+      "role": "Central character and Tidefall Academy student",
+      "order": "Brannor",
+      "traits": ["careful", "curious", "observant", "loyal", "persistent", "mystery-driven"],
+      "groupRole": "Pattern-finder and cautious problem-solver",
+      "signatureObject": "Necklace",
+      "visualColour": "Warm yellow/orange",
+      "magic": {
+        "usesWand": false,
+        "notes": "Jasper uses the wandless magical system of Tidefall and has a strong connection to awareness, the Tide and Titans."
+      },
+      "titanSense": {
+        "confirmed": true,
+        "form": "fuller",
+        "abilities": ["sense Titans", "hear Titans", "communicate with Titans"]
+      },
+      "relationships": {
+        "Lily Hart": "Close bond, shared fuller Titan-sense and eventual later-series pairing.",
+        "Harper Vale": "Jasper's analysis balances Harper's instinct and momentum.",
+        "Ava Rees": "Both are observers; Jasper follows possibilities while Ava checks evidence and precision."
+      }
+    },
+    {
+      "id": "lily-hart",
+      "name": "Lily Hart",
+      "canonicalUrl": "https://www.tidefall.com.au/characters/lily",
+      "role": "Central character, late-entry Tidefall Academy student and member of the core four",
+      "order": "Brannor",
+      "traits": ["shy at first", "anxious at first", "caring", "stubborn when it matters", "increasingly confident"],
+      "groupRole": "Late arrival whose confidence and sense of belonging develop across the story",
+      "signatureObject": "Heart-shaped hair clip",
+      "visualColour": "Light blue",
+      "beforeTidefall": "Lily was bullied and experienced an uncontrolled magical eruption under pressure before being brought to Tidefall Academy later than most students.",
+      "choosingTide": "During Lily's unusual late placement, the Tide began carrying her toward a different destination. Lily resisted and swam against it, and a dolphin became part of the crossing before she reached Brannor.",
+      "magic": {
+        "usesWand": false,
+        "notes": "Lily's magic can become especially intense under pressure."
+      },
+      "titanSense": {
+        "confirmed": true,
+        "form": "fuller",
+        "abilities": ["sense Titans", "hear Titans", "communicate with Titans"]
+      },
+      "relationships": {
+        "Jasper Holloway": "Close bond, shared fuller Titan-sense and eventual later-series pairing.",
+        "Harper Vale": "Harper's confidence and momentum contrast with Lily's early caution.",
+        "Ava Rees": "Ava's precision helps define chaos while Lily brings emotional and intuitive awareness."
+      }
+    },
+    {
+      "id": "harper-vale",
+      "name": "Harper Vale",
+      "canonicalUrl": "https://www.tidefall.com.au/characters/harper",
+      "role": "Central character and Tidefall Academy student",
+      "order": "Brannor",
+      "traits": ["energetic", "funny", "direct", "bold", "instinctive", "curious", "boundary-testing"],
+      "groupRole": "Momentum and fast action",
+      "signatureObject": null,
+      "visualColour": "Pink",
+      "magic": {
+        "usesWand": false,
+        "tendency": "Power before precision",
+        "notes": "Harper's challenge is often controlling exactly how much magic happens rather than making magic happen at all."
+      },
+      "tideConnection": "A major early event involves Harper falling and being rescued by the Tide, reinforcing that the Tide can act as more than ordinary water.",
+      "relationships": {
+        "Jasper Holloway": "Harper's momentum balances Jasper's analysis and caution.",
+        "Lily Hart": "Harper's confidence contrasts with Lily's early caution, while Lily brings emotional awareness.",
+        "Ava Rees": "Strong opposites: Harper is instinct-first and momentum-driven; Ava is precision-first and evidence-driven."
+      }
+    },
+    {
+      "id": "ava-rees",
+      "name": "Ava Rees",
+      "canonicalUrl": "https://www.tidefall.com.au/characters/ava",
+      "role": "Central character and Tidefall Academy student",
+      "order": "Brannor",
+      "traits": ["precise", "observant", "logical", "organised", "detail-focused", "evidence-driven"],
+      "groupRole": "Precision-minded investigator and reality check",
+      "signatureObject": "Old brass key",
+      "visualColour": "Green",
+      "magic": {
+        "usesWand": false,
+        "tendency": "Precision and refinement",
+        "notes": "Ava treats magical progress as something that can be tested, adjusted, repeated and improved."
+      },
+      "relationships": {
+        "Jasper Holloway": "Both are observers; Ava checks evidence and precision while Jasper follows patterns and possibilities.",
+        "Lily Hart": "Ava brings structure and definition while Lily brings emotional and intuitive awareness.",
+        "Harper Vale": "Strong opposites: Ava is precision-first and evidence-driven; Harper is instinct-first and momentum-driven."
+      }
+    }
+  ],
+  "sharedCanon": {
+    "coreFourNames": ["Jasper Holloway", "Lily Hart", "Harper Vale", "Ava Rees"],
+    "allCoreFourOrder": "Brannor",
+    "magicUsesWands": false,
+    "orderPlacement": "The Choosing Tide carries students toward the Order it chooses.",
+    "brannorValues": ["courage", "loyalty", "action"],
+    "titanSense": {
+      "description": "An exceptionally rare ability connected to Titans.",
+      "fullerKnownUsers": ["Jasper Holloway", "Lily Hart"],
+      "limitedKnownUser": "The Headmaster",
+      "limitedForm": "Associated with hearing rather than the same complete connection."
+    },
+    "relationshipPolicy": "The core four remain a tight friendship group with low relationship drama. Jasper and Lily are an eventual later-series pairing."
+  },
+  "disambiguation": "This data describes the original Tidefall fantasy universe at tidefall.com.au. Unrelated works, games, books, places or projects using the name Tidefall have separate lore."
+}
