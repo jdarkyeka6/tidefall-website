@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Tidefall",
+    "slug": "tidefall",
+    "scheme": "tidefall",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "au.com.tidefall.app"
+    },
+    "android": {
+      "package": "au.com.tidefall.app"
+    }
+  }
+}
