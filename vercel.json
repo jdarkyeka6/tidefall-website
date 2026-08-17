@@ -2,6 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "images": {
+    "sizes": [480, 640, 768, 960, 1200],
+    "qualities": [85, 90, 92],
+    "formats": ["image/webp"],
+    "minimumCacheTTL": 2678400,
+    "localPatterns": [
+      {
+        "pathname": "^/assets/.*$",
+        "search": ""
+      }
+    ]
+  },
   "redirects": [
     {
       "source": "/:path*",
@@ -21,15 +33,6 @@
     }
   ],
   "headers": [
-    {
-      "source": "/",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "</assets/jasper.png>; rel=prefetch; as=image, </assets/lily.png>; rel=prefetch; as=image, </assets/harper.png>; rel=prefetch; as=image, </assets/ava.png>; rel=prefetch; as=image"
-        }
-      ]
-    },
     {
       "source": "/llms.txt",
       "headers": [
