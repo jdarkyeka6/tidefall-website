@@ -1,0 +1,15 @@
+.button.secondary{
+  border-color:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.045);
+  color:#fff;
+  backdrop-filter:blur(12px);
+}
+.button.secondary:hover{
+  border-color:rgba(164,222,234,.34);
+  background:rgba(255,255,255,.075);
+}
+.button:active{transform:translateY(0) scale(.985)}
+
+@media(max-width:760px){
+  .button{min-height:48px}
+}
