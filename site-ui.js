@@ -1,4 +1,11 @@
 (()=>{
+  // Never trade real scrolling feel for a synthetic performance score.
+  // Some browsers support content-visibility, but Tidefall's image-led sections
+  // should already be ready to paint when the user reaches them.
+  const instantStyle=document.createElement('style');
+  instantStyle.textContent='@supports(content-visibility:auto){.section:not(.hero),.reader-section,.lore-section,.explore-section{content-visibility:visible!important;contain-intrinsic-size:auto!important}}';
+  document.head.appendChild(instantStyle);
+
   const headers=document.querySelectorAll('.site-header');
   headers.forEach(header=>{
     const nav=header.querySelector('.nav-links');
