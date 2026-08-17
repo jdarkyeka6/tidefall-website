@@ -1,3 +1,10 @@
+@supports(content-visibility:auto){
+  .section:not(.hero),.reader-section,.lore-section,.explore-section{
+    content-visibility:visible!important;
+    contain-intrinsic-size:auto!important;
+  }
+}
+
 @media(max-width:760px){
   .site-header:not(:has(.nav-toggle)){
     flex-wrap:wrap!important;
