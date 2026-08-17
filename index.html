@@ -4,15 +4,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <meta name="theme-color" content="#07131f"/>
-  <title>Tidefall | Official Fantasy World with Characters, Quizzes & Games</title>
-  <meta name="description" content="Official website for Tidefall, an interactive fantasy world. Discover characters, read books, explore lore, play games and take quizzes."/>
+  <title>Tidefall | Official Fantasy World, Academy, Characters, Books & Games</title>
+  <meta name="description" content="Enter the official Tidefall fantasy universe. Explore Tidefall Academy, meet Jasper, Lily, Harper and Ava, discover wandless magic, read the books and play 50 interactive activities."/>
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
   <link rel="canonical" href="https://www.tidefall.com.au/"/>
   <link rel="icon" href="/favicon.ico" sizes="16x16"/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="Tidefall"/>
-  <meta property="og:title" content="Tidefall | Interactive Fantasy World"/>
-  <meta property="og:description" content="Discover the Tidefall fantasy universe: characters, lore, Academy, magic, books, games and quizzes."/>
+  <meta property="og:title" content="Tidefall | Enter the Fantasy World"/>
+  <meta property="og:description" content="Enter Tidefall Academy, meet the core four, explore magic, lore, books, quizzes and games."/>
   <meta property="og:url" content="https://www.tidefall.com.au/"/>
   <meta property="og:image" content="https://www.tidefall.com.au/assets/hero.png"/>
   <meta property="og:locale" content="en_AU"/>
@@ -22,52 +22,27 @@
   <link rel="preload" as="image" href="/assets/hero.png" media="(min-width:701px)" fetchpriority="high"/>
 
   <style>
-    :root{--ink:#06111b;--white:#f7fbfc}
-    *{box-sizing:border-box}
-    html{background:var(--ink);scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-    a{color:inherit;text-decoration:none}
-    .site-header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,72px);background:linear-gradient(to bottom,rgba(3,12,20,.82),rgba(3,12,20,.08));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .brand{display:flex;gap:10px;align-items:center;font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.16em;font-size:.95rem}
-    .brand-mark{border:1px solid rgba(255,255,255,.38);width:28px;height:28px;display:grid;place-items:center;border-radius:50%}
-    .nav-links{display:flex;gap:26px;font-size:.9rem;color:rgba(255,255,255,.78)}
-    .hero{min-height:100svh;position:relative;display:grid;place-items:center;isolation:isolate;overflow:hidden;background:linear-gradient(to bottom,rgba(1,7,12,.08),rgba(1,10,16,.58)),url('/assets/hero.png') center/cover no-repeat}
-    .hero-water{position:absolute;inset:0;z-index:-1;opacity:.55;background:repeating-radial-gradient(ellipse at 50% 85%,rgba(154,222,238,.09) 0 2px,transparent 3px 26px)}
-    .hero-content{text-align:center;max-width:960px;padding:120px 24px 80px;position:relative;z-index:2}
-    .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#9cc8d6;font-weight:700}
-    .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(4rem,12vw,10rem);line-height:.88;margin:16px 0 24px;letter-spacing:.08em;text-shadow:0 14px 50px rgba(0,0,0,.35)}
-    .hero-copy{max-width:690px;margin:0 auto;font-size:clamp(1rem,1.6vw,1.22rem);color:rgba(255,255,255,.75);line-height:1.7;text-shadow:0 3px 18px rgba(0,0,0,.5)}
-    .hero-actions{margin-top:34px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    .button{min-height:48px;padding:0 22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;font-weight:700}
-    .button.primary{background:var(--white);color:#07131f}
-    .button.secondary{background:rgba(5,18,28,.42);border-color:rgba(255,255,255,.25);color:#fff;backdrop-filter:blur(14px)}
-    input,textarea{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}
-    img{-webkit-user-drag:none;user-drag:none}
-    @media(max-width:700px){
-      .hero{background-image:linear-gradient(to bottom,rgba(1,7,12,.08),rgba(1,10,16,.58)),url('/assets/tidefall-mobile-hero.webp')}
-      .site-header{padding:14px 16px}
-      .nav-links{gap:8px;font-size:.7rem}
-      .nav-links a:nth-child(2),.nav-links a:nth-child(4){display:none}
-      .hero-content{padding:100px 22px 64px}
-      .hero h1{font-size:clamp(3.6rem,18vw,6rem)}
-    }
+    :root{--ink:#06111b;--white:#f7fbfc}*{box-sizing:border-box}html{background:var(--ink);scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden}a{color:inherit;text-decoration:none}.site-header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,72px);background:linear-gradient(to bottom,rgba(3,12,20,.86),rgba(3,12,20,.08));backdrop-filter:blur(9px);border-bottom:1px solid rgba(255,255,255,.06)}.brand{display:flex;gap:10px;align-items:center;font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.16em;font-size:.95rem}.brand-mark{border:1px solid rgba(255,255,255,.38);width:28px;height:28px;display:grid;place-items:center;border-radius:50%}.nav-links{display:flex;gap:26px;font-size:.9rem;color:rgba(255,255,255,.78)}.nav-toggle{display:none}.hero{min-height:100svh;position:relative;display:grid;place-items:center;isolation:isolate;overflow:hidden;background:linear-gradient(to bottom,rgba(1,7,12,.06),rgba(1,10,16,.62)),url('/assets/hero.png') center/cover no-repeat}.hero-water{position:absolute;inset:0;z-index:-1;opacity:.55;background:repeating-radial-gradient(ellipse at 50% 85%,rgba(154,222,238,.09) 0 2px,transparent 3px 26px)}.hero-content{text-align:center;max-width:980px;padding:120px 24px 96px;position:relative;z-index:2}.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#9cc8d6;font-weight:700}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(4rem,12vw,10rem);line-height:.88;margin:16px 0 24px;letter-spacing:.08em;text-shadow:0 14px 50px rgba(0,0,0,.35)}.hero-copy{max-width:720px;margin:0 auto;font-size:clamp(1rem,1.6vw,1.22rem);color:rgba(255,255,255,.78);line-height:1.7;text-shadow:0 3px 18px rgba(0,0,0,.55)}.hero-actions{margin-top:34px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.button{min-height:48px;padding:0 22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;font-weight:700;cursor:pointer}.button.primary{background:var(--white);color:#07131f}.button.secondary{background:rgba(5,18,28,.48);border-color:rgba(255,255,255,.25);color:#fff;backdrop-filter:blur(14px)}
+    @media(max-width:700px){.hero{background-image:linear-gradient(to bottom,rgba(1,7,12,.05),rgba(1,10,16,.58)),url('/assets/tidefall-mobile-hero.webp');min-height:88svh}.site-header{position:sticky;padding:10px 12px;background:rgba(4,14,23,.94)}.nav-links{display:none}.nav-toggle{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.055);color:#fff;border-radius:999px;height:40px;padding:0 14px;font:inherit;font-size:.75rem;font-weight:700}.hero-content{padding:88px 18px 78px}.hero h1{font-size:clamp(3.3rem,17vw,5.8rem);letter-spacing:.04em}.hero-copy{font-size:.96rem;line-height:1.58}.hero-actions .button{width:100%}}
   </style>
 
   <link rel="preload" href="/styles-all.css" as="style"/>
   <link rel="stylesheet" href="/styles-all.css" media="print" onload="this.media='all';this.onload=null"/>
-  <noscript><link rel="stylesheet" href="/styles-all.css"/></noscript>
-  <style>@media(max-width:700px){.hero{background-image:linear-gradient(to bottom,rgba(1,7,12,.08),rgba(1,10,16,.58)),url('/assets/tidefall-mobile-hero.webp')!important}}</style>
+  <link rel="stylesheet" href="/site-upgrade.css" media="print" onload="this.media='all';this.onload=null"/>
+  <noscript><link rel="stylesheet" href="/styles-all.css"/><link rel="stylesheet" href="/site-upgrade.css"/></noscript>
 </head>
 <body>
   <div id="toast" class="toast"></div>
 
   <header class="site-header">
     <a class="brand" href="/"><span class="brand-mark">◌</span><span>TIDEFALL</span></a>
-    <nav class="nav-links">
-      <a href="/students">Characters</a>
-      <a href="/lore">Lore</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">MENU</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/explore">Explore</a>
       <a href="/academy">Academy</a>
+      <a href="/students">Characters</a>
       <a href="/books">Books</a>
+      <a href="/lore">Lore</a>
       <a href="/spells">Spells</a>
     </nav>
   </header>
@@ -76,138 +51,112 @@
     <section class="hero">
       <div class="hero-water"></div>
       <div class="hero-content">
-        <p class="eyebrow">INTERACTIVE FANTASY WORLD</p>
+        <p class="eyebrow">THE TIDE IS MOVING</p>
         <h1>Tidefall</h1>
-        <p class="hero-copy">Welcome to Tidefall Academy. Discover the characters, the magic, the Tide and the mysteries waiting in this interactive fantasy universe.</p>
+        <p class="hero-copy">Enter Tidefall Academy, where magic is cast without wands, the sea does not always behave like water, and four students keep finding the things everyone else was meant to miss.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#universe">Meet the Characters</a>
-          <a class="button secondary" href="/lore">Explore Lore</a>
+          <a class="button primary" href="#gateway">Enter Tidefall</a>
+          <a class="button secondary" href="/explore">Explore 50 activities</a>
         </div>
+      </div>
+    </section>
+
+    <aside class="home-status-strip" aria-label="Tidefall at a glance">
+      <div class="home-status-item"><strong>50 interactive activities</strong><span>Quizzes, games, generators and secrets</span></div>
+      <div class="home-status-item"><strong>4 central students</strong><span>Jasper, Lily, Harper and Ava</span></div>
+      <div class="home-status-item"><strong>Wandless magic</strong><span>Spells, the Tide and rare Titan-sense</span></div>
+    </aside>
+
+    <section id="gateway" class="section home-gateway">
+      <div class="section-heading">
+        <p class="eyebrow section-kicker">CHOOSE YOUR CURRENT</p>
+        <h2>Where do you want to go?</h2>
+        <p class="section-lead">Tidefall is bigger than one page. Start with the Academy, the students, the magic, the story, or dive straight into the interactive side of the world.</p>
+      </div>
+      <div class="gateway-grid">
+        <a class="gateway-card" data-number="01" href="/academy"><span class="gateway-icon">🏰</span><h3>The Academy</h3><p>Orders, rooms, classes, rules, history and the Choosing Tide.</p><span class="gateway-arrow">Enter Academy →</span></a>
+        <a class="gateway-card" data-number="02" href="/students"><span class="gateway-icon">◌◌</span><h3>The Students</h3><p>Meet the core four and the wider Tidefall Academy roster.</p><span class="gateway-arrow">Meet them →</span></a>
+        <a class="gateway-card" data-number="03" href="/spells"><span class="gateway-icon">✦</span><h3>The Magic</h3><p>Explore wandless spellcasting, spell classes and the Tide.</p><span class="gateway-arrow">Cast deeper →</span></a>
+        <a class="gateway-card" data-number="04" href="/books"><span class="gateway-icon">▤</span><h3>The Story</h3><p>Start the official Tidefall book series with the free preview.</p><span class="gateway-arrow">Read Book One →</span></a>
+        <a class="gateway-card" data-number="05" href="/explore"><span class="gateway-icon">⌁</span><h3>Explore</h3><p>Fifty quizzes, games, secrets, tests and strange Academy tools.</p><span class="gateway-arrow">Open Explore →</span></a>
       </div>
     </section>
 
     <section id="universe" class="section universe-section">
       <div class="section-heading">
-        <p class="eyebrow">THE CORE FOUR</p>
-        <h2>Main Tidefall characters</h2>
-        <p>The heart of the Tidefall story revolves around four students at Tidefall Academy: Jasper Holloway, Lily Hart, Harper Vale and Ava Rees. Together they navigate magic, mystery and the Tide.</p>
+        <p class="eyebrow section-kicker">FOUR PATHS, ONE TIDE</p>
+        <h2>Meet the core four</h2>
+        <p class="section-lead">Jasper Holloway, Lily Hart, Harper Vale and Ava Rees sit at the centre of the Tidefall story. They solve problems in very different ways, which is useful when the Academy starts behaving strangely.</p>
       </div>
-
       <div class="character-grid">
         <a class="character-card" href="/characters/jasper">
-          <picture>
-            <source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fjasper.png&w=480&q=90 480w, /_vercel/image?url=%2Fassets%2Fjasper.png&w=640&q=90 640w, /_vercel/image?url=%2Fassets%2Fjasper.png&w=960&q=90 960w" sizes="100vw"/>
-            <img src="/assets/jasper.png" alt="Jasper Holloway" loading="lazy" decoding="async" fetchpriority="low"/>
-          </picture>
-          <div class="character-overlay"><h3>Jasper Holloway</h3><p>Careful, curious and methodical. Jasper notices patterns others miss.</p><span>Brannor · Necklace</span></div>
+          <picture><source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fjasper.png&w=480&q=92 480w, /_vercel/image?url=%2Fassets%2Fjasper.png&w=640&q=92 640w, /_vercel/image?url=%2Fassets%2Fjasper.png&w=960&q=92 960w" sizes="(max-width:420px) 100vw, 50vw"/><img src="/assets/jasper.png" alt="Jasper Holloway" loading="lazy" decoding="async" fetchpriority="low"/></picture>
+          <div class="character-overlay"><h3>Jasper Holloway</h3><p>PATTERNS · TITAN-SENSE</p><span>Careful, curious and persistent.</span></div>
         </a>
-
         <a class="character-card" href="/characters/lily">
-          <picture>
-            <source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Flily.png&w=480&q=90 480w, /_vercel/image?url=%2Fassets%2Flily.png&w=640&q=90 640w, /_vercel/image?url=%2Fassets%2Flily.png&w=960&q=90 960w" sizes="100vw"/>
-            <img src="/assets/lily.png" alt="Lily Hart" loading="lazy" decoding="async" fetchpriority="low"/>
-          </picture>
-          <div class="character-overlay"><h3>Lily Hart</h3><p>A late-entry student growing from shy to confident. Lily has rare gifts.</p><span>Brannor · Heart clip</span></div>
+          <picture><source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Flily.png&w=480&q=92 480w, /_vercel/image?url=%2Fassets%2Flily.png&w=640&q=92 640w, /_vercel/image?url=%2Fassets%2Flily.png&w=960&q=92 960w" sizes="(max-width:420px) 100vw, 50vw"/><img src="/assets/lily.png" alt="Lily Hart" loading="lazy" decoding="async" fetchpriority="low"/></picture>
+          <div class="character-overlay"><h3>Lily Hart</h3><p>LATE ENTRY · TITAN-SENSE</p><span>Quiet at first. Powerful when it matters.</span></div>
         </a>
-
         <a class="character-card" href="/characters/harper">
-          <picture>
-            <source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fharper.png&w=480&q=90 480w, /_vercel/image?url=%2Fassets%2Fharper.png&w=640&q=90 640w, /_vercel/image?url=%2Fassets%2Fharper.png&w=960&q=90 960w" sizes="100vw"/>
-            <img src="/assets/harper.png" alt="Harper Vale" loading="lazy" decoding="async" fetchpriority="low"/>
-          </picture>
-          <div class="character-overlay"><h3>Harper Vale</h3><p>Fast-moving, funny and spontaneous. Harper tests boundaries and pushes forward.</p><span>Brannor · Energy</span></div>
+          <picture><source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fharper.png&w=480&q=92 480w, /_vercel/image?url=%2Fassets%2Fharper.png&w=640&q=92 640w, /_vercel/image?url=%2Fassets%2Fharper.png&w=960&q=92 960w" sizes="(max-width:420px) 100vw, 50vw"/><img src="/assets/harper.png" alt="Harper Vale" loading="lazy" decoding="async" fetchpriority="low"/></picture>
+          <div class="character-overlay"><h3>Harper Vale</h3><p>MOMENTUM · POWER</p><span>Fast-moving, funny and instinctive.</span></div>
         </a>
-
         <a class="character-card" href="/characters/ava">
-          <picture>
-            <source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fava.png&w=480&q=90 480w, /_vercel/image?url=%2Fassets%2Fava.png&w=640&q=90 640w, /_vercel/image?url=%2Fassets%2Fava.png&w=960&q=90 960w" sizes="100vw"/>
-            <img src="/assets/ava.png" alt="Ava Rees" loading="lazy" decoding="async" fetchpriority="low"/>
-          </picture>
-          <div class="character-overlay"><h3>Ava Rees</h3><p>Precise, observant and logical. Ava questions, checks and verifies everything.</p><span>Brannor · Old key</span></div>
+          <picture><source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fava.png&w=480&q=92 480w, /_vercel/image?url=%2Fassets%2Fava.png&w=640&q=92 640w, /_vercel/image?url=%2Fassets%2Fava.png&w=960&q=92 960w" sizes="(max-width:420px) 100vw, 50vw"/><img src="/assets/ava.png" alt="Ava Rees" loading="lazy" decoding="async" fetchpriority="low"/></picture>
+          <div class="character-overlay"><h3>Ava Rees</h3><p>EVIDENCE · PRECISION</p><span>Observant, logical and exact.</span></div>
         </a>
       </div>
-
-      <div class="center-button"><a class="button primary" href="/students">View All Students</a></div>
+      <div class="center-button"><a class="button primary" href="/students">See all students</a></div>
     </section>
 
     <section id="academy" class="section academy-section">
       <div class="academy-copy">
         <div class="section-heading">
-          <p class="eyebrow">TIDEFALL ACADEMY</p>
-          <h2>Home of magic and mystery</h2>
-          <p>Tidefall Academy sits on an island where magic flows through everything. Students learn to channel the Tide, discover their Order placement, and navigate friendships, challenges and ancient mysteries.</p>
+          <p class="eyebrow section-kicker">TIDEFALL ACADEMY</p>
+          <h2>The school at the edge of impossible water</h2>
+          <p class="section-lead">Students live, train and learn magic here, but the Academy is also a maze of Orders, hidden history, unusual rules and corridors that reward people who look twice.</p>
         </div>
-        <div class="academy-actions">
-          <a class="button primary" href="/academy">Explore the Academy</a>
-          <a class="button secondary" href="/lore">Read the Lore</a>
-        </div>
+        <div class="academy-actions"><a class="button primary" href="/academy">Explore the Academy</a><a class="button secondary" href="/academy-map">View locations</a></div>
       </div>
       <div class="academy-image-wrap">
-        <picture>
-          <source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fhero.png&w=640&q=90 640w, /_vercel/image?url=%2Fassets%2Fhero.png&w=960&q=90 960w" sizes="100vw"/>
-          <img src="/assets/hero.png" alt="Tidefall Academy" loading="lazy" decoding="async" fetchpriority="low"/>
-        </picture>
+        <picture><source media="(max-width:700px)" type="image/webp" srcset="/_vercel/image?url=%2Fassets%2Fhero.png&w=640&q=92 640w, /_vercel/image?url=%2Fassets%2Fhero.png&w=960&q=92 960w" sizes="100vw"/><img src="/assets/hero.png" alt="Tidefall Academy surrounded by water" loading="lazy" decoding="async" fetchpriority="low"/></picture>
         <div class="academy-fog"></div>
       </div>
     </section>
 
     <section id="spells" class="section spell-section">
-      <div class="spell-intro">
-        <p class="eyebrow">MAGIC & SPELLS</p>
-        <h2>The Tidefall spell system</h2>
-        <p>Magic in Tidefall flows without wands. Students cast spells directly, channeling the Tide's power. Spells are grouped into five classes: Lumen (light), Tide (water), Vela (air), Aegis (defense) and Ember (fire).</p>
-      </div>
+      <div class="spell-intro"><p class="eyebrow">MAGIC ANSWERS DIFFERENTLY HERE</p><h2>Try a Tidefall spell</h2><p>Magic is cast without wands. Tap a spell, or use voice casting in a supported browser, and watch the page respond.</p></div>
       <div class="spell-stage">
-        <div class="spell-list">
-          <button data-spell="veyra">Veyra <span>Lumen</span></button>
-          <button data-spell="sela">Sela <span>Tide</span></button>
-          <button data-spell="kera">Kera <span>Vela</span></button>
-          <button data-spell="neri">Neri <span>Aegis</span></button>
-          <button data-spell="tavra">Tavra <span>Aegis</span></button>
-          <button data-spell="mira">Mira <span>Lumen</span></button>
-        </div>
-        <div class="mic-core">
-          <div class="magic-ring ring-one"></div><div class="magic-ring ring-two"></div>
-          <button id="micButton" class="mic-button" title="Click to speak a spell"><span class="mic-icon">🎤</span></button>
-          <div id="spellStatus">Click a spell or say a spell name</div>
-          <div id="heardText" class="heard-text"></div>
-        </div>
-        <div class="spell-list">
-          <button data-spell="rova">Rova <span>Lumen</span></button>
-          <button data-spell="fera">Fera <span>Lumen</span></button>
-          <button data-spell="sori">Sori <span>Lumen</span></button>
-          <button data-spell="deya">Deya <span>Vela</span></button>
-          <button data-spell="liora">Liora <span>Vela</span></button>
-          <button data-spell="vessa">Vessa <span>Vela</span></button>
-        </div>
+        <div class="spell-list"><button data-spell="veyra">Veyra <span>Lumen</span></button><button data-spell="sela">Sela <span>Tide</span></button><button data-spell="kera">Kera <span>Vela</span></button><button data-spell="neri">Neri <span>Aegis</span></button><button data-spell="tavra">Tavra <span>Aegis</span></button><button data-spell="mira">Mira <span>Lumen</span></button></div>
+        <div class="mic-core"><div class="magic-ring ring-one"></div><div class="magic-ring ring-two"></div><button id="micButton" class="mic-button" title="Click to speak a spell"><span class="mic-icon">🎤</span></button><div id="spellStatus">Click a spell or say a spell name</div><div id="heardText" class="heard-text"></div></div>
+        <div class="spell-list"><button data-spell="rova">Rova <span>Lumen</span></button><button data-spell="fera">Fera <span>Lumen</span></button><button data-spell="sori">Sori <span>Lumen</span></button><button data-spell="deya">Deya <span>Vela</span></button><button data-spell="liora">Liora <span>Vela</span></button><button data-spell="vessa">Vessa <span>Vela</span></button></div>
       </div>
-      <div class="spell-note" style="text-align:center;margin-top:54px;opacity:.46;font-family:'Cinzel',serif">This is a demo. See the full spell list on the spells page.</div>
-      <div id="spellEffect" class="spell-effect"></div>
+      <div class="center-button"><a class="button secondary" href="/spells">Open the full spell archive</a></div><div id="spellEffect" class="spell-effect"></div>
     </section>
 
     <section id="books" class="section books-section">
-      <div class="books-copy">
-        <div class="section-heading">
-          <p class="eyebrow">THE BOOKS</p>
-          <h2>Read the Tidefall story</h2>
-          <p>The Tidefall universe is documented across books that follow the core four through their Academy years, revealing mysteries, relationships, magic and the strange power of the Tide.</p>
-        </div>
-        <div class="academy-actions"><a class="button primary" href="/books">Browse Books</a></div>
+      <div class="books-copy"><div class="section-heading"><p class="eyebrow section-kicker">THE STORY STARTS HERE</p><h2>Tidefall Book One</h2><p class="section-lead">The books are the main story of the universe. Read the blurb and the public Chapter One preview, then follow the world outward into the Academy and lore pages.</p></div><div class="academy-actions"><a class="button primary" href="/books">Read the free preview</a></div></div>
+      <div class="feature-row" style="grid-template-columns:1fr">
+        <a class="feature-tile" href="/books"><strong>Book One · Free Preview</strong><span>Start with Chapter One: The Water Without a Sky.</span></a>
+        <a class="feature-tile" href="/lore"><strong>Canon Lore</strong><span>Read the public reference material without replacing the story.</span></a>
+        <a class="feature-tile" href="/academy-guide"><strong>Academy Guide</strong><span>Understand the school, Orders and everyday Tidefall Academy life.</span></a>
       </div>
-      <div class="book-placeholder-row"><div class="book-card">Book One</div><div class="book-card">Book Two</div><div class="book-card">Book Three</div></div>
     </section>
 
-    <section id="ask" class="section ask-section">
-      <div class="ask-card"><h3>Explore Lore</h3><p>Discover the official canon of Tidefall: characters, magic, Orders, Titans, the Choosing Tide and more.</p><a class="button primary" href="/lore">Go to Lore</a></div>
-      <div class="ask-card feedback-card"><h3>Play Games</h3><p>Take quizzes, play mini-games and explore interactive features hidden throughout the Tidefall world.</p><a class="button primary" href="/discover">Discover Games</a></div>
+    <section class="section">
+      <div class="section-heading"><p class="eyebrow section-kicker">DO SOMETHING</p><h2>Explore Tidefall, don't just read it</h2><p class="section-lead">There are fifty interactive activities across the site. Start with one of the bigger ones, or open Explore and pick your own route.</p></div>
+      <div class="feature-row">
+        <a class="feature-tile" href="/character-quiz"><strong>Which character are you?</strong><span>Twenty questions and a weighted result across the core four.</span></a>
+        <a class="feature-tile" href="/survive"><strong>Would you survive?</strong><span>Make decisions through a full day at Tidefall Academy.</span></a>
+        <a class="feature-tile" href="/mini-adventure"><strong>Mini Adventure</strong><span>Choose your route through The Door Below the Waterline.</span></a>
+      </div>
+      <div class="center-button"><a class="button primary" href="/explore">Open all 50 activities</a></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div>
-    <div class="footer-links"><a href="/students">Characters</a><a href="/lore">Lore</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/spells">Spells</a><a href="/contact">Contact</a></div>
-  </footer>
+  <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div><div class="footer-links"><a href="/explore">Explore</a><a href="/academy">Academy</a><a href="/students">Characters</a><a href="/books">Books</a><a href="/spells">Spells</a><a href="/lore">Lore</a></div></footer>
 
-  <script src="script-optimized.js" defer></script>
+  <script src="/site-ui.js" defer></script>
+  <script src="/script-optimized.js" defer></script>
 </body>
 </html>
