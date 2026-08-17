@@ -22,6 +22,15 @@
   ],
   "headers": [
     {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</assets/jasper.png>; rel=prefetch; as=image, </assets/lily.png>; rel=prefetch; as=image, </assets/harper.png>; rel=prefetch; as=image, </assets/ava.png>; rel=prefetch; as=image"
+        }
+      ]
+    },
+    {
       "source": "/llms.txt",
       "headers": [
         { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
