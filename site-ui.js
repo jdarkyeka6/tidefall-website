@@ -1,7 +1,5 @@
 (()=>{
   // Never trade real scrolling feel for a synthetic performance score.
-  // Some browsers support content-visibility, but Tidefall's image-led sections
-  // should already be ready to paint when the user reaches them.
   const instantStyle=document.createElement('style');
   instantStyle.textContent='@supports(content-visibility:auto){.section:not(.hero),.reader-section,.lore-section,.explore-section{content-visibility:visible!important;contain-intrinsic-size:auto!important}}';
   document.head.appendChild(instantStyle);
@@ -37,6 +35,18 @@
     const href=(a.getAttribute('href')||'').replace(/\/$/,'')||'/';
     if(href===path)a.setAttribute('aria-current','page');
   });
+
+  // Give the character hub a direct route into the comparison experience.
+  if(path==='/students'){
+    const actions=document.querySelector('.character-actions');
+    if(actions&&!actions.querySelector('a[href="/core-four"]')){
+      const link=document.createElement('a');
+      link.className='button secondary';
+      link.href='/core-four';
+      link.textContent='Compare the Core Four';
+      actions.appendChild(link);
+    }
+  }
 
   const randomButton=document.querySelector('[data-random-activity]');
   if(randomButton){
@@ -85,4 +95,18 @@
       }catch{}
     });
   });
+
+  // Tiny intent prefetch: only the HTML of a link the user actually points at.
+  // This does not prefetch character images or other large assets.
+  const prefetched=new Set();
+  document.addEventListener('pointerover',e=>{
+    const a=e.target.closest?.('a[href^="/"]');
+    if(!a)return;
+    const href=a.getAttribute('href');
+    if(!href||href.startsWith('/#')||prefetched.has(href))return;
+    prefetched.add(href);
+    const link=document.createElement('link');
+    link.rel='prefetch';link.as='document';link.href=href;
+    document.head.appendChild(link);
+  },{passive:true});
 })();
