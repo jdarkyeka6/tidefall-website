@@ -7,55 +7,16 @@
     "qualities": [85, 90, 92],
     "formats": ["image/webp"],
     "minimumCacheTTL": 2678400,
-    "localPatterns": [
-      {
-        "pathname": "^/assets/.*$",
-        "search": ""
-      }
-    ]
+    "localPatterns": [{"pathname":"^/assets/.*$","search":""}]
   },
   "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "tidefall.com.au"
-        }
-      ],
-      "destination": "https://www.tidefall.com.au/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    }
+    {"source":"/:path*","has":[{"type":"host","value":"tidefall.com.au"}],"destination":"https://www.tidefall.com.au/:path*","permanent":true},
+    {"source":"/index.html","destination":"/","permanent":true},
+    {"source":"/merch","destination":"/merch2.html","permanent":false}
   ],
   "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=2678400, stale-while-revalidate=86400" }
-      ]
-    },
-    {
-      "source": "/llms.txt",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), geolocation=(), payment=(), usb=()" }
-      ]
-    }
+    {"source":"/assets/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=86400, s-maxage=2678400, stale-while-revalidate=86400"}]},
+    {"source":"/llms.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"},{"key":"Cache-Control","value":"public, max-age=3600, s-maxage=3600"}]},
+    {"source":"/(.*)","headers":[{"key":"Strict-Transport-Security","value":"max-age=63072000; includeSubDomains; preload"},{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"X-Frame-Options","value":"DENY"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},{"key":"Cross-Origin-Opener-Policy","value":"same-origin"},{"key":"Permissions-Policy","value":"camera=(), geolocation=(), payment=(), usb=()"}]}
   ]
 }
