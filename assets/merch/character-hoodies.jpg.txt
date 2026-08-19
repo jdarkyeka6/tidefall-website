@@ -1,1 +1,0 @@
-The actual character hoodie image is served as assets/merch/character-hoodies-mini.svg.
