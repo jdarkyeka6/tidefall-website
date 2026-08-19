@@ -1,1 +1,0 @@
-Character hoodie card now uses the actual generated four-character artwork.
