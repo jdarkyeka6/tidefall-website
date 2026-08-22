@@ -1,0 +1,1 @@
+The Lore Vault is designed to store each category online in Supabase rather than browser localStorage. The backend validates the Tidefall vault session before reading or writing. Vercel must provide the Supabase project URL and a backend-only secret/service key.
