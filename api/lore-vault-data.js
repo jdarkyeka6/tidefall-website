@@ -12,15 +12,19 @@ function isValidSession(req) {
   const secret = process.env.TIDEFALL_VAULT_SESSION_SECRET;
   if (!secret || !expires || !signature || Number(expires) < Date.now()) return false;
   const expected = sign(expires, secret);
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  const a = Buffer.from(signature);
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
 const categories = ["canon", "relationships", "characters", "families", "academy", "magic", "story", "ideas", "scrapped"];
 
 async function supabaseRequest(path, options = {}) {
-  const url = process.env.TIDEFALL_SUPABASE_URL;
-  const key = process.env.TIDEFALL_SUPABASE_SECRET_KEY;
-  if (!url || !key) throw new Error("Supabase storage is not configured");
+  // Support the names commonly already used by Tidefall deployments, while
+  // keeping the service key strictly server-side.
+  const url = process.env.TIDEFALL_SUPABASE_URL || process.env.SUPABASE_URL;
+  const key = process.env.TIDEFALL_SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) throw new Error("Supabase storage is not configured in Vercel");
   return fetch(`${url}/rest/v1/${path}`, {
     ...options,
     headers: {
@@ -35,8 +39,8 @@ async function supabaseRequest(path, options = {}) {
 
 export default async function handler(req, res) {
   if (!isValidSession(req)) return res.status(401).json({ error: "Unauthorized" });
-  if (!categories.includes(req.query?.category)) return res.status(400).json({ error: "Invalid category" });
-  const category = req.query.category;
+  const category = req.query?.category;
+  if (!categories.includes(category)) return res.status(400).json({ error: "Invalid category" });
 
   try {
     if (req.method === "GET") {
@@ -48,7 +52,7 @@ export default async function handler(req, res) {
 
     if (req.method === "PUT") {
       const content = typeof req.body?.content === "string" ? req.body.content : "";
-      const response = await supabaseRequest("tidefall_lore_vault_entries", {
+      const response = await supabaseRequest("tidefall_lore_vault_entries?on_conflict=category", {
         method: "POST",
         headers: { Prefer: "resolution=merge-duplicates,return=representation" },
         body: JSON.stringify({ category, content, updated_at: new Date().toISOString() })
