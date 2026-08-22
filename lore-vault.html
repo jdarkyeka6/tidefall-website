@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#06111b">
+  <title>Tidefall Lore Vault</title>
+  <link rel="stylesheet" href="/styles-all.css">
+  <link rel="stylesheet" href="/lore-vault.css">
+</head>
+<body class="vault-body">
+  <main class="vault-shell">
+    <section id="loginView" class="vault-card login-card">
+      <div class="vault-mark">◌</div>
+      <p class="vault-kicker">PRIVATE TIDEFALL ARCHIVE</p>
+      <h1>Lore Vault</h1>
+      <p class="vault-lead">A private workspace for canon, relationships, ideas and the tiny details that must not disappear into the chat abyss.</p>
+      <form id="loginForm" autocomplete="off">
+        <label for="vaultPassword">Vault password</label>
+        <div class="password-row">
+          <input id="vaultPassword" name="password" type="password" autocomplete="current-password" required>
+          <button class="vault-button" type="submit">Enter</button>
+        </div>
+        <p id="loginError" class="vault-error" role="alert"></p>
+      </form>
+    </section>
+
+    <section id="vaultView" class="vault-dashboard" hidden>
+      <header class="vault-header">
+        <div>
+          <p class="vault-kicker">TIDEFALL · PRIVATE</p>
+          <h1>Lore Vault</h1>
+          <p>Keep the canon somewhere safer than a scrolling chat history.</p>
+        </div>
+        <button id="logoutButton" class="vault-button ghost" type="button">Lock vault</button>
+      </header>
+
+      <div class="vault-grid">
+        <aside class="vault-sidebar">
+          <button class="vault-tab active" data-category="canon">Canon</button>
+          <button class="vault-tab" data-category="relationships">Relationships</button>
+          <button class="vault-tab" data-category="characters">Characters</button>
+          <button class="vault-tab" data-category="families">Families</button>
+          <button class="vault-tab" data-category="academy">Academy</button>
+          <button class="vault-tab" data-category="magic">Magic</button>
+          <button class="vault-tab" data-category="story">Story / Books</button>
+          <button class="vault-tab" data-category="ideas">Random Ideas</button>
+          <button class="vault-tab" data-category="scrapped">Scrapped</button>
+        </aside>
+
+        <section class="vault-editor">
+          <div class="editor-topline">
+            <div>
+              <span class="status-dot"></span>
+              <span id="categoryLabel">Canon</span>
+            </div>
+            <span class="save-state" id="saveState">Saved locally</span>
+          </div>
+          <textarea id="vaultNotes" spellcheck="true" placeholder="Put the lore here..."></textarea>
+          <div class="editor-actions">
+            <button id="saveButton" class="vault-button" type="button">Save notes</button>
+            <button id="clearButton" class="vault-button danger" type="button">Clear section</button>
+          </div>
+          <p class="vault-warning">MVP storage: notes are saved in this browser. The password is checked server-side. Persistent shared lore storage can be connected next.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="/lore-vault.js" defer></script>
+</body>
+</html>
