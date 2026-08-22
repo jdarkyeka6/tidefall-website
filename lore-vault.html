@@ -51,18 +51,15 @@
 
         <section class="vault-editor">
           <div class="editor-topline">
-            <div>
-              <span class="status-dot"></span>
-              <span id="categoryLabel">Canon</span>
-            </div>
-            <span class="save-state" id="saveState">Saved locally</span>
+            <div><span class="status-dot"></span><span id="categoryLabel">Canon</span></div>
+            <span class="save-state" id="saveState">Loading online vault…</span>
           </div>
           <textarea id="vaultNotes" spellcheck="true" placeholder="Put the lore here..."></textarea>
           <div class="editor-actions">
-            <button id="saveButton" class="vault-button" type="button">Save notes</button>
+            <button id="saveButton" class="vault-button" type="button">Save online</button>
             <button id="clearButton" class="vault-button danger" type="button">Clear section</button>
           </div>
-          <p class="vault-warning">MVP storage: notes are saved in this browser. The password is checked server-side. Persistent shared lore storage can be connected next.</p>
+          <p class="vault-warning">Online storage: changes are saved to the Tidefall database and are available from any device after signing in.</p>
         </section>
       </div>
     </section>
