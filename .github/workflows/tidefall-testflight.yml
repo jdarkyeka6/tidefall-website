@@ -43,12 +43,18 @@ jobs:
           cd ios
           pod install
 
-      - name: Set up Ruby and Fastlane
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-          bundler-cache: true
+          bundler-cache: false
           working-directory: mobile-app
+
+      - name: Install Ruby dependencies
+        run: |
+          bundle config set --local frozen false
+          bundle config set --local deployment false
+          bundle install --jobs 3 --retry 3
 
       - name: Check Apple secrets
         env:
