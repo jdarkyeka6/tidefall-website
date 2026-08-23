@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Tidefall app icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a2633"/>
+      <stop offset="1" stop-color="#041019"/>
+    </linearGradient>
+    <linearGradient id="tide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#78dff2"/>
+      <stop offset="1" stop-color="#dffaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="166" fill="none" stroke="#7fdff0" stroke-opacity=".22" stroke-width="12"/>
+  <path d="M94 271c54-52 105-52 159 0s105 52 165 0" fill="none" stroke="url(#tide)" stroke-width="31" stroke-linecap="round"/>
+  <path d="M117 337c45-35 88-35 132 0s88 35 146 0" fill="none" stroke="#88e5f5" stroke-opacity=".58" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="256" cy="181" r="34" fill="#e8fbff"/>
+</svg>
