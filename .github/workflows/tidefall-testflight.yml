@@ -80,3 +80,12 @@ jobs:
           ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: bundle exec fastlane beta
+
+      - name: Preserve Xcode archive log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tidefall-xcode-archive-log
+          path: mobile-app/build/archive.log
+          if-no-files-found: ignore
+          retention-days: 7
