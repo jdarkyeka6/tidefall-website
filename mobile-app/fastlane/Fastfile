@@ -2,9 +2,9 @@ require "fileutils"
 require "shellwords"
 
 APP_IDENTIFIER = "au.com.tidefall.app"
-PROJECT_PATH = "ios/Tidefall.xcodeproj"
-WORKSPACE_PATH = "ios/Tidefall.xcworkspace"
 SCHEME = "Tidefall"
+APP_ROOT = File.expand_path("..", __dir__)
+IOS_DIR = File.join(APP_ROOT, "ios")
 
 default_platform(:ios)
 
@@ -41,11 +41,32 @@ platform :ios do
       key_filepath: key_path
     )
 
-    # Do not create a local Apple Distribution certificate on the ephemeral
-    # GitHub runner. Apple's cloud-managed distribution signing can be used by
-    # xcodebuild when an App Store Connect API key is supplied.
+    # Expo generates the native iOS project during CI, so discover the actual
+    # generated names instead of assuming Tidefall.xcworkspace exists.
+    project_path = Dir[File.join(IOS_DIR, "*.xcodeproj")].first
+    UI.user_error!("No Xcode project found in #{IOS_DIR}") unless project_path
+
+    workspace_path = Dir[File.join(IOS_DIR, "*.xcworkspace")].first
+
+    # CocoaPods should create a workspace. If the earlier CI step did not leave
+    # one behind, recover here rather than failing with xcodebuild exit 66.
+    unless workspace_path
+      UI.message("No .xcworkspace found after prebuild; running pod install again")
+      sh("cd #{Shellwords.escape(IOS_DIR)} && pod install")
+      workspace_path = Dir[File.join(IOS_DIR, "*.xcworkspace")].first
+    end
+
+    build_container_flag = if workspace_path
+      UI.message("Using Xcode workspace: #{workspace_path}")
+      "-workspace #{Shellwords.escape(workspace_path)}"
+    else
+      UI.important("No workspace exists; falling back to Xcode project: #{project_path}")
+      "-project #{Shellwords.escape(project_path)}"
+    end
+
+    # Use automatic/cloud-managed signing on the ephemeral GitHub runner.
     update_code_signing_settings(
-      path: PROJECT_PATH,
+      path: project_path,
       use_automatic_signing: true,
       team_id: team_id,
       targets: [SCHEME]
@@ -58,11 +79,11 @@ platform :ios do
     )
 
     increment_build_number(
-      xcodeproj: PROJECT_PATH,
+      xcodeproj: project_path,
       build_number: latest + 1
     )
 
-    build_root = File.expand_path("../build", __dir__)
+    build_root = File.join(APP_ROOT, "build")
     archive_path = File.join(build_root, "Tidefall.xcarchive")
     export_path = File.join(build_root, "export")
     export_plist = File.join(build_root, "ExportOptions.plist")
@@ -98,7 +119,7 @@ platform :ios do
 
     archive_cmd = [
       "xcodebuild",
-      "-workspace #{Shellwords.escape(WORKSPACE_PATH)}",
+      build_container_flag,
       "-scheme #{Shellwords.escape(SCHEME)}",
       "-configuration Release",
       "-destination 'generic/platform=iOS'",
