@@ -13,10 +13,10 @@ jobs:
       run:
         working-directory: mobile-app
     steps:
-      - name: Check out Tidefall app branch
+      - name: Check out Tidefall app v2
         uses: actions/checkout@v4
         with:
-          ref: tidefall-app-v1
+          ref: feature/tidefall-app-v2
 
       - name: Select Xcode
         run: |
