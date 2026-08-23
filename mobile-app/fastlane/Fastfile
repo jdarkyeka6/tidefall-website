@@ -1,5 +1,6 @@
 require "fileutils"
 require "shellwords"
+require "open3"
 
 APP_IDENTIFIER = "au.com.tidefall.app"
 SCHEME = "Tidefall"
@@ -42,14 +43,12 @@ platform :ios do
     )
 
     # Expo generates the native iOS project during CI, so discover the actual
-    # generated names instead of assuming Tidefall.xcworkspace exists.
+    # generated names instead of assuming a particular workspace path.
     project_path = Dir[File.join(IOS_DIR, "*.xcodeproj")].first
     UI.user_error!("No Xcode project found in #{IOS_DIR}") unless project_path
 
     workspace_path = Dir[File.join(IOS_DIR, "*.xcworkspace")].first
 
-    # CocoaPods should create a workspace. If the earlier CI step did not leave
-    # one behind, recover here rather than failing with xcodebuild exit 66.
     unless workspace_path
       UI.message("No .xcworkspace found after prebuild; running pod install again")
       sh("cd #{Shellwords.escape(IOS_DIR)} && pod install")
@@ -64,7 +63,6 @@ platform :ios do
       "-project #{Shellwords.escape(project_path)}"
     end
 
-    # Use automatic/cloud-managed signing on the ephemeral GitHub runner.
     update_code_signing_settings(
       path: project_path,
       use_automatic_signing: true,
@@ -87,6 +85,7 @@ platform :ios do
     archive_path = File.join(build_root, "Tidefall.xcarchive")
     export_path = File.join(build_root, "export")
     export_plist = File.join(build_root, "ExportOptions.plist")
+    archive_log = File.join(build_root, "archive.log")
 
     FileUtils.rm_rf(build_root)
     FileUtils.mkdir_p(export_path)
@@ -130,7 +129,32 @@ platform :ios do
       "archive"
     ].join(" ")
 
-    sh(archive_cmd)
+    # Stream the complete Xcode output and save it. If archive fails, print a
+    # compact error digest so the useful cause is visible at the bottom of the
+    # GitHub Actions log instead of being buried hundreds of lines above.
+    archive_lines = []
+    archive_status = nil
+    File.open(archive_log, "w") do |log|
+      Open3.popen2e(archive_cmd) do |_stdin, stdout_err, wait_thr|
+        stdout_err.each do |line|
+          print line
+          log.write(line)
+          archive_lines << line
+          archive_lines.shift while archive_lines.length > 2000
+        end
+        archive_status = wait_thr.value
+      end
+    end
+
+    unless archive_status&.success?
+      error_lines = archive_lines.select do |line|
+        line.match?(/(^|\s)(error:|fatal error:)|provisioning|code sign|codesign|signing|certificate|PhaseScriptExecution|Command .* failed|BUILD FAILED|ARCHIVE FAILED/i)
+      end
+      error_lines = archive_lines.last(120) if error_lines.empty?
+      digest = error_lines.last(80).join
+      UI.error("\n================ XCODE ERROR DIGEST ================\n#{digest}\n====================================================")
+      UI.user_error!("Xcode archive failed with exit code #{archive_status&.exitstatus}. Full log: #{archive_log}")
+    end
 
     export_cmd = [
       "xcodebuild -exportArchive",
