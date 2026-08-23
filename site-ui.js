@@ -4,6 +4,29 @@
   instantStyle.textContent='@supports(content-visibility:auto){.section:not(.hero),.reader-section,.lore-section,.explore-section{content-visibility:visible!important;contain-intrinsic-size:auto!important}}';
   document.head.appendChild(instantStyle);
 
+  // App/PWA metadata is injected globally so every existing page can participate
+  // without duplicating head markup across the large static site.
+  const ensureLink=(rel,href,attrs={})=>{
+    let el=document.querySelector(`link[rel="${rel}"]`);
+    if(!el){el=document.createElement('link');el.rel=rel;document.head.appendChild(el)}
+    el.href=href;Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));
+  };
+  const ensureMeta=(name,content)=>{
+    let el=document.querySelector(`meta[name="${name}"]`);
+    if(!el){el=document.createElement('meta');el.name=name;document.head.appendChild(el)}
+    el.content=content;
+  };
+  ensureLink('manifest','/manifest.webmanifest');
+  ensureLink('apple-touch-icon','/favicon-64.png');
+  ensureMeta('apple-mobile-web-app-capable','yes');
+  ensureMeta('apple-mobile-web-app-status-bar-style','black-translucent');
+  ensureMeta('apple-mobile-web-app-title','Tidefall');
+  ensureMeta('mobile-web-app-capable','yes');
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}),{once:true});
+  }
+
   const headers=document.querySelectorAll('.site-header');
   headers.forEach(header=>{
     const nav=header.querySelector('.nav-links');
@@ -35,6 +58,29 @@
     const href=(a.getAttribute('href')||'').replace(/\/$/,'')||'/';
     if(href===path)a.setAttribute('aria-current','page');
   });
+
+  // Mobile bottom navigation gives the website the same information architecture
+  // as the native app and respects the iPhone home indicator safe area.
+  if(!document.querySelector('.mobile-app-nav')){
+    const items=[
+      ['⌂','Home','/'],
+      ['🏰','Academy','/academy'],
+      ['✦','Magic','/spells'],
+      ['⌁','Explore','/explore'],
+      ['◌','You','/account']
+    ];
+    const nav=document.createElement('nav');
+    nav.className='mobile-app-nav';
+    nav.setAttribute('aria-label','Tidefall app navigation');
+    items.forEach(([icon,label,href])=>{
+      const a=document.createElement('a');a.href=href;
+      const target=href==='/'?path==='/' : path===href||path.startsWith(`${href}/`);
+      if(target)a.setAttribute('aria-current','page');
+      a.innerHTML=`<span class="mobile-app-nav-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+  }
 
   // Give the character hub a direct route into the comparison experience.
   if(path==='/students'){
@@ -97,7 +143,6 @@
   });
 
   // Tiny intent prefetch: only the HTML of a link the user actually points at.
-  // This does not prefetch character images or other large assets.
   const prefetched=new Set();
   document.addEventListener('pointerover',e=>{
     const a=e.target.closest?.('a[href^="/"]');
