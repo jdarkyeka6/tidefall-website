@@ -18,6 +18,9 @@
   };
   ensureLink('manifest','/manifest.webmanifest');
   ensureLink('apple-touch-icon','/favicon-64.png');
+  if(!document.querySelector('link[href="/app-shell.css"]')){
+    const shellStyles=document.createElement('link');shellStyles.rel='stylesheet';shellStyles.href='/app-shell.css';document.head.appendChild(shellStyles);
+  }
   ensureMeta('apple-mobile-web-app-capable','yes');
   ensureMeta('apple-mobile-web-app-status-bar-style','black-translucent');
   ensureMeta('apple-mobile-web-app-title','Tidefall');
