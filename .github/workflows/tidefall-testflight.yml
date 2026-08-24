@@ -20,6 +20,7 @@ jobs:
     env:
       CI: "1"
       EXPO_NO_TELEMETRY: "1"
+      EXPO_USE_PRECOMPILED_MODULES: "0"
 
     steps:
       - name: Check out Tidefall app v2
