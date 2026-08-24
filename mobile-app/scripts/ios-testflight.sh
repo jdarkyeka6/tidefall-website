@@ -97,8 +97,13 @@ echo "==> Installing CocoaPods"
   pod install
 )
 
-PROJECT_PATH="$(find "$IOS_DIR" -maxdepth 1 -name '*.xcodeproj' -print -quit)"
-WORKSPACE_PATH="$(find "$IOS_DIR" -maxdepth 1 -name '*.xcworkspace' -print -quit)"
+# Use shell globs instead of GNU-only find flags so this works on macOS runners.
+shopt -s nullglob
+projects=("$IOS_DIR"/*.xcodeproj)
+workspaces=("$IOS_DIR"/*.xcworkspace)
+shopt -u nullglob
+PROJECT_PATH="${projects[0]:-}"
+WORKSPACE_PATH="${workspaces[0]:-}"
 
 if [[ -z "$PROJECT_PATH" ]]; then
   echo "::error::No .xcodeproj was generated in $IOS_DIR"
@@ -179,7 +184,10 @@ if ! run_logged "$EXPORT_LOG" \
   exit 11
 fi
 
-IPA_PATH="$(find "$EXPORT_DIR" -maxdepth 1 -name '*.ipa' -print -quit)"
+shopt -s nullglob
+ipas=("$EXPORT_DIR"/*.ipa)
+shopt -u nullglob
+IPA_PATH="${ipas[0]:-}"
 if [[ -z "$IPA_PATH" ]]; then
   echo "::error::Xcode export completed but no IPA was produced."
   exit 12
