@@ -126,8 +126,12 @@ fi
 echo "==> Verifying scheme"
 xcodebuild "${CONTAINER_ARGS[@]}" -list
 
-BUILD_NUMBER="${GITHUB_RUN_NUMBER:-1}"
-echo "==> Build number: $BUILD_NUMBER"
+# Build 1 already exists in TestFlight. Always offset the GitHub workflow run
+# number so a fresh run can never accidentally re-upload build 1.
+BASE_RUN_NUMBER="${GITHUB_RUN_NUMBER:-1}"
+BUILD_NUMBER="$((BASE_RUN_NUMBER + 1))"
+echo "==> GitHub run number: $BASE_RUN_NUMBER"
+echo "==> TestFlight build number: $BUILD_NUMBER"
 
 AUTH_ARGS=(
   -allowProvisioningUpdates
