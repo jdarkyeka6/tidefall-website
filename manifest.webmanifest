@@ -1,0 +1,25 @@
+{
+  "name": "Tidefall",
+  "short_name": "Tidefall",
+  "description": "Explore Tidefall Academy, characters, wandless magic, lore, books, quizzes and games.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#041019",
+  "theme_color": "#07131f",
+  "icons": [
+    {
+      "src": "/assets/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Explore", "url": "/explore" },
+    { "name": "Academy", "url": "/academy" },
+    { "name": "Magic", "url": "/spells" }
+  ]
+}
