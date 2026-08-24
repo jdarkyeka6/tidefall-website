@@ -154,7 +154,10 @@ cat > "$EXPORT_PLIST" <<PLIST
 </plist>
 PLIST
 
-echo "==> Archiving $APP_NAME"
+# The GitHub runner has no development signing identity or registered iPhone.
+# Archive the app unsigned, then let Xcode's App Store Connect export stage do
+# the distribution signing with Apple's cloud-managed certificate/profile.
+echo "==> Archiving $APP_NAME without development signing"
 if ! run_logged "$ARCHIVE_LOG" \
   xcodebuild \
     "${CONTAINER_ARGS[@]}" \
@@ -164,15 +167,16 @@ if ! run_logged "$ARCHIVE_LOG" \
     -archivePath "$ARCHIVE_PATH" \
     -resultBundlePath "$RESULT_BUNDLE" \
     DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
-    CODE_SIGN_STYLE=Automatic \
     CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
-    "${AUTH_ARGS[@]}" \
+    CODE_SIGNING_ALLOWED=NO \
+    CODE_SIGNING_REQUIRED=NO \
+    CODE_SIGN_IDENTITY="" \
     archive; then
   echo "::error::Xcode archive failed. See the digest above and archive.log artifact."
   exit 10
 fi
 
-echo "==> Exporting IPA"
+echo "==> Exporting and cloud-signing IPA for App Store Connect"
 if ! run_logged "$EXPORT_LOG" \
   xcodebuild \
     -exportArchive \
@@ -180,7 +184,7 @@ if ! run_logged "$EXPORT_LOG" \
     -exportPath "$EXPORT_DIR" \
     -exportOptionsPlist "$EXPORT_PLIST" \
     "${AUTH_ARGS[@]}"; then
-  echo "::error::Xcode export failed. See the digest above and export.log artifact."
+  echo "::error::Xcode export/signing failed. See the digest above and export.log artifact."
   exit 11
 fi
 
