@@ -6,12 +6,21 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: tidefall-testflight
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: macos-15
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: mobile-app
+    env:
+      CI: "1"
+      EXPO_NO_TELEMETRY: "1"
+
     steps:
       - name: Check out Tidefall app v2
         uses: actions/checkout@v4
@@ -23,9 +32,10 @@ jobs:
           if [ -d /Applications/Xcode_26.3.app ]; then
             sudo xcode-select -s /Applications/Xcode_26.3.app
           else
-            echo "Xcode_26.3 not on this runner; using the default"
+            echo "Xcode_26.3 not found; using runner default"
           fi
           xcodebuild -version
+          xcrun --find altool
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -33,45 +43,12 @@ jobs:
           node-version: 22
 
       - name: Install npm dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
-      - name: Generate native iOS project
-        run: npx expo prebuild --platform ios --non-interactive --clean
-
-      - name: Install CocoaPods
+      - name: Validate Expo config
         run: |
-          cd ios
-          pod install
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.3"
-          bundler-cache: false
-          working-directory: mobile-app
-
-      - name: Install Ruby dependencies
-        run: |
-          bundle config set --local frozen false
-          bundle config set --local deployment false
-          bundle install --jobs 3 --retry 3
-
-      - name: Check Apple secrets
-        env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        run: |
-          missing=""
-          [ -z "$ASC_KEY_ID" ] && missing="$missing ASC_KEY_ID"
-          [ -z "$ASC_ISSUER_ID" ] && missing="$missing ASC_ISSUER_ID"
-          [ -z "$ASC_KEY_CONTENT" ] && missing="$missing ASC_KEY_CONTENT"
-          [ -z "$APPLE_TEAM_ID" ] && missing="$missing APPLE_TEAM_ID"
-          if [ -n "$missing" ]; then
-            echo "::error::Missing repository secret(s):$missing"
-            exit 1
-          fi
+          npx expo config --type public >/dev/null
+          echo "Expo config OK"
 
       - name: Build and upload to TestFlight
         env:
@@ -79,13 +56,31 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        run: bundle exec fastlane beta
+        run: bash scripts/ios-testflight.sh
 
-      - name: Preserve Xcode archive log
+      - name: Print final Xcode diagnostics
         if: failure()
+        run: |
+          echo "================ FINAL IOS DIAGNOSTICS ================"
+          for log in build/archive.log build/export.log; do
+            if [ -f "$log" ]; then
+              echo
+              echo "----- $log -----"
+              grep -Eai '(^|[[:space:]])(error:|fatal error:)|provision|signing|codesign|certificate|PhaseScriptExecution|Command .* failed|ARCHIVE FAILED|EXPORT FAILED|No profiles|requires a provisioning profile|not permitted' "$log" | tail -n 120 || tail -n 120 "$log"
+            fi
+          done
+          echo "========================================================"
+
+      - name: Preserve iOS diagnostics
+        if: failure()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: tidefall-xcode-archive-log
-          path: mobile-app/build/archive.log
+          name: tidefall-ios-diagnostics-${{ github.run_number }}
+          path: |
+            mobile-app/build/archive.log
+            mobile-app/build/export.log
+            mobile-app/build/Tidefall.xcresult
+            mobile-app/ios/Podfile.lock
           if-no-files-found: ignore
           retention-days: 7
