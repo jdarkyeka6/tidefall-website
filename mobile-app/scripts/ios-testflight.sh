@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+# Expo's precompiled iOS XCFrameworks can be ABI-incompatible with the exact
+# React Native/Hermes patch used by this app. Build Expo modules from source so
+# ExpoModulesCore is compiled against the same JSI/Hermes ABI as Tidefall.
+export EXPO_USE_PRECOMPILED_MODULES=0
+
 APP_NAME="Tidefall"
 SCHEME="Tidefall"
 APP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -91,7 +96,7 @@ if [[ ! -d "$IOS_DIR" ]]; then
   exit 3
 fi
 
-echo "==> Installing CocoaPods"
+echo "==> Installing CocoaPods (Expo modules from source)"
 (
   cd "$IOS_DIR"
   pod install
