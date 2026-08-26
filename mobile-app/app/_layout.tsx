@@ -16,14 +16,8 @@ export default function RootLayout() {
         tabBarActiveTintColor: '#BDEFFC',
         tabBarInactiveTintColor: '#738895',
         sceneStyle: { backgroundColor: '#041019' },
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: '800',
-          marginTop: 1,
-        },
-        tabBarItemStyle: {
-          paddingTop: 4,
-        },
+        tabBarLabelStyle: { fontSize: 10, fontWeight: '800', marginTop: 1 },
+        tabBarItemStyle: { paddingTop: 4 },
         tabBarStyle: {
           backgroundColor: '#07131D',
           borderTopColor: '#173746',
@@ -39,6 +33,8 @@ export default function RootLayout() {
       <Tabs.Screen name="magic" options={{ title: 'Magic', tabBarAccessibilityLabel: 'Magic', tabBarIcon: tabIcon('✦') }} />
       <Tabs.Screen name="explore" options={{ title: 'Explore', tabBarAccessibilityLabel: 'Explore', tabBarIcon: tabIcon('⌁') }} />
       <Tabs.Screen name="profile" options={{ title: 'You', tabBarAccessibilityLabel: 'Profile', tabBarIcon: tabIcon('◌') }} />
+      <Tabs.Screen name="characters/index" options={{ href: null }} />
+      <Tabs.Screen name="characters/[slug]" options={{ href: null }} />
     </Tabs>
   );
 }
