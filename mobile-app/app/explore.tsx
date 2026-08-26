@@ -1,5 +1,14 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+const SITE = 'https://tidefall.com.au';
+
+const items = [
+  { title: 'Which character are you?', url: `${SITE}/character-quiz` },
+  { title: 'Would you survive Tidefall?', url: `${SITE}/survive` },
+  { title: 'Secrets & discoveries', url: `${SITE}/secrets` },
+  { title: 'Character relationship map', url: `${SITE}/relationships` },
+];
 
 export default function ExploreScreen() {
   return (
@@ -9,11 +18,18 @@ export default function ExploreScreen() {
         <Text style={styles.title}>Tidefall is bigger than the story.</Text>
         <Text style={styles.body}>Quizzes, secrets, maps, character discoveries and Academy lore will live here.</Text>
 
-        {['Which character are you?', 'Would you survive Tidefall?', 'Secrets & discoveries', 'Character relationship map'].map((item) => (
-          <View key={item} style={styles.card}>
-            <Text style={styles.cardText}>{item}</Text>
+        {items.map((item) => (
+          <TouchableOpacity
+            key={item.title}
+            accessibilityRole="link"
+            accessibilityLabel={`Open ${item.title}`}
+            style={styles.card}
+            activeOpacity={0.84}
+            onPress={() => Linking.openURL(item.url)}
+          >
+            <Text style={styles.cardText}>{item.title}</Text>
             <Text style={styles.arrow}>›</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>
