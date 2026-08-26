@@ -1,6 +1,8 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+const SITE = 'https://tidefall.com.au';
 
 const spells = [
   { name: 'Veyra', symbol: '✦', status: 'Known' },
@@ -12,6 +14,8 @@ const spells = [
 ];
 
 export default function MagicScreen() {
+  const open = (url: string) => Linking.openURL(url);
+
   return (
     <LinearGradient colors={['#041019', '#071B27', '#041019']} style={styles.bg}>
       <SafeAreaView style={styles.safe}>
@@ -24,8 +28,16 @@ export default function MagicScreen() {
             <View style={styles.ringOuter}><View style={styles.ringInner}><Text style={styles.mic}>◉</Text></View></View>
             <Text style={styles.castLabel}>CASTING CHAMBER</Text>
             <Text style={styles.castTitle}>Speak a spell.</Text>
-            <Text style={styles.castBody}>Voice casting will listen for Tidefall spells and respond with visual feedback.</Text>
-            <TouchableOpacity style={styles.castButton} activeOpacity={0.84}><Text style={styles.castButtonText}>BEGIN CASTING</Text></TouchableOpacity>
+            <Text style={styles.castBody}>Open the full casting chamber to use Tidefall spell controls and voice casting.</Text>
+            <TouchableOpacity
+              accessibilityRole="link"
+              accessibilityLabel="Begin casting"
+              style={styles.castButton}
+              activeOpacity={0.84}
+              onPress={() => open(`${SITE}/spells`)}
+            >
+              <Text style={styles.castButtonText}>BEGIN CASTING</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.sectionRow}>
@@ -35,7 +47,14 @@ export default function MagicScreen() {
 
           <View style={styles.spellGrid}>
             {spells.map((spell) => (
-              <TouchableOpacity key={`${spell.name}-${spell.symbol}`} style={[styles.spellCard, spell.status === 'Hidden' && styles.hiddenCard]} activeOpacity={0.84}>
+              <TouchableOpacity
+                key={`${spell.name}-${spell.symbol}`}
+                accessibilityRole="link"
+                accessibilityLabel={spell.status === 'Hidden' ? 'Open hidden spell archive' : `Open ${spell.name} in the spell archive`}
+                style={[styles.spellCard, spell.status === 'Hidden' && styles.hiddenCard]}
+                activeOpacity={0.84}
+                onPress={() => open(`${SITE}/spells`)}
+              >
                 <Text style={[styles.spellSymbol, spell.status === 'Hidden' && styles.hiddenSymbol]}>{spell.symbol}</Text>
                 <Text style={styles.spellName}>{spell.name}</Text>
                 <Text style={styles.spellStatus}>{spell.status}</Text>
@@ -43,12 +62,18 @@ export default function MagicScreen() {
             ))}
           </View>
 
-          <View style={styles.trainingCard}>
+          <TouchableOpacity
+            accessibilityRole="link"
+            accessibilityLabel="Open spell training"
+            style={styles.trainingCard}
+            activeOpacity={0.84}
+            onPress={() => open(`${SITE}/spell-trial`)}
+          >
             <Text style={styles.trainingLabel}>TRAINING</Text>
             <Text style={styles.trainingTitle}>Precision before power.</Text>
             <Text style={styles.trainingCopy}>Practice timing, pronunciation and control with short casting challenges.</Text>
             <Text style={styles.trainingArrow}>›</Text>
-          </View>
+          </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
