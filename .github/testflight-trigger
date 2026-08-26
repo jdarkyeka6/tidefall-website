@@ -1,3 +1,5 @@
-Trigger Tidefall TestFlight rebuild with Expo iOS modules compiled from source.
-2026-08-24
-attempt=2
+Trigger Tidefall TestFlight rebuild with latest app expansion.
+2026-08-26
+attempt=3
+source=feature/tidefall-app-v2
+commit=f1017525c4d0f7247b5d37d7e92bdc255358c559
