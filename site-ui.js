@@ -4,10 +4,22 @@
   instantStyle.textContent='@supports(content-visibility:auto){.section:not(.hero),.reader-section,.lore-section,.explore-section{content-visibility:visible!important;contain-intrinsic-size:auto!important}}';
   document.head.appendChild(instantStyle);
 
+  const path=location.pathname.replace(/\/$/,'')||'/';
+
   const headers=document.querySelectorAll('.site-header');
   headers.forEach(header=>{
     const nav=header.querySelector('.nav-links');
     if(!nav)return;
+
+    // Make the new-reader funnel a permanent first-class route across the site.
+    if(!nav.querySelector('a[href="/start-here"]')){
+      const start=document.createElement('a');
+      start.href='/start-here';
+      start.textContent='Start Here';
+      const home=[...nav.querySelectorAll('a')].find(a=>(a.getAttribute('href')||'')==='/');
+      if(home)home.insertAdjacentElement('afterend',start);else nav.insertBefore(start,nav.firstChild);
+    }
+
     let toggle=header.querySelector('.nav-toggle');
     if(!toggle){
       toggle=document.createElement('button');
@@ -30,14 +42,63 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   });
 
-  const path=location.pathname.replace(/\/$/,'')||'/';
   document.querySelectorAll('.nav-links a').forEach(a=>{
     const href=(a.getAttribute('href')||'').replace(/\/$/,'')||'/';
     if(href===path)a.setAttribute('aria-current','page');
   });
 
-  // Site-wide book marketing: make it impossible to miss that Tidefall is a book-first fantasy series.
-  const noBookPromo=new Set(['/books','/book-one','/reading-order','/book-characters']);
+  // Homepage: turn the first screen after the hero into a real book launch, not a generic site directory.
+  if(path==='/'){
+    const main=document.querySelector('main');
+    const hero=main?.querySelector(':scope > .hero');
+    const homeStyle=document.createElement('style');
+    homeStyle.textContent=`
+      .home-book-launch{width:min(1220px,calc(100% - 30px));margin:30px auto 82px;border:1px solid rgba(169,213,223,.2);border-radius:32px;overflow:hidden;background:radial-gradient(circle at 82% 8%,rgba(93,186,211,.14),transparent 28%),linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));display:grid;grid-template-columns:minmax(210px,300px) 1fr;gap:clamp(28px,5vw,70px);align-items:center;padding:clamp(26px,5vw,58px)}
+      .home-book-cover{aspect-ratio:2/3;border-radius:6px 18px 18px 6px;border:1px solid rgba(255,255,255,.18);background:radial-gradient(circle at 50% 18%,rgba(134,219,237,.22),transparent 26%),linear-gradient(160deg,#173d52,#07131f 60%,#03090d);box-shadow:-10px 22px 60px rgba(0,0,0,.38),inset 13px 0 16px rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:space-between;text-align:center;padding:12% 11%;font-family:Cinzel,Georgia,serif;letter-spacing:.08em;position:relative;overflow:hidden}
+      .home-book-cover:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:1px;background:rgba(255,255,255,.13)}
+      .home-book-cover small{font-size:.62rem;letter-spacing:.22em;color:rgba(255,255,255,.68)}.home-book-cover strong{font-size:clamp(1.8rem,4vw,3rem);line-height:.92}.home-book-cover span{font-size:.72rem;letter-spacing:.2em;color:#b9e1e9}
+      .home-book-copy .eyebrow{margin:0 0 10px}.home-book-copy h2{font-family:Cinzel,Georgia,serif;font-size:clamp(2.7rem,6vw,5.4rem);line-height:.98;margin:0 0 18px}.home-book-copy>p{max-width:700px;color:rgba(255,255,255,.7);line-height:1.8;font-size:1.02rem}.home-book-hook{margin:24px 0 0;padding:18px 20px;border-left:2px solid rgba(169,213,223,.7);background:rgba(255,255,255,.025);font-family:Cinzel,Georgia,serif;font-size:clamp(1.2rem,2.5vw,1.75rem);line-height:1.4}.home-book-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.home-book-actions a{min-height:48px;padding:0 20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:1px solid rgba(255,255,255,.18)}.home-book-actions a:first-child{background:#f7fbfc;color:#07131f}
+      .home-book-proof{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.home-book-proof span{padding:7px 10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:rgba(255,255,255,.58);font-size:.75rem}
+      .home-books-upgraded{width:min(1180px,100%);margin:auto}.home-books-upgraded .book-world-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:28px}.home-books-upgraded .book-story-card,.home-books-upgraded .book-side-card{border:1px solid rgba(255,255,255,.11);border-radius:26px;background:rgba(255,255,255,.025);padding:clamp(25px,4vw,42px)}.home-books-upgraded .book-story-card{min-height:330px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(circle at 80% 0%,rgba(88,176,201,.13),transparent 34%),rgba(255,255,255,.025)}.home-books-upgraded .book-story-card strong{font-family:Cinzel,Georgia,serif;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05}.home-books-upgraded .book-story-card p,.home-books-upgraded .book-side-card p{color:rgba(255,255,255,.62);line-height:1.7}.home-books-upgraded .book-side-stack{display:grid;gap:16px}.home-books-upgraded .book-side-card strong{display:block;font-size:1.08rem;margin-bottom:8px}
+      @media(max-width:820px){.home-book-launch{grid-template-columns:1fr}.home-book-cover{width:min(270px,70vw);margin:auto}.home-book-copy{text-align:center}.home-book-actions,.home-book-proof{justify-content:center}.home-books-upgraded .book-world-grid{grid-template-columns:1fr}}
+    `;
+    document.head.appendChild(homeStyle);
+
+    if(hero&&!document.querySelector('.home-book-launch')){
+      const launch=document.createElement('section');
+      launch.className='home-book-launch';
+      launch.setAttribute('aria-label','Start the Tidefall book series');
+      launch.innerHTML=`
+        <div class="home-book-cover"><small>THE TIDE IS MOVING</small><strong>TIDEFALL<br>ACADEMY</strong><span>BOOK ONE</span></div>
+        <div class="home-book-copy">
+          <p class="eyebrow">THE WEBSITE IS THE WORLD. THE BOOKS ARE THE STORY.</p>
+          <h2>Start with Book One.</h2>
+          <p>Tidefall Academy is a book-first fantasy series. The quizzes, maps, spells and lore let you wander around the world, but the actual story begins with Jasper Holloway and the first book.</p>
+          <div class="home-book-hook">“Jasper Holloway was underwater, but he could breathe.”</div>
+          <div class="home-book-actions"><a href="/books">Read Chapter One free</a><a href="/book-one">See Book One</a><a href="/start-here">I'm new to Tidefall</a></div>
+          <div class="home-book-proof"><span>Book One is the beginning</span><span>Chapter One free now</span><span>Four central characters</span><span>Fantasy · magic academy</span></div>
+        </div>`;
+      hero.insertAdjacentElement('afterend',launch);
+    }
+
+    const books=document.querySelector('#books');
+    if(books){
+      books.classList.add('home-books-upgraded');
+      books.innerHTML=`
+        <div class="section-heading"><p class="eyebrow section-kicker">THE MAIN STORY</p><h2>Read Tidefall, then explore it.</h2><p class="section-lead">Book One is not an extra feature hidden inside the website. It is the beginning of the story. Everything else on tidefall.com.au is a door back into that world.</p></div>
+        <div class="book-world-grid">
+          <a class="book-story-card" href="/book-one"><span class="eyebrow">BOOK ONE</span><strong>The story starts beneath the water.</strong><p>Meet Jasper Holloway, enter Tidefall Academy, and begin the mystery before you read the lore about it.</p><span class="gateway-arrow">Enter Book One →</span></a>
+          <div class="book-side-stack">
+            <a class="book-side-card" href="/books"><strong>📖 Read Chapter One free</strong><p>Open <em>The Water Without a Sky</em>, the official public preview of Tidefall Book One.</p><span class="gateway-arrow">Start reading →</span></a>
+            <a class="book-side-card" href="/start-here"><strong>🧭 New-reader path</strong><p>Book first, characters second, Academy third. Use the official five-step route into Tidefall.</p><span class="gateway-arrow">Show me where to start →</span></a>
+            <a class="book-side-card" href="/reading-order"><strong>▤ Reading order</strong><p>See exactly where Book One sits and how the series begins without invented filler or spoilers.</p><span class="gateway-arrow">Open reading order →</span></a>
+          </div>
+        </div>`;
+    }
+  }
+
+  // Site-wide book marketing for pages outside the launch funnel.
+  const noBookPromo=new Set(['/','/books','/book-one','/reading-order','/book-characters','/start-here']);
   if(!noBookPromo.has(path)){
     const main=document.querySelector('main');
     if(main&&!document.querySelector('.book-launch-strip')){
@@ -47,10 +108,24 @@
       const strip=document.createElement('aside');
       strip.className='book-launch-strip';
       strip.setAttribute('aria-label','Tidefall books');
-      strip.innerHTML='<div class="book-launch-copy"><strong>📚 Tidefall is a book-first fantasy series</strong><span>The Academy, characters and games expand the world. The books are the main story. Start with Book One and read Chapter One free.</span></div><div class="book-launch-actions"><a href="/book-one">Start Book One</a><a href="/reading-order">Reading order</a></div>';
+      strip.innerHTML='<div class="book-launch-copy"><strong>📚 The books are the main Tidefall story</strong><span>You are exploring the world around the series. Start with Book One and read Chapter One free.</span></div><div class="book-launch-actions"><a href="/books">Read Chapter One</a><a href="/start-here">Start here</a></div>';
       const preferred=main.querySelector(':scope > .hero, :scope > .inner-hero');
       if(preferred)preferred.insertAdjacentElement('afterend',strip);else main.insertBefore(strip,main.firstChild);
     }
+  }
+
+  // Reading progress for the actual public Chapter One reader.
+  if(path==='/books'){
+    const bar=document.createElement('div');
+    bar.setAttribute('aria-hidden','true');
+    bar.style.cssText='position:fixed;top:0;left:0;height:3px;width:0;background:currentColor;z-index:9999;box-shadow:0 0 14px rgba(169,213,223,.7);transition:width .08s linear';
+    document.body.appendChild(bar);
+    const update=()=>{
+      const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+      bar.style.width=`${Math.min(100,Math.max(0,scrollY/max*100))}%`;
+    };
+    addEventListener('scroll',update,{passive:true});
+    update();
   }
 
   // Give the character hub a direct route into the comparison experience.
