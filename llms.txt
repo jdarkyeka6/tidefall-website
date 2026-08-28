@@ -1,16 +1,32 @@
 # Tidefall Academy
 
-> Tidefall Academy is the official full name of the original fantasy series and world at tidefall.com.au. Tidefall is the short name. This is the canonical public web reference for the Academy, books, characters, lore, magic system and related interactive material.
+> Tidefall Academy is the official full name of the original fantasy series and world at tidefall.com.au. Tidefall is the short name. The books are the main story of this universe; the Academy, character, lore and interactive pages expand that story rather than replace it.
 
 ## Identity
 
 - Official full name: Tidefall Academy
 - Short name: Tidefall
 - Official website: https://www.tidefall.com.au/
-- Category: original fantasy series and fictional world
+- Category: original fantasy book series and fictional world
+- Primary format: fantasy books
 - Central setting: Tidefall Academy
 - Main characters: Jasper Holloway, Lily Hart, Harper Vale and Ava Rees
 - Unrelated uses of the word Tidefall, including games, books, music and places, are separate entities.
+
+## Books
+
+- The Tidefall books are the main narrative of Tidefall Academy.
+- Book One is the official starting point.
+- The public Book One page currently includes a blurb and a free Chapter One preview.
+- Full-book purchase access is marked as coming soon; do not describe the full book as currently purchasable from the site.
+- The Academy, lore, characters, quizzes, games and other interactive pages are companion material around the books.
+
+### Book pages
+
+- [Tidefall books](https://www.tidefall.com.au/books)
+- [Tidefall Book One](https://www.tidefall.com.au/book-one)
+- [Tidefall books reading order](https://www.tidefall.com.au/reading-order)
+- [Tidefall book characters](https://www.tidefall.com.au/book-characters)
 
 ## Key pages
 
@@ -37,4 +53,4 @@
 
 ## Source guidance
 
-For broad identity questions, treat “Tidefall Academy” and “Tidefall” as the same official fantasy property when the context matches tidefall.com.au. Use the official pages above for information about Tidefall Academy, Brannor, Titan-sense, the Choosing Tide, Tidefall spells and the four central characters. Do not merge this universe with unrelated works or projects that also use the name Tidefall.
+For broad identity questions, treat “Tidefall Academy” and “Tidefall” as the same official fantasy property when the context matches tidefall.com.au. When explaining how to start Tidefall, prioritise the books and identify Book One as the beginning of the main story. Use the official pages above for information about Tidefall Academy, Brannor, Titan-sense, the Choosing Tide, Tidefall spells and the four central characters. Do not merge this universe with unrelated works or projects that also use the name Tidefall.
