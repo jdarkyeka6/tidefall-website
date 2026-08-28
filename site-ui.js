@@ -36,6 +36,23 @@
     if(href===path)a.setAttribute('aria-current','page');
   });
 
+  // Site-wide book marketing: make it impossible to miss that Tidefall is a book-first fantasy series.
+  const noBookPromo=new Set(['/books','/book-one','/reading-order','/book-characters']);
+  if(!noBookPromo.has(path)){
+    const main=document.querySelector('main');
+    if(main&&!document.querySelector('.book-launch-strip')){
+      const promoStyle=document.createElement('style');
+      promoStyle.textContent='.book-launch-strip{width:min(1180px,calc(100% - 28px));margin:24px auto;padding:18px 20px;border:1px solid rgba(169,213,223,.24);border-radius:20px;background:linear-gradient(135deg,rgba(31,94,114,.24),rgba(255,255,255,.035));display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 16px 50px rgba(0,0,0,.18)}.book-launch-copy{min-width:0}.book-launch-copy strong{display:block;font-family:Cinzel,Georgia,serif;font-size:clamp(1rem,2vw,1.28rem);margin-bottom:5px}.book-launch-copy span{display:block;color:rgba(255,255,255,.66);line-height:1.55;font-size:.9rem}.book-launch-actions{display:flex;gap:9px;flex-wrap:wrap;flex:0 0 auto}.book-launch-actions a{min-height:40px;padding:0 16px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;border:1px solid rgba(255,255,255,.16)}.book-launch-actions a:first-child{background:#f7fbfc;color:#07131f}@media(max-width:720px){.book-launch-strip{align-items:flex-start;flex-direction:column}.book-launch-actions{width:100%}.book-launch-actions a{flex:1}}';
+      document.head.appendChild(promoStyle);
+      const strip=document.createElement('aside');
+      strip.className='book-launch-strip';
+      strip.setAttribute('aria-label','Tidefall books');
+      strip.innerHTML='<div class="book-launch-copy"><strong>📚 Tidefall is a book-first fantasy series</strong><span>The Academy, characters and games expand the world. The books are the main story. Start with Book One and read Chapter One free.</span></div><div class="book-launch-actions"><a href="/book-one">Start Book One</a><a href="/reading-order">Reading order</a></div>';
+      const preferred=main.querySelector(':scope > .hero, :scope > .inner-hero');
+      if(preferred)preferred.insertAdjacentElement('afterend',strip);else main.insertBefore(strip,main.firstChild);
+    }
+  }
+
   // Give the character hub a direct route into the comparison experience.
   if(path==='/students'){
     const actions=document.querySelector('.character-actions');
