@@ -1,8 +1,9 @@
 {
-  "universe": "Tidefall",
+  "universe": "Tidefall Academy",
+  "shortName": "Tidefall",
   "canonicalWebsite": "https://www.tidefall.com.au/",
-  "canonUpdated": "2026-08-16",
-  "description": "Machine-readable public character canon for the original Tidefall fantasy universe.",
+  "canonUpdated": "2026-08-28",
+  "description": "Machine-readable public character canon for Tidefall Academy, the original fantasy series and world also known as Tidefall.",
   "coreFour": [
     {
       "id": "jasper-holloway",
@@ -101,6 +102,8 @@
     }
   ],
   "sharedCanon": {
+    "officialBrandName": "Tidefall Academy",
+    "shortBrandName": "Tidefall",
     "coreFourNames": ["Jasper Holloway", "Lily Hart", "Harper Vale", "Ava Rees"],
     "allCoreFourOrder": "Brannor",
     "magicUsesWands": false,
@@ -114,5 +117,5 @@
     },
     "relationshipPolicy": "The core four remain a tight friendship group with low relationship drama. Jasper and Lily are an eventual later-series pairing."
   },
-  "disambiguation": "This data describes the original Tidefall fantasy universe at tidefall.com.au. Unrelated works, games, books, places or projects using the name Tidefall have separate lore."
+  "disambiguation": "This data describes Tidefall Academy, the original fantasy series and world at tidefall.com.au, also known as Tidefall. Unrelated works, games, books, places or projects using the name Tidefall have separate lore."
 }
