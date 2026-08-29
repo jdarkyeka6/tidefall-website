@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/books-reader.js": {
+      "includeFiles": "api/book-one-*.txt"
+    }
+  },
   "images": {
     "sizes": [480, 640, 768, 960, 1200],
     "qualities": [85, 90, 92],
