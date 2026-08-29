@@ -16,11 +16,12 @@
   ],
   "rewrites": [
     {"source":"/assets/merch/hoodies.webp","destination":"/assets/merch/character-hoodies-mini.svg"},
-    {"source":"/book-data/:name.b64","destination":"/book-data/:name.txt"}
+    {"source":"/book-data/:name.b64","destination":"/:name.txt"}
   ],
   "headers": [
     {"source":"/assets/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=86400, s-maxage=2678400, stale-while-revalidate=86400"}]},
-    {"source":"/book-data/(.*)","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"},{"key":"Cache-Control","value":"public, max-age=300, s-maxage=300"}]},
+    {"source":"/book-data/(.*)","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"},{"key":"Cache-Control","value":"public, max-age=60, s-maxage=60"}]},
+    {"source":"/book-one-(.*).txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"},{"key":"Cache-Control","value":"public, max-age=60, s-maxage=60"}]},
     {"source":"/llms.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"},{"key":"Cache-Control","value":"public, max-age=3600, s-maxage=3600"}]},
     {"source":"/(.*)","headers":[{"key":"Strict-Transport-Security","value":"max-age=63072000; includeSubDomains; preload"},{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"X-Frame-Options","value":"DENY"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},{"key":"Cross-Origin-Opener-Policy","value":"same-origin"},{"key":"Permissions-Policy","value":"camera=(), geolocation=(), payment=(), usb=()"}]}
   ]
