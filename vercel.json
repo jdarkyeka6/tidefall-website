@@ -15,6 +15,7 @@
     {"source":"/merch","destination":"/merch2.html","permanent":false}
   ],
   "rewrites": [
+    {"source":"/books","destination":"/api/books-reader"},
     {"source":"/assets/merch/hoodies.webp","destination":"/assets/merch/character-hoodies-mini.svg"},
     {"source":"/book-data/:name.b64","destination":"/:name.txt"}
   ],
