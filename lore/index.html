@@ -17,60 +17,42 @@
   <meta property="og:image" content="https://www.tidefall.com.au/assets/hero.png" />
   <meta property="og:locale" content="en_AU" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../styles-all.css" />
+  <link rel="stylesheet" href="../styles.css" />
   <style>
-    .lore-main{padding:120px clamp(18px,5vw,72px) 90px;background:radial-gradient(circle at 50% 0,rgba(85,171,198,.13),transparent 34%),#07131f;min-height:100vh}.lore-shell{width:min(1180px,100%);margin:0 auto}
+    body{background:#050b10}.lore-main{min-height:100vh;padding:112px clamp(18px,5vw,72px) 110px;background:radial-gradient(circle at 82% 0,rgba(126,160,132,.11),transparent 28%),linear-gradient(180deg,#07131b 0,#091116 48%,#050a0d 100%)}.lore-shell{width:min(1260px,100%);margin:auto}.lore-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:clamp(32px,7vw,90px);align-items:end;min-height:55vh;padding:40px 0 70px;border-bottom:1px solid rgba(218,227,204,.15)}.lore-hero-copy{max-width:780px}.lore-hero h1{font-family:Cinzel,serif;font-size:clamp(4.2rem,10vw,9rem);line-height:.82;letter-spacing:-.045em;margin:12px 0 24px}.lore-hero p{font-size:1.05rem;line-height:1.8;color:rgba(244,246,237,.66)}.archive-index{border-left:1px solid rgba(219,230,205,.2);padding-left:28px}.archive-index small{display:block;letter-spacing:.18em;text-transform:uppercase;color:#b9c7ad;margin-bottom:18px}.archive-index a{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid rgba(255,255,255,.08);color:rgba(244,246,237,.72)}.archive-index a:last-child{border-bottom:1px solid rgba(255,255,255,.08)}.archive-index span{opacity:.45}.lore-section{padding:86px 0;border-bottom:1px solid rgba(218,227,204,.12)}.lore-heading{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;margin-bottom:38px}.lore-heading .section-kicker{margin:9px 0 0;letter-spacing:.18em;font-size:.68rem;color:#aebda5}.lore-heading h2{font-family:Cinzel,serif;font-size:clamp(2.4rem,5vw,5rem);line-height:1;margin:0;letter-spacing:-.035em}.core-grid{display:grid;grid-template-columns:1.2fr .8fr 1fr 1.1fr;gap:10px;align-items:end}.core-card{position:relative;min-height:460px;overflow:hidden;background:#0b1418;border:0!important;border-radius:0!important}.core-card:nth-child(2){min-height:380px}.core-card:nth-child(3){min-height:430px}.core-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.core-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(2,6,8,.9))}.core-copy{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:24px}.core-copy h3{font-family:Cinzel,serif;font-size:1.35rem;margin:0 0 8px}.core-copy p{margin:0;color:rgba(255,255,255,.62);line-height:1.55;font-size:.86rem}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid rgba(218,227,204,.14);border-left:1px solid rgba(218,227,204,.14)}.info-card{min-height:230px;padding:34px;border-right:1px solid rgba(218,227,204,.14);border-bottom:1px solid rgba(218,227,204,.14);background:transparent!important;border-radius:0!important}.info-card:nth-child(2),.info-card:nth-child(3){background:rgba(255,255,255,.018)!important}.info-card h3{font-family:Cinzel,serif;font-size:1.35rem;margin:0 0 14px}.info-card p{color:rgba(244,246,237,.6);line-height:1.72;margin:0}.canon-box{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;padding:0!important;background:none!important;border:0!important}.canon-copy{font-size:1.05rem;line-height:1.85;color:rgba(244,246,237,.68)}.canon-links{display:grid;align-content:start}.canon-links a{padding:18px 0;border-top:1px solid rgba(218,227,204,.14);font-family:Cinzel,serif;font-size:1.15rem}.canon-links a:last-child{border-bottom:1px solid rgba(218,227,204,.14)}.lore-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}@media(max-width:900px){.lore-hero{grid-template-columns:1fr;min-height:auto}.archive-index{border-left:0;border-top:1px solid rgba(218,227,204,.16);padding:24px 0 0}.lore-heading{grid-template-columns:1fr}.core-grid{grid-template-columns:1fr 1fr}.canon-box{grid-template-columns:1fr}}@media(max-width:600px){.lore-main{padding-top:72px}.lore-hero h1{font-size:clamp(3.4rem,17vw,5.5rem)}.core-grid,.info-grid{grid-template-columns:1fr}.core-card,.core-card:nth-child(2),.core-card:nth-child(3){min-height:420px}.lore-section{padding:62px 0}}
   </style>
 </head>
 <body>
-  <div id="toast" class="toast"></div>
   <header class="site-header">
     <a class="brand" href="/"><span class="brand-mark">◌</span><span>TIDEFALL</span></a>
-    <nav class="nav-links"><a href="/students">Characters</a><a href="/lore">Lore</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/spells">Spells</a></nav>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">MENU</button>
+    <nav class="nav-links"><a href="/">Home</a><a href="/students">Characters</a><a href="/lore" aria-current="page">Lore</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/spells">Spells</a></nav>
   </header>
   <main class="lore-main">
     <div class="lore-shell">
       <section class="lore-hero">
-        <p class="eyebrow">OFFICIAL CANON ARCHIVE</p>
-        <h1>Tidefall Lore</h1>
-        <p>This is the official reference hub for the <strong>Tidefall fantasy universe</strong>: its characters, magic, Orders, Titans, Academy and the strange force known as the Tide.</p>
-        <div class="links" style="justify-content:center"><a class="button primary" href="/students">Meet the Characters</a><a class="button secondary" href="/academy">Explore the Academy</a></div>
+        <div class="lore-hero-copy"><p class="eyebrow">OFFICIAL CANON ARCHIVE</p><h1>Tidefall<br>Lore</h1><p>This is the official reference archive for the <strong>Tidefall fantasy universe</strong>: its characters, magic, Orders, Titans, Academy and the strange force known as the Tide.</p><div class="lore-actions"><a class="button primary" href="/students">Meet the Characters</a><a class="button secondary" href="/academy">Explore the Academy</a></div></div>
+        <aside class="archive-index" aria-label="Lore archive index"><small>Archive index</small><a href="#core-four">01 <span>Characters</span></a><a href="#magic-lore">02 <span>Magic & the Tide</span></a><a href="#official-canon">03 <span>Canon source</span></a><a href="/lore-vault">04 <span>Lore Vault</span></a></aside>
       </section>
 
-      <section class="lore-section" aria-labelledby="core-four">
-        <p class="section-kicker">THE CORE FOUR</p>
-        <h2 id="core-four">Main Tidefall characters</h2>
-        <div class="core-grid">
-          <a class="core-card" href="/characters/jasper"><img src="../assets/jasper.png" alt="Jasper Holloway from Tidefall" /><div class="core-copy"><h3>Jasper Holloway</h3><p>Careful, curious and pattern-focused. Jasper notices what others miss.</p></div></a>
-          <a class="core-card" href="/characters/lily"><img src="../assets/lily.png" alt="Lily Hart from Tidefall" /><div class="core-copy"><h3>Lily Hart</h3><p>A late-entry student. Shy at first, Lily grows confident and aware.</p></div></a>
-          <a class="core-card" href="/characters/harper"><img src="../assets/harper.png" alt="Harper Vale from Tidefall" /><div class="core-copy"><h3>Harper Vale</h3><p>Fast-moving, funny and spontaneous. Harper acts first and thinks later.</p></div></a>
-          <a class="core-card" href="/characters/ava"><img src="../assets/ava.png" alt="Ava Rees from Tidefall" /><div class="core-copy"><h3>Ava Rees</h3><p>Precise, observant and logical. Ava verifies everything and questions assumptions.</p></div></a>
-        </div>
-      </section>
+      <section class="lore-section" aria-labelledby="core-four"><div class="lore-heading"><p class="section-kicker">FILE 01 / PEOPLE</p><h2 id="core-four">The core four</h2></div><div class="core-grid">
+        <a class="core-card" href="/characters/jasper"><img src="../assets/jasper.png" alt="Jasper Holloway from Tidefall"><div class="core-copy"><h3>Jasper Holloway</h3><p>Patterns, persistence and Titan-sense.</p></div></a>
+        <a class="core-card" href="/characters/lily"><img src="../assets/lily.png" alt="Lily Hart from Tidefall"><div class="core-copy"><h3>Lily Hart</h3><p>Late entry, quiet strength and Titan-sense.</p></div></a>
+        <a class="core-card" href="/characters/harper"><img src="../assets/harper.png" alt="Harper Vale from Tidefall"><div class="core-copy"><h3>Harper Vale</h3><p>Momentum, humour and instinct.</p></div></a>
+        <a class="core-card" href="/characters/ava"><img src="../assets/ava.png" alt="Ava Rees from Tidefall"><div class="core-copy"><h3>Ava Rees</h3><p>Evidence, precision and questions.</p></div></a>
+      </div></section>
 
-      <section class="lore-section" aria-labelledby="magic-lore">
-        <p class="section-kicker">MAGIC & THE TIDE</p>
-        <h2 id="magic-lore">Magic system and mystical forces</h2>
-        <div class="info-grid">
-          <article class="info-card"><h3>Magic without wands</h3><p>Tidefall magic is not a wand-based system. Students cast directly through Tidefall's magical rules and the power of the Tide.</p></article>
-          <article class="info-card"><h3>Titan-sense</h3><p>Titan-sense is an exceptionally rare ability connected to Titans. Jasper Holloway and Lily Hart possess the fuller form, allowing them to sense and communicate with Titans.</p></article>
-          <article class="info-card"><h3>The Choosing Tide</h3><p>Order placement is performed by the Choosing Tide. Rather than students choosing, the Tide carries students toward the Order it selects.</p></article>
-          <article class="info-card"><h3>The Five Classes</h3><p>Spells are organized into five classes: Lumen (light), Tide (water), Vela (air), Aegis (defense) and Ember (fire/heat).</p></article>
-        </div>
-      </section>
+      <section class="lore-section" aria-labelledby="magic-lore"><div class="lore-heading"><p class="section-kicker">FILE 02 / SYSTEMS</p><h2 id="magic-lore">Magic & the Tide</h2></div><div class="info-grid">
+        <article class="info-card"><h3>Magic without wands</h3><p>Tidefall magic is cast directly, without wand-based spellcasting.</p></article>
+        <article class="info-card"><h3>Titan-sense</h3><p>An exceptionally rare connection. Jasper Holloway and Lily Hart possess the fuller known form.</p></article>
+        <article class="info-card"><h3>The Choosing Tide</h3><p>Order placement is performed by the Tide itself, carrying students toward the Order it selects.</p></article>
+        <article class="info-card"><h3>The Five Classes</h3><p>Lumen, Tide, Vela, Aegis and Ember form the main public spell classification system.</p></article>
+      </div></section>
 
-      <section class="lore-section" aria-labelledby="official-canon">
-        <p class="section-kicker">SOURCE OF TRUTH</p>
-        <h2 id="official-canon">What counts as official Tidefall canon?</h2>
-        <div class="canon-box">
-          <p>The Tidefall universe documented on <strong>tidefall.com.au</strong> is an original fantasy setting centred on Tidefall Academy, its characters, magic, mysteries and the Tide.</p>
-          <p>For character questions, the dedicated character pages are the most specific public canon source. This lore archive provides the shared context connecting those character facts to the broader universe.</p>
-          <div class="links"><a class="button primary" href="/characters/jasper">Jasper</a><a class="button primary" href="/characters/lily">Lily</a><a class="button primary" href="/characters/harper">Harper</a><a class="button primary" href="/characters/ava">Ava</a></div>
-        </div>
-      </section>
+      <section class="lore-section" aria-labelledby="official-canon"><div class="lore-heading"><p class="section-kicker">FILE 03 / SOURCE</p><h2 id="official-canon">What counts as canon?</h2></div><div class="canon-box"><div class="canon-copy"><p>The Tidefall universe documented on <strong>tidefall.com.au</strong> is the canonical public source for this version of Tidefall. Character profiles provide the most specific public character facts, while this archive connects those facts to the wider world.</p><p>The Lore Vault goes deeper into internal worldbuilding and recently decided canon.</p></div><div class="canon-links"><a href="/characters/jasper">Jasper Holloway →</a><a href="/characters/lily">Lily Hart →</a><a href="/characters/harper">Harper Vale →</a><a href="/characters/ava">Ava Rees →</a><a href="/lore-vault">Open Lore Vault →</a></div></div></section>
     </div>
   </main>
-  <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div><div class="footer-links"><a href="/students">Characters</a><a href="/lore">Lore</a><a href="/academy">Academy</a><a href="/books">Books</a><a href="/spells">Spells</a></div></footer>
-  <script src="../script-optimized.js" defer></script>
+  <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div><div class="footer-links"><a href="/students">Characters</a><a href="/lore">Lore</a><a href="/academy">Academy</a><a href="/books">Books</a></div></footer>
+  <script src="../site-ui.js" defer></script>
 </body>
 </html>
