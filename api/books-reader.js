@@ -1,59 +1,27 @@
 const fs = require('fs');
 const path = require('path');
-const zlib = require('zlib');
 
-const PART_FILES = [
-  'book-one-01.txt',
-  'book-one-02.txt',
-  'book-one-03.txt',
-  'book-one-04.txt',
-  'book-one-05.txt'
-];
+const PART_FILES = Array.from({ length: 33 }, (_, i) =>
+  path.join(__dirname, 'booksource', `part-${String(i + 1).padStart(3, '0')}.txt`)
+);
 
-function clean64(value) {
-  return String(value || '').replace(/\s+/g, '').trim();
-}
-
-function readParts() {
-  return PART_FILES.map((name) => fs.readFileSync(path.join(__dirname, name), 'utf8'));
-}
-
-function decodeBook(parts) {
-  const attempts = [];
-
-  // The payload may be slices of one Base64 stream.
-  attempts.push(() => {
-    const joined = clean64(parts.join(''));
-    return zlib.gunzipSync(Buffer.from(joined, 'base64')).toString('utf8');
-  });
-
-  // Or each part may have been Base64-encoded independently before concatenation.
-  attempts.push(() => {
-    const merged = Buffer.concat(parts.map((part) => Buffer.from(clean64(part), 'base64')));
-    return zlib.gunzipSync(merged).toString('utf8');
-  });
-
-  // Or each part may be its own gzip member.
-  attempts.push(() => parts.map((part) => zlib.gunzipSync(Buffer.from(clean64(part), 'base64')).toString('utf8')).join(''));
-
-  let lastError;
-  for (const attempt of attempts) {
-    try {
-      const text = attempt();
-      if (text && text.includes('CHAPTER ONE')) return text;
-    } catch (error) {
-      lastError = error;
-    }
+function readBook() {
+  const text = PART_FILES.map(file => fs.readFileSync(file, 'utf8')).join('');
+  const normalized = text.replace(/\r\n?/g, '\n');
+  if (!normalized.includes('CHAPTER ONE\nTHE WATER WITHOUT A SKY')) {
+    throw new Error('Book One source does not begin with the expected first chapter.');
   }
-  throw lastError || new Error('Unable to decode Book One payload.');
+  if (!normalized.includes('CHAPTER ONE HUNDRED TWENTY\nTHE FIRST YEAR')) {
+    throw new Error('Book One source is incomplete: final chapter is missing.');
+  }
+  return normalized;
 }
 
 function parseChapters(text) {
-  const normalized = text.replace(/\r\n?/g, '\n');
   const chapters = [];
   const re = /^CHAPTER ([^\n]+)\n([^\n]+)\n([\s\S]*?)(?=^CHAPTER [^\n]+\n|$)/gm;
   let match;
-  while ((match = re.exec(normalized))) {
+  while ((match = re.exec(text))) {
     chapters.push({
       numberWord: match[1].trim(),
       title: match[2].trim(),
@@ -74,9 +42,10 @@ function safeJson(value) {
 
 module.exports = function handler(req, res) {
   try {
-    const chapters = parseChapters(decodeBook(readParts()));
+    const source = readBook();
+    const chapters = parseChapters(source);
     if (chapters.length !== 120) {
-      throw new Error(`Book source decoded, but ${chapters.length} chapters were detected instead of 120.`);
+      throw new Error(`Book source loaded, but ${chapters.length} chapters were detected instead of 120.`);
     }
 
     const data = safeJson(chapters);
@@ -94,7 +63,7 @@ module.exports = function handler(req, res) {
 </style>
 </head>
 <body>
-<header class="site-header"><a class="brand" href="/"><span class="brand-mark">◌</span><span>TIDEFALL</span></a><button class="nav-toggle" type="button" aria-expanded="false">MENU</button><nav class="nav-links"><a href="/">Home</a><a href="/explore">Explore</a><a href="/academy">Academy</a><a href="/students">Characters</a><a href="/books" aria-current="page">Books</a><a href="/lore">Lore</a><a href="/spells">Spells</a></nav></header>
+<header class="site-header"><a class="brand" href="/"><span class="brand-mark">◌</span><span>TIDEFALL</span></a><button class="nav-toggle" type="button" aria-expanded="false">MENU</button><nav class="nav-links"><a href="/">Home</a><a href="/start-here">Start Here</a><a href="/explore">Explore</a><a href="/academy">Academy</a><a href="/students">Characters</a><a href="/books" aria-current="page">Books</a><a href="/lore">Lore</a><a href="/spells">Spells</a></nav></header>
 <main><section class="book-hero"><div class="book-cover"><small>TIDEFALL</small><strong>THE<br>LISTENING<br>TIDE</strong><span>BOOK ONE</span></div><div class="book-intro"><div class="eyebrow">COMPLETE BOOK ONE · 120 CHAPTERS</div><h1>Tidefall<span>The Listening Tide</span></h1><p>Jasper Holloway arrives at Tidefall Academy expecting to learn magic. Instead, the sea notices him back.</p><a class="button primary" href="#reader">Start reading</a></div></section>
 <section id="reader" class="reader-zone"><div class="reader-shell"><aside class="reader-sidebar"><p class="eyebrow">THE LISTENING TIDE</p><h2>Book One</h2><label class="chapter-number" for="chapterSelect">Jump to chapter</label><select id="chapterSelect" class="chapter-select"></select><p id="progressCopy" class="reader-progress"></p><div class="reader-nav"><button id="prevTop">← Previous</button><button id="nextTop">Next →</button></div><button id="tocToggle" class="toc-toggle" type="button">All chapters +</button><div id="toc" class="toc"></div></aside><article><div id="chapterNumber" class="chapter-number"></div><h2 id="chapterHeading" class="chapter-heading"></h2><div id="readerCopy" class="reader-copy protected-reader" tabindex="0"></div><div class="reader-bottom-nav"><button id="prevBottom">← Previous chapter</button><button id="nextBottom">Next chapter →</button></div></article></div></section></main>
 <footer class="site-footer"><div><strong>TIDEFALL</strong><p>The official home of the Tidefall fantasy universe.</p></div></footer><div id="copyWarning" class="copy-warning">Book text copying is disabled.</div>
