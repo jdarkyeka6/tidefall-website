@@ -18,13 +18,10 @@ jobs:
           from pathlib import Path
           import json
 
-          # Remove the stale static page so Vercel rewrites can actually win.
           stale = Path('books.html')
           if stale.exists():
               stale.unlink()
 
-          # Point the server reader at the verified 33-part plaintext manuscript
-          # and expose both public reader URLs.
           vp = Path('vercel.json')
           data = json.loads(vp.read_text(encoding='utf-8'))
           data.setdefault('functions', {}).setdefault('api/books-reader.js', {})['includeFiles'] = 'api/booksource/part-*.txt'
@@ -34,16 +31,23 @@ jobs:
           data['rewrites'] = rewrites
           vp.write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
 
-          # Replace old preview-era CTA wording across site UI files.
           replacements = [
               ('Read Chapter One free', 'Read Book 1'),
               ('Read Chapter One', 'Read Book 1'),
               ('read Chapter One free', 'read Book 1'),
               ('read Chapter One', 'read Book 1'),
+              ('Continue into Chapter One', 'Read Book 1'),
               ('Chapter One free now', 'Full Book One online'),
               ('Chapter One free', 'Book 1 online'),
               ('official public preview of Tidefall Book One', 'complete 120-chapter Tidefall Book One'),
               ('public Chapter One reader', 'complete Book One reader'),
+              ('The full Book One is not publicly available yet. The official site currently includes the blurb and free Chapter One preview.', 'The complete Book One is available to read online now, with all 120 chapters in the official reader.'),
+              ('The official public preview includes the Book One blurb and Chapter One, <strong>The Water Without a Sky</strong>. The rest of Book One remains unreleased on the public site for now.', 'The complete Book One is available online now, from Chapter One, <strong>The Water Without a Sky</strong>, through Chapter 120.'),
+              ('free Chapter One preview', 'complete online reader'),
+              ('The rest of Book One remains unreleased on the public site for now.', 'All 120 chapters are available in the official reader.'),
+              ('<div><strong>Chapter One</strong><br>Available free now</div>', '<div><strong>Complete Book One</strong><br>120 chapters online</div>'),
+              ('<div><strong>Full Book One</strong><br>Coming later</div>', '<div><strong>Reader</strong><br>Available now</div>'),
+              ('After the chapter', 'After the book'),
           ]
           skip_prefixes = ('api/booksource/','book-data/','data/book-one/')
           changed=[]
@@ -63,9 +67,9 @@ jobs:
               if s != original:
                   p.write_text(s,encoding='utf-8')
                   changed.append(rel)
-          print('Updated CTA copy in:', ', '.join(changed) if changed else 'none')
+          print('Updated copy in:', ', '.join(changed) if changed else 'none')
           PY
-      - name: Verify reader source
+      - name: Verify reader source and no stale preview copy
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -78,12 +82,33 @@ jobs:
           assert len(chapters)==120, f'Expected 120 chapters, got {len(chapters)}'
           assert chapters[0][1].strip()=='THE WATER WITHOUT A SKY', chapters[0]
           assert chapters[-1][1].strip()=='THE FIRST YEAR', chapters[-1]
-          print('Verified 120 chapters:', chapters[0], '->', chapters[-1])
+
+          bad_phrases = [
+              'Read Chapter One',
+              'not publicly available yet',
+              'free Chapter One preview',
+              'rest of Book One remains unreleased',
+              '<br>Coming later',
+          ]
+          hits=[]
+          skip_prefixes=('api/booksource/','book-data/','data/book-one/')
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or p.suffix.lower() not in {'.html','.js','.md'}:
+                  continue
+              rel=p.as_posix()
+              if rel.startswith(skip_prefixes) or rel == '.github/workflows/fix-book-reader.yml':
+                  continue
+              try: s=p.read_text(encoding='utf-8')
+              except UnicodeDecodeError: continue
+              for phrase in bad_phrases:
+                  if phrase in s: hits.append(f'{rel}: {phrase}')
+          if hits: raise SystemExit('Stale preview copy remains:\n'+'\n'.join(hits))
+          print('Verified 120 chapters and no stale Chapter One preview CTAs.')
           PY
       - name: Commit repair
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
-          git diff --cached --quiet || git commit -m 'Fix Book One routes, source bundling and CTAs'
+          git diff --cached --quiet || git commit -m 'Remove stale Book One preview copy'
           git push
