@@ -1,0 +1,125 @@
+/* Book One reader: isolated readable colour system */
+:root { color-scheme: light dark; }
+
+.reader-shell,
+.reader-sidebar,
+.reader-article,
+.reader-copy,
+.reader-copy p {
+  box-sizing: border-box;
+}
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  html,
+  body,
+  .reader-shell,
+  .reader-sidebar,
+  .reader-article {
+    background: #ffffff !important;
+    color: #101820 !important;
+  }
+
+  .reader-article h2,
+  .reader-article .reader-count,
+  .reader-sidebar h1,
+  .reader-sidebar label,
+  .reader-sidebar .reader-kicker,
+  .reader-copy,
+  .reader-copy p,
+  .reader-nav a,
+  .reader-bottom-nav a {
+    color: #101820 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .reader-sidebar select {
+    background: #ffffff !important;
+    color: #101820 !important;
+    border-color: rgba(16, 24, 32, .22) !important;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  html,
+  body,
+  .reader-shell,
+  .reader-sidebar,
+  .reader-article {
+    background: #071923 !important;
+    color: #f5f7f8 !important;
+  }
+
+  .reader-article h2,
+  .reader-article .reader-count,
+  .reader-sidebar h1,
+  .reader-sidebar label,
+  .reader-sidebar .reader-kicker,
+  .reader-copy,
+  .reader-copy p,
+  .reader-nav a,
+  .reader-bottom-nav a {
+    color: #f5f7f8 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: none !important;
+  }
+
+  .reader-sidebar select {
+    background: #0c2531 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+  }
+}
+
+.reader-shell {
+  min-height: calc(100vh - 80px);
+}
+
+.reader-copy {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.reader-copy p {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: clamp(1.08rem, 2.2vw, 1.22rem) !important;
+  line-height: 1.82 !important;
+  max-width: 72ch;
+  margin: 0 0 1.35em !important;
+}
+
+.reader-article h2 {
+  line-height: .98 !important;
+}
+
+@media (max-width: 760px) {
+  .reader-shell {
+    display: block !important;
+    padding: 28px 20px 56px !important;
+  }
+
+  .reader-sidebar {
+    padding: 0 0 28px !important;
+    border: 0 !important;
+  }
+
+  .reader-article {
+    padding: 20px 0 0 !important;
+  }
+
+  .reader-article h2 {
+    font-size: clamp(2.7rem, 13vw, 4.7rem) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .reader-copy p {
+    font-size: 1.08rem !important;
+    line-height: 1.75 !important;
+  }
+}
