@@ -1,0 +1,118 @@
+# Tidefall full-site cleanup audit
+
+Generated: 2026-08-30T03:47:32.966Z
+
+- HTML pages checked: 90
+- CSS files: 13
+- JS files: 12
+- Files changed by cleanup: 11
+- Remaining audit notices: 94
+
+## Changes
+- TEMP-NOTE.txt (removed)
+- UPLOAD_THIS_FOLDER.txt (removed)
+- index.html
+- reading-order.html
+- book-characters.html
+- character-quiz.html
+- gallery.html
+- gift-finder.html
+- merch2.html
+- outfit-builder.html
+- ui-patches.css
+
+## Remaining notices
+- 404.html: missing meta description
+- HTML-UPDATE-INSTRUCTIONS.html: missing meta description
+- academy-pet.html: missing meta description
+- account.html: missing meta description
+- artifact-hunt.html: missing meta description
+- badge-builder.html: missing meta description
+- codebreaker.html: missing meta description
+- coin.html: missing meta description
+- corridor-quiz.html: missing meta description
+- creature-generator.html: missing meta description
+- design-your-own.html: missing meta description
+- duel.html: missing meta description
+- emoji-riddle.html: missing meta description
+- feedback.html: missing meta description
+- gift-finder.html: missing meta description
+- lore-vault.html: missing meta description
+- merch.html: missing meta description
+- merch2.html: missing meta description
+- mini-adventure.html: missing meta description
+- mystery-object.html: missing meta description
+- outfit-builder.html: missing meta description
+- password.html: missing meta description
+- rapid-choice.html: missing meta description
+- reaction.html: missing meta description
+- request.html: missing meta description
+- riddle.html: missing meta description
+- riptide-player-quiz.html: missing meta description
+- room-generator.html: missing meta description
+- secret-archive.html: missing meta description
+- sequence.html: missing meta description
+- spell-builder.html: missing meta description
+- spell-speed.html: missing meta description
+- this-or-that.html: missing meta description
+- timetable.html: missing meta description
+- trust-quiz.html: missing meta description
+- who-said-it.html: missing meta description
+- 404.html: possible broken internal link /books
+- HTML-UPDATE-INSTRUCTIONS.html: possible broken internal link ../styles.css
+- HTML-UPDATE-INSTRUCTIONS.html: possible broken internal link ../styles-base.css
+- HTML-UPDATE-INSTRUCTIONS.html: possible broken internal link ../style.css
+- HTML-UPDATE-INSTRUCTIONS.html: possible broken internal link ../styles-all.css
+- HTML-UPDATE-INSTRUCTIONS.html: possible broken internal link ../styles-all.css
+- about-tidefall-academy.html: possible broken internal link /books
+- about-tidefall-academy.html: possible broken internal link /books
+- academy-faq.html: possible broken internal link /books
+- academy-guide.html: possible broken internal link /books
+- academy-review.html: possible broken internal link /books
+- academy-review.html: possible broken internal link /books
+- academy.html: possible broken internal link /books
+- academy.html: possible broken internal link /books
+- academy.html: possible broken internal link /books
+- book-characters.html: possible broken internal link /books
+- book-characters.html: possible broken internal link /books
+- book-characters.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- book-one.html: possible broken internal link /books
+- contact.html: possible broken internal link /books
+- core-four.html: possible broken internal link /books
+- explore.html: possible broken internal link /books
+- explore.html: possible broken internal link /books
+- gallery.html: possible broken internal link /books
+- index.html: possible broken internal link /books
+- index.html: possible broken internal link /books
+- index.html: possible broken internal link /books
+- index.html: possible broken internal link /books
+- index.html: possible broken internal link /books
+- map.html: possible broken internal link /books
+- parents.html: possible broken internal link /books
+- parents.html: possible broken internal link /books
+- quotes.html: possible broken internal link /books
+- quotes.html: possible broken internal link /books
+- reading-guide.html: possible broken internal link /books
+- reading-guide.html: possible broken internal link /books
+- reading-order.html: possible broken internal link /books
+- reading-order.html: possible broken internal link /books
+- reading-order.html: possible broken internal link /books
+- secrets.html: possible broken internal link ${s.link}
+- spells.html: possible broken internal link /books
+- spells.html: possible broken internal link /books
+- start-here.html: possible broken internal link /books
+- start-here.html: possible broken internal link /books
+- start-here.html: possible broken internal link /books
+- start-here.html: possible broken internal link /books
+- students.html: possible broken internal link /books
+- students.html: possible broken internal link /books
+- what-is-tidefall.html: possible broken internal link /books
+- what-is-tidefall.html: possible broken internal link /books
+- what-is-tidefall.html: possible broken internal link /books
+- what-is-tidefall.html: possible broken internal link /books
+- what-is-tidefall.html: possible broken internal link /books
