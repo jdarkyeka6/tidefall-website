@@ -4,7 +4,7 @@
   "trailingSlash": false,
   "functions": {
     "api/books-reader.js": {
-      "includeFiles": "api/booksource/part-*.txt"
+      "includeFiles": "api/book1-chapters/**"
     }
   },
   "images": {

@@ -1,0 +1,602 @@
+[
+  {
+    "number": 1,
+    "title": "THE WATER WITHOUT A SKY",
+    "file": "book1-chapter1.txt"
+  },
+  {
+    "number": 2,
+    "title": "THE LETTER ON THE FRIDGE",
+    "file": "book1-chapter2.txt"
+  },
+  {
+    "number": 3,
+    "title": "THROUGH THE MIST",
+    "file": "book1-chapter3.txt"
+  },
+  {
+    "number": 4,
+    "title": "ROOM FOURTEEN",
+    "file": "book1-chapter4.txt"
+  },
+  {
+    "number": 5,
+    "title": "NORMAL MAGIC",
+    "file": "book1-chapter5.txt"
+  },
+  {
+    "number": 6,
+    "title": "OCEAN STUDIES",
+    "file": "book1-chapter6.txt"
+  },
+  {
+    "number": 7,
+    "title": "THE FIRST LETTER HOME",
+    "file": "book1-chapter7.txt"
+  },
+  {
+    "number": 8,
+    "title": "HARPER'S SHORTCUT",
+    "file": "book1-chapter8.txt"
+  },
+  {
+    "number": 9,
+    "title": "THE MAP OF THINGS THAT SHOULD NOT HAPPEN",
+    "file": "book1-chapter9.txt"
+  },
+  {
+    "number": 10,
+    "title": "THE THING HARPER COULD NOT DO SLOWLY",
+    "file": "book1-chapter10.txt"
+  },
+  {
+    "number": 11,
+    "title": "THE LOWER DOOR",
+    "file": "book1-chapter11.txt"
+  },
+  {
+    "number": 12,
+    "title": "RAIN ON THE WESTERN WINDOWS",
+    "file": "book1-chapter12.txt"
+  },
+  {
+    "number": 13,
+    "title": "THE PACKAGE FROM HOME",
+    "file": "book1-chapter13.txt"
+  },
+  {
+    "number": 14,
+    "title": "FOUR SQUARES AND ONE BROKEN WINDOW",
+    "file": "book1-chapter14.txt"
+  },
+  {
+    "number": 15,
+    "title": "THE TIDE POOLS",
+    "file": "book1-chapter15.txt"
+  },
+  {
+    "number": 16,
+    "title": "PARENT WEEKEND",
+    "file": "book1-chapter16.txt"
+  },
+  {
+    "number": 17,
+    "title": "THE FIRST TERM SHOWCASE",
+    "file": "book1-chapter17.txt"
+  },
+  {
+    "number": 18,
+    "title": "HOME AGAIN",
+    "file": "book1-chapter18.txt"
+  },
+  {
+    "number": 19,
+    "title": "WINTER TERM",
+    "file": "book1-chapter19.txt"
+  },
+  {
+    "number": 20,
+    "title": "THE SUPERVISED DOCK",
+    "file": "book1-chapter20.txt"
+  },
+  {
+    "number": 21,
+    "title": "THE WRONG KIND OF BRAVE",
+    "file": "book1-chapter21.txt"
+  },
+  {
+    "number": 22,
+    "title": "THE OLD MAINTENANCE PASSAGE",
+    "file": "book1-chapter22.txt"
+  },
+  {
+    "number": 23,
+    "title": "DETENTION WITHOUT A CRIME",
+    "file": "book1-chapter23.txt"
+  },
+  {
+    "number": 24,
+    "title": "THE STORY THORNE WOULD NOT FINISH",
+    "file": "book1-chapter24.txt"
+  },
+  {
+    "number": 25,
+    "title": "THE DAY NOTHING ANSWERED",
+    "file": "book1-chapter25.txt"
+  },
+  {
+    "number": 26,
+    "title": "THE OBSERVATION LEDGE",
+    "file": "book1-chapter26.txt"
+  },
+  {
+    "number": 27,
+    "title": "THE INFIRMARY WINDOW",
+    "file": "book1-chapter27.txt"
+  },
+  {
+    "number": 28,
+    "title": "EVERYONE KNOWS",
+    "file": "book1-chapter28.txt"
+  },
+  {
+    "number": 29,
+    "title": "THE CHOICE IN THE WATER",
+    "file": "book1-chapter29.txt"
+  },
+  {
+    "number": 30,
+    "title": "HARPER GOES BACK",
+    "file": "book1-chapter30.txt"
+  },
+  {
+    "number": 31,
+    "title": "THE QUESTION AVA COULD NOT MEASURE",
+    "file": "book1-chapter31.txt"
+  },
+  {
+    "number": 32,
+    "title": "THE SECOND FALL",
+    "file": "book1-chapter32.txt"
+  },
+  {
+    "number": 33,
+    "title": "THE DIFFERENCE BETWEEN SAVE AND CHOOSE",
+    "file": "book1-chapter33.txt"
+  },
+  {
+    "number": 34,
+    "title": "MIDYEAR",
+    "file": "book1-chapter34.txt"
+  },
+  {
+    "number": 35,
+    "title": "THE FOUR ORDERS",
+    "file": "book1-chapter35.txt"
+  },
+  {
+    "number": 36,
+    "title": "THREE SPELLS AT ONCE",
+    "file": "book1-chapter36.txt"
+  },
+  {
+    "number": 37,
+    "title": "THE DEEPWATER FILE",
+    "file": "book1-chapter37.txt"
+  },
+  {
+    "number": 38,
+    "title": "THE DAY JASPER FAILED EVERYTHING",
+    "file": "book1-chapter38.txt"
+  },
+  {
+    "number": 39,
+    "title": "THE CHOOSING BASIN",
+    "file": "book1-chapter39.txt"
+  },
+  {
+    "number": 40,
+    "title": "THE SPRING FAIR",
+    "file": "book1-chapter40.txt"
+  },
+  {
+    "number": 41,
+    "title": "A DAY WITHOUT THE SEA",
+    "file": "book1-chapter41.txt"
+  },
+  {
+    "number": 42,
+    "title": "THE NIGHT THE LIGHTS WENT OUT",
+    "file": "book1-chapter42.txt"
+  },
+  {
+    "number": 43,
+    "title": "THE OTHER FIRST-YEARS",
+    "file": "book1-chapter43.txt"
+  },
+  {
+    "number": 44,
+    "title": "THE LETTER THAT CAME BACK",
+    "file": "book1-chapter44.txt"
+  },
+  {
+    "number": 45,
+    "title": "THE STORM CALENDAR",
+    "file": "book1-chapter45.txt"
+  },
+  {
+    "number": 46,
+    "title": "THE LAST QUIET WEEK",
+    "file": "book1-chapter46.txt"
+  },
+  {
+    "number": 47,
+    "title": "THE FORECAST THAT WAS WRONG",
+    "file": "book1-chapter47.txt"
+  },
+  {
+    "number": 48,
+    "title": "RED FLAG",
+    "file": "book1-chapter48.txt"
+  },
+  {
+    "number": 49,
+    "title": "THE HARBOUR BELOW",
+    "file": "book1-chapter49.txt"
+  },
+  {
+    "number": 50,
+    "title": "NOT YET",
+    "file": "book1-chapter50.txt"
+  },
+  {
+    "number": 51,
+    "title": "THE STORM CONTINUES",
+    "file": "book1-chapter51.txt"
+  },
+  {
+    "number": 52,
+    "title": "THE STORY EVERYONE WANTED",
+    "file": "book1-chapter52.txt"
+  },
+  {
+    "number": 53,
+    "title": "THE HARBOUR IN DAYLIGHT",
+    "file": "book1-chapter53.txt"
+  },
+  {
+    "number": 54,
+    "title": "THE PARENTS' MIRROR",
+    "file": "book1-chapter54.txt"
+  },
+  {
+    "number": 55,
+    "title": "THE SAFETY PROJECT",
+    "file": "book1-chapter55.txt"
+  },
+  {
+    "number": 56,
+    "title": "EXAM WEATHER",
+    "file": "book1-chapter56.txt"
+  },
+  {
+    "number": 57,
+    "title": "THE REOPENING",
+    "file": "book1-chapter57.txt"
+  },
+  {
+    "number": 58,
+    "title": "THE BEACH DAY",
+    "file": "book1-chapter58.txt"
+  },
+  {
+    "number": 59,
+    "title": "THE RESCUE COURSE",
+    "file": "book1-chapter59.txt"
+  },
+  {
+    "number": 60,
+    "title": "THE LETTERS THEY DID NOT SEND",
+    "file": "book1-chapter60.txt"
+  },
+  {
+    "number": 61,
+    "title": "ORDER INTERVIEWS",
+    "file": "book1-chapter61.txt"
+  },
+  {
+    "number": 62,
+    "title": "TOO MUCH PROTECTING",
+    "file": "book1-chapter62.txt"
+  },
+  {
+    "number": 63,
+    "title": "AVA'S PERFECT PLAN",
+    "file": "book1-chapter63.txt"
+  },
+  {
+    "number": 64,
+    "title": "THE YEAR ONE BUILD",
+    "file": "book1-chapter64.txt"
+  },
+  {
+    "number": 65,
+    "title": "THE THINGS THEY DID NOT TELL EACH OTHER",
+    "file": "book1-chapter65.txt"
+  },
+  {
+    "number": 66,
+    "title": "THE FAREWELL PHOTO",
+    "file": "book1-chapter66.txt"
+  },
+  {
+    "number": 67,
+    "title": "THE CHRONICLE",
+    "file": "book1-chapter67.txt"
+  },
+  {
+    "number": 68,
+    "title": "FOUR OPEN DOORS",
+    "file": "book1-chapter68.txt"
+  },
+  {
+    "number": 69,
+    "title": "THE FINAL",
+    "file": "book1-chapter69.txt"
+  },
+  {
+    "number": 70,
+    "title": "A BOOK WITH NO SEA IN IT",
+    "file": "book1-chapter70.txt"
+  },
+  {
+    "number": 71,
+    "title": "THE HOOKS",
+    "file": "book1-chapter71.txt"
+  },
+  {
+    "number": 72,
+    "title": "THE QUIET FIELD DAY",
+    "file": "book1-chapter72.txt"
+  },
+  {
+    "number": 73,
+    "title": "LETTERS ABOUT ORDERS",
+    "file": "book1-chapter73.txt"
+  },
+  {
+    "number": 74,
+    "title": "HOT WEATHER",
+    "file": "book1-chapter74.txt"
+  },
+  {
+    "number": 75,
+    "title": "THE LAST MAGIC SHOWCASE",
+    "file": "book1-chapter75.txt"
+  },
+  {
+    "number": 76,
+    "title": "THE MYTHS PEOPLE MAKE",
+    "file": "book1-chapter76.txt"
+  },
+  {
+    "number": 77,
+    "title": "THE NIGHT MARKET",
+    "file": "book1-chapter77.txt"
+  },
+  {
+    "number": 78,
+    "title": "FAMILIES ON THE CLIFF",
+    "file": "book1-chapter78.txt"
+  },
+  {
+    "number": 79,
+    "title": "WHAT THE SCHOOL REMEMBERS",
+    "file": "book1-chapter79.txt"
+  },
+  {
+    "number": 80,
+    "title": "THE HARBOUR AT LOW TIDE",
+    "file": "book1-chapter80.txt"
+  },
+  {
+    "number": 81,
+    "title": "ONE SENTENCE",
+    "file": "book1-chapter81.txt"
+  },
+  {
+    "number": 82,
+    "title": "ORDER CLOTH",
+    "file": "book1-chapter82.txt"
+  },
+  {
+    "number": 83,
+    "title": "THE KITCHENS",
+    "file": "book1-chapter83.txt"
+  },
+  {
+    "number": 84,
+    "title": "THE WEST STAIR RACE",
+    "file": "book1-chapter84.txt"
+  },
+  {
+    "number": 85,
+    "title": "THE LAST LESSONS",
+    "file": "book1-chapter85.txt"
+  },
+  {
+    "number": 86,
+    "title": "SERVICE DAY",
+    "file": "book1-chapter86.txt"
+  },
+  {
+    "number": 87,
+    "title": "MUSIC UNDER THE ARCHES",
+    "file": "book1-chapter87.txt"
+  },
+  {
+    "number": 88,
+    "title": "AVA WITHOUT A PLAN",
+    "file": "book1-chapter88.txt"
+  },
+  {
+    "number": 89,
+    "title": "OPEN DOORS",
+    "file": "book1-chapter89.txt"
+  },
+  {
+    "number": 90,
+    "title": "LOWTIDE TOWN",
+    "file": "book1-chapter90.txt"
+  },
+  {
+    "number": 91,
+    "title": "THE LIBRARY CHALLENGE",
+    "file": "book1-chapter91.txt"
+  },
+  {
+    "number": 92,
+    "title": "HARPER AND AVA",
+    "file": "book1-chapter92.txt"
+  },
+  {
+    "number": 93,
+    "title": "THE ETHICS GAME",
+    "file": "book1-chapter93.txt"
+  },
+  {
+    "number": 94,
+    "title": "JASPER IS ANNOYED",
+    "file": "book1-chapter94.txt"
+  },
+  {
+    "number": 95,
+    "title": "THE THREE CHAIRS",
+    "file": "book1-chapter95.txt"
+  },
+  {
+    "number": 96,
+    "title": "THE REHEARSAL WITHOUT WATER",
+    "file": "book1-chapter96.txt"
+  },
+  {
+    "number": 97,
+    "title": "THE AWARDS THAT DID NOT MATTER",
+    "file": "book1-chapter97.txt"
+  },
+  {
+    "number": 98,
+    "title": "THE ONE HUNDRED STEPS",
+    "file": "book1-chapter98.txt"
+  },
+  {
+    "number": 99,
+    "title": "THE RETURN CART",
+    "file": "book1-chapter99.txt"
+  },
+  {
+    "number": 100,
+    "title": "ROOM FOURTEEN'S LAST NIGHT",
+    "file": "book1-chapter100.txt"
+  },
+  {
+    "number": 101,
+    "title": "MORNING WATER",
+    "file": "book1-chapter101.txt"
+  },
+  {
+    "number": 102,
+    "title": "OTHER PEOPLE'S WATER",
+    "file": "book1-chapter102.txt"
+  },
+  {
+    "number": 103,
+    "title": "HARPER",
+    "file": "book1-chapter103.txt"
+  },
+  {
+    "number": 104,
+    "title": "AVA",
+    "file": "book1-chapter104.txt"
+  },
+  {
+    "number": 105,
+    "title": "JASPER",
+    "file": "book1-chapter105.txt"
+  },
+  {
+    "number": 106,
+    "title": "AFTER THE WATER",
+    "file": "book1-chapter106.txt"
+  },
+  {
+    "number": 107,
+    "title": "THE QUESTION EVERYONE ASKED",
+    "file": "book1-chapter107.txt"
+  },
+  {
+    "number": 108,
+    "title": "THE ORDER FEAST",
+    "file": "book1-chapter108.txt"
+  },
+  {
+    "number": 109,
+    "title": "THE DAY AFTER",
+    "file": "book1-chapter109.txt"
+  },
+  {
+    "number": 110,
+    "title": "THREE DAYS AS BRANNOR",
+    "file": "book1-chapter110.txt"
+  },
+  {
+    "number": 111,
+    "title": "ACROSS FOUR TABLES",
+    "file": "book1-chapter111.txt"
+  },
+  {
+    "number": 112,
+    "title": "THE FINAL FEAST",
+    "file": "book1-chapter112.txt"
+  },
+  {
+    "number": 113,
+    "title": "HANDING BACK THE ROOM",
+    "file": "book1-chapter113.txt"
+  },
+  {
+    "number": 114,
+    "title": "THE DOCK",
+    "file": "book1-chapter114.txt"
+  },
+  {
+    "number": 115,
+    "title": "BEYOND THE MIST",
+    "file": "book1-chapter115.txt"
+  },
+  {
+    "number": 116,
+    "title": "THE HISTORY BOX AT HOME",
+    "file": "book1-chapter116.txt"
+  },
+  {
+    "number": 117,
+    "title": "SUMMER MAGIC",
+    "file": "book1-chapter117.txt"
+  },
+  {
+    "number": 118,
+    "title": "THE ROOM LETTER",
+    "file": "book1-chapter118.txt"
+  },
+  {
+    "number": 119,
+    "title": "ORDINARY OCEAN",
+    "file": "book1-chapter119.txt"
+  },
+  {
+    "number": 120,
+    "title": "THE FIRST YEAR",
+    "file": "book1-chapter120.txt"
+  }
+]
