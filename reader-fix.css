@@ -1,0 +1,87 @@
+/* Book One reader isolation.
+   The reader is server-rendered. Global reveal/card/layout rules must never hide its article text. */
+.reader-zone,
+.reader-zone .reader-shell,
+.reader-zone article,
+.reader-zone .reader-copy,
+.reader-zone .reader-copy > p,
+.reader-zone .chapter-number,
+.reader-zone .chapter-heading,
+.reader-zone .reader-bottom-nav {
+  content-visibility: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  clip: auto !important;
+  clip-path: none !important;
+  max-height: none !important;
+}
+
+.reader-zone article {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  color: #20282b !important;
+}
+
+.reader-zone .reader-copy {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 1px !important;
+  overflow: visible !important;
+  color: #253034 !important;
+  background: transparent !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(1.05rem, 1.5vw, 1.18rem) !important;
+  line-height: 1.88 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  -webkit-text-fill-color: #253034 !important;
+}
+
+.reader-zone .reader-copy > p {
+  display: block !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 1.4em !important;
+  padding: 0 !important;
+  color: #253034 !important;
+  background: transparent !important;
+  -webkit-text-fill-color: #253034 !important;
+}
+
+.reader-zone .chapter-heading,
+.reader-zone .chapter-number {
+  display: block !important;
+  color: #20282b !important;
+  -webkit-text-fill-color: #20282b !important;
+}
+
+.reader-zone .reader-bottom-nav {
+  display: grid !important;
+}
+
+@media (max-width: 850px) {
+  .reader-zone .reader-shell {
+    display: block !important;
+  }
+
+  .reader-zone .reader-sidebar {
+    position: relative !important;
+    top: auto !important;
+    margin-bottom: 36px !important;
+  }
+
+  .reader-zone article {
+    clear: both !important;
+    margin-top: 0 !important;
+    padding-top: 8px !important;
+  }
+}
