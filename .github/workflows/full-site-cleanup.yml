@@ -1,0 +1,121 @@
+name: Tidefall Full Site Cleanup
+
+on:
+  push:
+    paths:
+      - '.github/workflows/full-site-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Audit and clean site
+        shell: bash
+        run: |
+          cat > /tmp/cleanup.mjs <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+
+          const root=process.cwd();
+          const files=fs.readdirSync(root);
+          const htmlFiles=files.filter(f=>f.endsWith('.html'));
+          const cssFiles=files.filter(f=>f.endsWith('.css'));
+          const jsFiles=files.filter(f=>f.endsWith('.js'));
+          let changed=[];
+
+          const replaceFile=(file, fn)=>{
+            const p=path.join(root,file);
+            if(!fs.existsSync(p)) return;
+            const before=fs.readFileSync(p,'utf8');
+            const after=fn(before);
+            if(after!==before){fs.writeFileSync(p,after);changed.push(file);}
+          };
+
+          // Remove obvious repo litter that should never be public-site content.
+          for(const f of ['TEMP-NOTE.txt','UPLOAD_THIS_FOLDER.txt']){
+            if(fs.existsSync(f)){fs.rmSync(f);changed.push(f+' (removed)');}
+          }
+
+          // Normalize stale Book One CTA/status language everywhere user-facing.
+          const textTargets=[...htmlFiles,...jsFiles];
+          for(const f of textTargets){
+            replaceFile(f,s=>s
+              .replace(/Read Chapter One/gi,'Read Book 1')
+              .replace(/Read Chapter 1/gi,'Read Book 1')
+              .replace(/free Chapter One preview/gi,'complete Book One reader')
+              .replace(/free chapter one preview/gi,'complete Book One reader')
+              .replace(/Chapter One preview/gi,'Book One reader')
+              .replace(/chapter one preview/gi,'Book One reader')
+              .replace(/The rest of Book One remains unreleased\.?/gi,'All 120 chapters of Book One are available online.')
+              .replace(/Full Book One is not publicly available yet\.?/gi,'All 120 chapters of Book One are available online.')
+            );
+          }
+
+          // Ensure every HTML page has viewport metadata and lazy-load ordinary images.
+          for(const f of htmlFiles){
+            replaceFile(f,s=>{
+              if(!/<meta\s+name=["']viewport["']/i.test(s) && /<head[^>]*>/i.test(s)){
+                s=s.replace(/<head([^>]*)>/i,'<head$1>\n  <meta name="viewport" content="width=device-width, initial-scale=1">');
+              }
+              s=s.replace(/<img\b(?![^>]*\bloading=)([^>]*)>/gi,(m,attrs)=>{
+                // Keep likely hero/LCP images eager.
+                if(/hero|logo|cover/i.test(attrs)) return m;
+                return `<img loading="lazy"${attrs}>`;
+              });
+              return s;
+            });
+          }
+
+          // Global mobile/overflow and media safety layer.
+          const patch='ui-patches.css';
+          replaceFile(patch,s=>{
+            const marker='/* FULL-SITE-CLEANUP */';
+            const block=`\n\n${marker}\n*{box-sizing:border-box}\nhtml,body{width:100%;max-width:100%;overflow-x:hidden;overscroll-behavior-x:none}\nimg,video,canvas,svg,iframe{max-width:100%;height:auto}\nmain,section,article,aside,header,footer,nav,.container,.section-inner{min-width:0}\na,button,input,select,textarea{max-width:100%}\n:focus-visible{outline:2px solid currentColor;outline-offset:3px}\n@supports (overflow:clip){html,body{overflow-x:clip}}\n@media(max-width:760px){html,body{max-width:100vw;touch-action:pan-y pinch-zoom}button,.button,a.button{min-height:44px}input,select,textarea{font-size:16px}}\n`;
+            if(s.includes(marker)) return s.replace(/\/\* FULL-SITE-CLEANUP \*\/[\s\S]*$/m,block.trimStart());
+            return s+block;
+          });
+
+          // Generate an audit report from the resulting tree.
+          const allHtml=htmlFiles.filter(f=>fs.existsSync(f));
+          const hrefs=[];
+          const ids=new Map();
+          const issues=[];
+          for(const f of allHtml){
+            const s=fs.readFileSync(f,'utf8');
+            const seen=new Set();
+            for(const m of s.matchAll(/\bid=["']([^"']+)["']/gi)){
+              if(seen.has(m[1])) issues.push(`${f}: duplicate id #${m[1]}`);
+              seen.add(m[1]);
+            }
+            ids.set(f,seen);
+            if(!/<title>[^<]+<\/title>/i.test(s)) issues.push(`${f}: missing title`);
+            if(!/<meta\s+name=["']description["']/i.test(s)) issues.push(`${f}: missing meta description`);
+            for(const m of s.matchAll(/href=["']([^"'#?]+)(#[^"']*)?["']/gi)) hrefs.push([f,m[1],m[2]||'']);
+          }
+          for(const [from,href,hash] of hrefs){
+            if(/^(https?:|mailto:|tel:|javascript:)/i.test(href)) continue;
+            let clean=href.split('?')[0];
+            if(clean==='/'||clean==='') continue;
+            clean=clean.replace(/^\//,'');
+            const candidates=[clean,clean+'.html',path.join(clean,'index.html')];
+            if(!candidates.some(x=>fs.existsSync(x)) && !clean.startsWith('api/')) issues.push(`${from}: possible broken internal link ${href}${hash}`);
+          }
+          const report=`# Tidefall full-site cleanup audit\n\nGenerated: ${new Date().toISOString()}\n\n- HTML pages checked: ${allHtml.length}\n- CSS files: ${cssFiles.length}\n- JS files: ${jsFiles.length}\n- Files changed by cleanup: ${changed.length}\n- Remaining audit notices: ${issues.length}\n\n## Changes\n${changed.map(x=>'- '+x).join('\n')||'- None'}\n\n## Remaining notices\n${issues.slice(0,300).map(x=>'- '+x).join('\n')||'- None'}\n`;
+          fs.writeFileSync('SITE-CLEANUP-AUDIT.md',report);
+          console.log(report);
+          NODE
+          node /tmp/cleanup.mjs
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Run full Tidefall site cleanup" || exit 0
+          git push
