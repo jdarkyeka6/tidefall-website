@@ -1,0 +1,89 @@
+name: Fix Book One reader
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-book-reader.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair Book One routes and copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          # Remove the stale static page so Vercel rewrites can actually win.
+          stale = Path('books.html')
+          if stale.exists():
+              stale.unlink()
+
+          # Point the server reader at the verified 33-part plaintext manuscript
+          # and expose both public reader URLs.
+          vp = Path('vercel.json')
+          data = json.loads(vp.read_text(encoding='utf-8'))
+          data.setdefault('functions', {}).setdefault('api/books-reader.js', {})['includeFiles'] = 'api/booksource/part-*.txt'
+          rewrites = [r for r in data.get('rewrites', []) if r.get('source') not in ('/books','/books/reader')]
+          rewrites.insert(0, {'source':'/books/reader','destination':'/api/books-reader'})
+          rewrites.insert(0, {'source':'/books','destination':'/api/books-reader'})
+          data['rewrites'] = rewrites
+          vp.write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
+
+          # Replace old preview-era CTA wording across site UI files.
+          replacements = [
+              ('Read Chapter One free', 'Read Book 1'),
+              ('Read Chapter One', 'Read Book 1'),
+              ('read Chapter One free', 'read Book 1'),
+              ('read Chapter One', 'read Book 1'),
+              ('Chapter One free now', 'Full Book One online'),
+              ('Chapter One free', 'Book 1 online'),
+              ('official public preview of Tidefall Book One', 'complete 120-chapter Tidefall Book One'),
+              ('public Chapter One reader', 'complete Book One reader'),
+          ]
+          skip_prefixes = ('api/booksource/','book-data/','data/book-one/')
+          changed=[]
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or p.suffix.lower() not in {'.html','.js','.md'}:
+                  continue
+              rel=p.as_posix()
+              if rel.startswith(skip_prefixes) or rel == '.github/workflows/fix-book-reader.yml':
+                  continue
+              try:
+                  s=p.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              original=s
+              for old,new in replacements:
+                  s=s.replace(old,new)
+              if s != original:
+                  p.write_text(s,encoding='utf-8')
+                  changed.append(rel)
+          print('Updated CTA copy in:', ', '.join(changed) if changed else 'none')
+          PY
+      - name: Verify reader source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          parts=[Path(f'api/booksource/part-{i:03}.txt') for i in range(1,34)]
+          missing=[str(p) for p in parts if not p.exists()]
+          if missing: raise SystemExit('Missing source parts: '+', '.join(missing))
+          text=''.join(p.read_text(encoding='utf-8') for p in parts).replace('\r\n','\n').replace('\r','\n')
+          chapters=re.findall(r'^CHAPTER ([^\n]+)\n([^\n]+)\n',text,re.M)
+          assert len(chapters)==120, f'Expected 120 chapters, got {len(chapters)}'
+          assert chapters[0][1].strip()=='THE WATER WITHOUT A SKY', chapters[0]
+          assert chapters[-1][1].strip()=='THE FIRST YEAR', chapters[-1]
+          print('Verified 120 chapters:', chapters[0], '->', chapters[-1])
+          PY
+      - name: Commit repair
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet || git commit -m 'Fix Book One routes, source bundling and CTAs'
+          git push
