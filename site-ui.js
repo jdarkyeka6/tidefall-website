@@ -75,8 +75,8 @@
           <h2>Start with Book One.</h2>
           <p>Tidefall Academy is a book-first fantasy series. The quizzes, maps, spells and lore let you wander around the world, but the actual story begins with Jasper Holloway and the first book.</p>
           <div class="home-book-hook">“Jasper Holloway was underwater, but he could breathe.”</div>
-          <div class="home-book-actions"><a href="/books">Read Chapter One free</a><a href="/book-one">See Book One</a><a href="/start-here">I'm new to Tidefall</a></div>
-          <div class="home-book-proof"><span>Book One is the beginning</span><span>Chapter One free now</span><span>Four central characters</span><span>Fantasy · magic academy</span></div>
+          <div class="home-book-actions"><a href="/books">Read Book 1</a><a href="/book-one">See Book One</a><a href="/start-here">I'm new to Tidefall</a></div>
+          <div class="home-book-proof"><span>Book One is the beginning</span><span>Full Book One online</span><span>Four central characters</span><span>Fantasy · magic academy</span></div>
         </div>`;
       hero.insertAdjacentElement('afterend',launch);
     }
@@ -89,7 +89,7 @@
         <div class="book-world-grid">
           <a class="book-story-card" href="/book-one"><span class="eyebrow">BOOK ONE</span><strong>The story starts beneath the water.</strong><p>Meet Jasper Holloway, enter Tidefall Academy, and begin the mystery before you read the lore about it.</p><span class="gateway-arrow">Enter Book One →</span></a>
           <div class="book-side-stack">
-            <a class="book-side-card" href="/books"><strong>📖 Read Chapter One free</strong><p>Open <em>The Water Without a Sky</em>, the official public preview of Tidefall Book One.</p><span class="gateway-arrow">Start reading →</span></a>
+            <a class="book-side-card" href="/books"><strong>📖 Read Book 1</strong><p>Open <em>The Water Without a Sky</em>, the complete 120-chapter Tidefall Book One.</p><span class="gateway-arrow">Start reading →</span></a>
             <a class="book-side-card" href="/start-here"><strong>🧭 New-reader path</strong><p>Book first, characters second, Academy third. Use the official five-step route into Tidefall.</p><span class="gateway-arrow">Show me where to start →</span></a>
             <a class="book-side-card" href="/reading-order"><strong>▤ Reading order</strong><p>See exactly where Book One sits and how the series begins without invented filler or spoilers.</p><span class="gateway-arrow">Open reading order →</span></a>
           </div>
@@ -108,13 +108,13 @@
       const strip=document.createElement('aside');
       strip.className='book-launch-strip';
       strip.setAttribute('aria-label','Tidefall books');
-      strip.innerHTML='<div class="book-launch-copy"><strong>📚 The books are the main Tidefall story</strong><span>You are exploring the world around the series. Start with Book One and read Chapter One free.</span></div><div class="book-launch-actions"><a href="/books">Read Chapter One</a><a href="/start-here">Start here</a></div>';
+      strip.innerHTML='<div class="book-launch-copy"><strong>📚 The books are the main Tidefall story</strong><span>You are exploring the world around the series. Start with Book One and read Book 1.</span></div><div class="book-launch-actions"><a href="/books">Read Book 1</a><a href="/start-here">Start here</a></div>';
       const preferred=main.querySelector(':scope > .hero, :scope > .inner-hero');
       if(preferred)preferred.insertAdjacentElement('afterend',strip);else main.insertBefore(strip,main.firstChild);
     }
   }
 
-  // Reading progress for the actual public Chapter One reader.
+  // Reading progress for the actual complete Book One reader.
   if(path==='/books'){
     const bar=document.createElement('div');
     bar.setAttribute('aria-hidden','true');
