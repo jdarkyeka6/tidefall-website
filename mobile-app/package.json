@@ -8,6 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "generate:icon": "node scripts/generate-app-icon.cjs",
+    "postinstall": "node scripts/generate-app-icon.cjs",
     "testflight": "bash scripts/ios-testflight.sh",
     "ios:ci": "bash scripts/ios-testflight.sh",
     "config:check": "expo config --type public"
