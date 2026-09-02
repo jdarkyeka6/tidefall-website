@@ -6,12 +6,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
     "newArchEnabled": true,
     "plugins": ["expo-router"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "au.com.tidefall.app",
-      "buildNumber": "1",
+      "buildNumber": "2",
+      "icon": "./assets/icon.png",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }

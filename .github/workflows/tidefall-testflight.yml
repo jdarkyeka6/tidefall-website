@@ -1,50 +1,91 @@
 name: Tidefall TestFlight
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - feature/tidefall-app-v2
+    paths:
+      - mobile-app/**
+      - .github/workflows/tidefall-testflight.yml
 
 permissions:
   contents: read
 
+concurrency:
+  group: tidefall-testflight
+  cancel-in-progress: false
+
 jobs:
-  testflight:
-    name: Build and submit Tidefall to TestFlight
-    runs-on: ubuntu-latest
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: mobile-app
+    env:
+      CI: "1"
+      EXPO_NO_TELEMETRY: "1"
+      EXPO_USE_PRECOMPILED_MODULES: "0"
+
     steps:
-      - name: Check EXPO_TOKEN
-        shell: bash
+      - name: Check out Tidefall app v2
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
         run: |
-          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
-            echo "Missing EXPO_TOKEN repository secret."
-            exit 1
+          if [ -d /Applications/Xcode_26.3.app ]; then
+            sudo xcode-select -s /Applications/Xcode_26.3.app
+          else
+            echo "Xcode_26.3 not found; using runner default"
           fi
+          xcodebuild -version
+          xcrun --find altool
 
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
 
-      - name: Setup Expo and EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install npm dependencies
+        run: npm install --no-audit --no-fund
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Verify Expo project is linked
+      - name: Validate Expo config
         run: |
-          if ! grep -q '"projectId"' app.json; then
-            echo "This app is not linked to an EAS project yet. Link it once in Expo, then commit the projectId to app.json."
-            exit 1
-          fi
+          npx expo config --type public >/dev/null
+          echo "Expo config OK"
 
-      - name: Build and submit to TestFlight
-        run: eas build --platform ios --profile production --non-interactive --auto-submit --no-wait
+      - name: Build and upload to TestFlight
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: bash scripts/ios-testflight.sh
+
+      - name: Print final Xcode diagnostics
+        if: failure()
+        run: |
+          echo "================ FINAL IOS DIAGNOSTICS ================"
+          for log in build/archive.log build/export.log; do
+            if [ -f "$log" ]; then
+              echo
+              echo "----- $log -----"
+              grep -Eai '(^|[[:space:]])(error:|fatal error:)|provision|signing|codesign|certificate|PhaseScriptExecution|Command .* failed|ARCHIVE FAILED|EXPORT FAILED|No profiles|requires a provisioning profile|not permitted' "$log" | tail -n 120 || tail -n 120 "$log"
+            fi
+          done
+          echo "========================================================"
+
+      - name: Preserve iOS diagnostics
+        if: failure()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: tidefall-ios-diagnostics-${{ github.run_number }}
+          path: |
+            mobile-app/build/archive.log
+            mobile-app/build/export.log
+            mobile-app/build/Tidefall.xcresult
+            mobile-app/ios/Podfile.lock
+          if-no-files-found: ignore
+          retention-days: 7

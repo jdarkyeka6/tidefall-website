@@ -1,17 +1,20 @@
-import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ASSET = 'https://tidefall.com.au/assets';
+const SITE = 'https://tidefall.com.au';
 
 const places = [
-  { title: 'Dorms', copy: 'Rooms, belongings, house details and hidden corners.', icon: '🛏️' },
-  { title: 'Classrooms', copy: 'Magic, lessons, rules and teachers.', icon: '📖' },
-  { title: 'Hidden corridors', copy: 'Not every route appears on the map.', icon: '🗝️' },
-  { title: 'Riptide grounds', copy: 'Explore the sport, teams and match lore.', icon: '🌊' },
+  { title: 'Dorms', copy: 'Rooms, belongings, house details and hidden corners.', icon: '🛏️', url: `${SITE}/academy-dorms` },
+  { title: 'Classrooms', copy: 'Magic, lessons, rules and teachers.', icon: '📖', url: `${SITE}/academy-classes` },
+  { title: 'Hidden corridors', copy: 'Not every route appears on the map.', icon: '🗝️', url: `${SITE}/academy-map` },
+  { title: 'Riptide grounds', copy: 'Explore the sport, teams and match lore.', icon: '🌊', url: `${SITE}/riptide-player-quiz` },
 ];
 
 export default function AcademyScreen() {
+  const open = (url: string) => Linking.openURL(url);
+
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -32,7 +35,14 @@ export default function AcademyScreen() {
         <Text style={styles.sectionTitle}>Places</Text>
         <View style={styles.grid}>
           {places.map((place) => (
-            <TouchableOpacity key={place.title} style={styles.card} activeOpacity={0.84}>
+            <TouchableOpacity
+              key={place.title}
+              accessibilityRole="link"
+              accessibilityLabel={`Open ${place.title}`}
+              style={styles.card}
+              activeOpacity={0.84}
+              onPress={() => open(place.url)}
+            >
               <Text style={styles.icon}>{place.icon}</Text>
               <Text style={styles.cardTitle}>{place.title}</Text>
               <Text style={styles.cardCopy}>{place.copy}</Text>
@@ -40,14 +50,20 @@ export default function AcademyScreen() {
           ))}
         </View>
 
-        <View style={styles.secretCard}>
+        <TouchableOpacity
+          accessibilityRole="link"
+          accessibilityLabel="Open Academy discoveries"
+          style={styles.secretCard}
+          activeOpacity={0.84}
+          onPress={() => open(`${SITE}/secrets`)}
+        >
           <Text style={styles.secretGlyph}>◌</Text>
           <View style={{ flex: 1 }}>
             <Text style={styles.secretLabel}>DISCOVERY</Text>
             <Text style={styles.secretTitle}>Some doors only appear once.</Text>
-            <Text style={styles.secretCopy}>Academy discoveries will be tracked here as the app grows.</Text>
+            <Text style={styles.secretCopy}>Open the Academy secrets and discoveries.</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
