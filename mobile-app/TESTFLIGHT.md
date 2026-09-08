@@ -1,30 +1,31 @@
 # Tidefall TestFlight
 
-The app is configured for EAS Build + EAS Submit.
+Tidefall now ships to TestFlight through GitHub Actions using Expo prebuild plus Apple's native Xcode/App Store Connect tooling. Fastlane and EAS are not required for the CI upload path.
 
-## First time only
+## GitHub repository secrets
 
-From the `mobile-app` folder:
+The workflow requires these Actions secrets:
 
-```bash
-npm install
-npx eas-cli@latest login
-npm run testflight
-```
+- `ASC_KEY_ID`
+- `ASC_ISSUER_ID`
+- `ASC_KEY_CONTENT` — the App Store Connect `.p8` private key contents, or a base64-encoded copy
+- `APPLE_TEAM_ID`
 
-On the first run, EAS may ask to create/link the Expo project and set up Apple signing credentials. Sign in with the Apple Developer account that owns the Tidefall App Store Connect app. If the Tidefall app record does not exist yet, create it in App Store Connect using bundle ID `au.com.tidefall.app` before submitting.
+## Ship a beta
 
-## Every beta after that
+1. Open the repository's **Actions** tab.
+2. Select **Tidefall TestFlight**.
+3. Choose **Run workflow** on `main`.
+4. The workflow checks out `feature/tidefall-app-v2`, installs dependencies, regenerates the iOS project with Expo, installs CocoaPods, archives with automatic Apple signing, exports an IPA, and uploads it to App Store Connect.
 
-```bash
-npm run testflight
-```
+The GitHub Actions run number is used as the iOS build number so new workflow runs do not reuse an already-uploaded build number.
 
-The production profile automatically increments the iOS build number and `--auto-submit` uploads the successful build to App Store Connect. After Apple processes the build, enable it for your TestFlight tester group in App Store Connect.
+## Failure diagnostics
+
+If Xcode fails, the workflow prints an error digest near the bottom of the job and uploads a `tidefall-ios-diagnostics-*` artifact containing the archive/export logs, Xcode result bundle when available, and Podfile lockfile.
 
 ## App identifiers
 
 - App name: Tidefall
 - Bundle ID: `au.com.tidefall.app`
 - Version: `1.0.0`
-- EAS profile: `production`
