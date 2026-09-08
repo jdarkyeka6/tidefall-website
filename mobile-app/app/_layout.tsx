@@ -35,6 +35,9 @@ export default function RootLayout() {
       <Tabs.Screen name="profile" options={{ title: 'You', tabBarAccessibilityLabel: 'Profile', tabBarIcon: tabIcon('◎') }} />
       <Tabs.Screen name="academy/[slug]" options={{ href: null }} />
       <Tabs.Screen name="books" options={{ href: null }} />
+      <Tabs.Screen name="quests" options={{ href: null }} />
+      <Tabs.Screen name="secrets" options={{ href: null }} />
+      <Tabs.Screen name="achievements" options={{ href: null }} />
       <Tabs.Screen name="characters/index" options={{ href: null }} />
       <Tabs.Screen name="characters/[slug]" options={{ href: null }} />
     </Tabs>
