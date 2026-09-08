@@ -1,4 +1,4 @@
-import type { TidefallProgress } from './progress';
+import { unlockAchievement, type TidefallProgress } from './progress';
 
 export type QuestCondition =
   | { type: 'room'; target: string }
@@ -223,6 +223,16 @@ export function achievementConditionMet(progress: TidefallProgress, condition: A
   if (condition.type === 'quests') return progress.completedQuests.length >= condition.value;
   if (condition.type === 'reading') return progress.reading.bookOnePercent >= condition.value;
   return false;
+}
+
+export function reconcileAchievements(progress: TidefallProgress) {
+  let next = progress;
+  achievements.forEach((achievement) => {
+    if (!next.unlockedAchievements.includes(achievement.slug) && achievementConditionMet(next, achievement.condition)) {
+      next = unlockAchievement(next, achievement.slug, achievement.title, achievement.reward);
+    }
+  });
+  return next;
 }
 
 export function characterLocation(slug: string, date = new Date()) {
